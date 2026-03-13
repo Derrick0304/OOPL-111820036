@@ -1,60 +1,57 @@
 #include "UnitFactory.hpp"
 #include <vector>
 #include <string>
+#include <fstream>
+#include <nlohmann/json.hpp>
+#include "Util/Logger.hpp"
+
+using json = nlohmann::json;
 
 std::unordered_map<std::string, UnitData> UnitFactory::s_Registry;
 
 void UnitFactory::Init() {
-    // 註冊基礎貓 (BasicCat)
-    s_Registry["BasicCat"] = {
-        "BasicCat",
-        {100.0f, 150.0f, 60.0f, 20.0f, 0.5f}, 
-        "/Units/Cats/BasicCat",
-        2, 2,
-        50.0f, 2.0f,
-        "/Units/Cats/BasicCat/icon.png"
-    };
-
-    // 註冊狗狗 (Doge)
-    s_Registry["Doge"] = {
-        "Doge",
-        {150.0f, 80.0f, 60.0f, 10.0f, 1.0f},
-        "/Units/Enemies/Doge",
-        2, 2,
-        0.0f, 0.0f,
-        ""
-    };
-
-    // 註冊坦克貓 (TankCat)
-    s_Registry["TankCat"] = {
-        "TankCat",
-        {400.0f, 80.0f, 50.0f, 10.0f, 1.0f},
-        "/Units/Cats/TankCat",
-        3, 5,
-        150.0f, 5.0f,
-        "/Units/Cats/TankCat/icon.png"
-    };
-
-    // 註冊斧頭貓 (AxeCat)
-    s_Registry["AxeCat"] = {
-        "AxeCat",
-        {180.0f, 120.0f, 70.0f, 40.0f, 0.8f},
-        "/Units/Cats/AxeCat",
-        3, 5,
-        200.0f, 3.5f,
-        "/Units/Cats/AxeCat/icon.png"
-    };
-
-    // 註冊噁心貓 (GrossCat) - 長射程, 高成本
-    s_Registry["GrossCat"] = {
-        "GrossCat",
-        {200.0f, 100.0f, 250.0f, 50.0f, 1.5f},
-        "/Units/Cats/GrossCat",
-        6, 4,
-        400.0f, 6.0f,
-        "/Units/Cats/GrossCat/icon.png"
-    };
+    std::string path = RESOURCE_DIR"/Data/Units.json";
+    std::ifstream file(path);
+    if (!file.is_open()) {
+        LOG_ERROR("Failed to open Units.json at {}", path);
+        return;
     }
+
+    try {
+        json data = json::parse(file);
+        
+        auto registerGroup = [](const json& group) {
+            for (const auto& item : group) {
+                UnitData unit;
+                unit.name = item["name"];
+                
+                // 嚴格按照 Unit::Stats 結構順序進行顯式初始化
+                unit.stats.maxHp = item["stats"]["hp"];
+                unit.stats.speed = item["stats"]["speed"];
+                unit.stats.attackRange = item["stats"]["range"];
+                unit.stats.attackDamage = item["stats"]["atk"];
+                unit.stats.attackInterval = item["stats"]["atkInterval"];
+
+                unit.resourcePath = item["resourcePath"];
+                unit.walkFrames = item["walkFrames"];
+                unit.attackFrames = item["attackFrames"];
+                unit.cost = item["cost"];
+                unit.cooldown = item["cooldown"];
+                unit.iconPath = item["iconPath"];
+                
+                s_Registry[unit.name] = unit;
+            }
+        };
+
+        if (data.contains("Cats")) registerGroup(data["Cats"]);
+        if (data.contains("Enemies")) registerGroup(data["Enemies"]);
+
+        LOG_INFO("Successfully loaded {} units from JSON", s_Registry.size());
+
+    } catch (const std::exception& e) {
+        LOG_ERROR("Error parsing Units.json: {}", e.what());
+    }
+}
 
 
 std::shared_ptr<Unit> UnitFactory::Create(const std::string& name, Unit::Team team) {
