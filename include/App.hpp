@@ -3,6 +3,7 @@
 
 #include "pch.hpp"
 #include "UnitManager.hpp"
+#include "UIManager.hpp"
 #include "Util/Renderer.hpp"
 #include "Util/Image.hpp"
 #include <memory>
@@ -22,6 +23,9 @@ private:
     
     std::shared_ptr<Util::GameObject> m_Root;
     std::unique_ptr<UnitManager> m_UnitManager;
+    std::unique_ptr<UIManager> m_UIManager;
+
+    float m_Money = 100.0f;
 
     // 背景
     std::shared_ptr<Util::Image> m_BackgroundImage;

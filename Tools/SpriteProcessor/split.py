@@ -42,7 +42,7 @@ def split_sprite_sheet(image_name):
         
         # 轉為 RGBA 並儲存
         if roi.shape[2] == 4:
-            roi_rgba = cv2.cvtColor(roi, cv2.COLOR_BGRA_RGBA)
+            roi_rgba = cv2.cvtColor(roi, cv2.COLOR_BGRA2RGBA)
         else:
             roi_rgba = cv2.cvtColor(roi, cv2.COLOR_BGR2RGBA)
             

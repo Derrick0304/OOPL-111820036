@@ -3,6 +3,8 @@ set(SRC_FILES
     Unit.cpp
     UnitManager.cpp
     UnitFactory.cpp
+    UnitButton.cpp
+    UIManager.cpp
 )
 
 set(INCLUDE_FILES
@@ -12,6 +14,8 @@ set(INCLUDE_FILES
     Tower.hpp
     UnitData.hpp
     UnitFactory.hpp
+    UnitButton.hpp
+    UIManager.hpp
 )
 
 set(TEST_FILES

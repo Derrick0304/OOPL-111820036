@@ -8,10 +8,11 @@ void UnitFactory::Init() {
     // 註冊基礎貓 (BasicCat)
     s_Registry["BasicCat"] = {
         "BasicCat",
-        {100.0f, 150.0f, 60.0f, 20.0f, 0.5f}, // HP, Speed, Range, DMG, Interval
+        {100.0f, 150.0f, 60.0f, 20.0f, 0.5f}, 
         "/Units/Cats/BasicCat",
-        2, // Walk Frames
-        2  // Attack Frames
+        2, 2,
+        50.0f, 2.0f,
+        "/Units/Cats/BasicCat/icon.png"
     };
 
     // 註冊狗狗 (Doge)
@@ -19,10 +20,42 @@ void UnitFactory::Init() {
         "Doge",
         {150.0f, 80.0f, 60.0f, 10.0f, 1.0f},
         "/Units/Enemies/Doge",
-        2,
-        2
+        2, 2,
+        0.0f, 0.0f,
+        ""
     };
-}
+
+    // 註冊坦克貓 (TankCat)
+    s_Registry["TankCat"] = {
+        "TankCat",
+        {400.0f, 80.0f, 50.0f, 10.0f, 1.0f},
+        "/Units/Cats/TankCat",
+        3, 5,
+        150.0f, 5.0f,
+        "/Units/Cats/TankCat/icon.png"
+    };
+
+    // 註冊斧頭貓 (AxeCat)
+    s_Registry["AxeCat"] = {
+        "AxeCat",
+        {180.0f, 120.0f, 70.0f, 40.0f, 0.8f},
+        "/Units/Cats/AxeCat",
+        3, 5,
+        200.0f, 3.5f,
+        "/Units/Cats/AxeCat/icon.png"
+    };
+
+    // 註冊噁心貓 (GrossCat) - 長射程, 高成本
+    s_Registry["GrossCat"] = {
+        "GrossCat",
+        {200.0f, 100.0f, 250.0f, 50.0f, 1.5f},
+        "/Units/Cats/GrossCat",
+        6, 4,
+        400.0f, 6.0f,
+        "/Units/Cats/GrossCat/icon.png"
+    };
+    }
+
 
 std::shared_ptr<Unit> UnitFactory::Create(const std::string& name, Unit::Team team) {
     if (s_Registry.find(name) == s_Registry.end()) return nullptr;

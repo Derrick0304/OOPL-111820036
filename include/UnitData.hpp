@@ -11,6 +11,9 @@ struct UnitData {
     std::string resourcePath; // 例如 "/Units/Cats/BasicCat"
     int walkFrames;
     int attackFrames;
+    float cost;         // 出兵成本
+    float cooldown;     // 冷卻時間 (秒)
+    std::string iconPath; // 按鈕圖示路徑
 };
 
 #endif
