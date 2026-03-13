@@ -46,20 +46,19 @@ void UnitButton::Update(float currentMoney) {
 
     // --- 同步子物件位置與縮放 ---
     glm::vec2 pos = m_Transform.translation;
-    glm::vec2 baseSize = GetScaledSize() / animScale; // 原始縮放後的尺寸
+    glm::vec2 currentSize = GetScaledSize();
 
     // 1. 遮罩覆蓋全圖
     m_Mask->m_Transform.translation = pos;
-    m_Mask->m_Transform.scale = GetScaledSize();
+    m_Mask->m_Transform.scale = currentSize;
 
     // 2. 藍色讀條 (位於底部)
-    m_BlueBar->m_Transform.translation = {pos.x, pos.y - GetScaledSize().y / 2.0f};
-    // 寬度會由 UpdateVisuals 再次修正比例
+    m_BlueBar->m_Transform.translation = {pos.x, pos.y - currentSize.y / 2.0f};
 
     // 3. 價格文字 (右上角)
     m_PriceObj->m_Transform.translation = {
-        pos.x + GetScaledSize().x / 2.0f - 25.0f * m_BaseScale, 
-        pos.y + GetScaledSize().y / 2.0f - 15.0f * m_BaseScale
+        pos.x + currentSize.x / 2.0f - 25.0f * m_BaseScale, 
+        pos.y + currentSize.y / 2.0f - 15.0f * m_BaseScale
     };
     m_PriceObj->m_Transform.scale = m_Transform.scale;
 }

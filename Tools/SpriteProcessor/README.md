@@ -7,7 +7,7 @@
 *   `Tools/SpriteProcessor/`
     *   `input/`: **[用戶操作]** 放置原始大圖檔案（支援 `.webp`, `.png`, `.jpg`）。
     *   `output/`: **[系統生成]** 存放切割後的暫存圖片（命名為 `0.png`, `1.png`...）。
-    *   `split.py`: **[核心腳本]** 負責自動偵測透明邊界並精確裁切。
+    *   `split.py`: **[核心腳本]** 負責自動偵測透明邊界並進行「貼身裁切 (Tight Crop)」。
     *   `README.md`: 本規格文件。
 
 ## 2. 環境要求 (Prerequisites)
@@ -18,33 +18,38 @@
 
 ## 3. 標準作業程序 (Standard Operating Procedure)
 
-### 第一階段：自動切割 (Auto-Split)
-1.  用戶將大圖放入 `input/`。
-2.  用戶指令：`開始切割 [檔名]`。
-3.  Agent 執行 `split.py`：
-    *   自動偵測 Alpha 通道（去背區域）。
-    *   依照「從上到下、從左到右」的順序對物體進行編號。
-    *   將結果輸出至 `output/`。
+### 第一階段：自動切割與修整 (Auto-Split & Crop)
+1.  將原始大圖或單張素材放入 `input/`。
+2.  執行指令：`python Tools/SpriteProcessor/split.py [檔名]`。
+3.  **關鍵點**：即使是只有一張圖的素材（如 Icon 或 基地），也建議通過此腳本處理，以消除不可見的透明邊距，確保遊戲內的「基準點 (Pivot)」計算正確。
 
-### 第二階段：人工辨識與整合 (Identification & Integration)
-1.  用戶檢查 `output/` 中的圖片內容。
-2.  用戶指令範例：
-    *   「將 0~3 設為 BasicCat 的 Walk」
-    *   「將 4, 5 設為 BasicCat 的 Attack」
-    *   「將 10 設為 TankCat 的 Icon」
-3.  Agent 執行自動搬移：
-    *   依照指令將檔案移動至 `Resources/Units/{Team}/{UnitName}/{State}/{Index}.png`。
-    *   若目標目錄不存在，Agent 會自動建立。
-    *   搬移完成後自動清理 `output/` 暫存區。
+### 第二階段：分類整合 (Categorization & Integration)
+根據素材性質，將 `output/` 中的檔案搬移至對應目錄：
 
-## 4. 命名規範 (Conventions)
+#### A. 戰鬥單位 (Units)
+*   路徑：`Resources/Units/{Cats|Enemies}/{UnitName}/`
+*   子目錄：`Walk/` (走路), `Attack/` (攻擊), `Dead/` (死亡)。
+*   單張：`icon.png` (按鈕圖示，**務必使用切割後的版本**)。
 
-*   **單位目錄**: `Resources/Units/{陣營}/{單位名稱}/`
-*   **動作子目錄**: `Walk/` (走路), `Attack/` (攻擊), `Dead/` (死亡)。
-*   **幀檔名**: 必須從 `0.png` 開始遞增編號。
-*   **單位數據**: 整合完成後，需在 `src/UnitFactory.cpp` 中註冊該單位的動畫幀數與數值。
+#### B. 建築與基地 (Towers)
+*   路徑：`Resources/Towers/{TowerName}/`
+*   檔案：`base.png` (主體)。
 
-## 5. 優勢
-*   **零手動裁切**: 不再需要使用 Photoshop 手動選取範圍。
-*   **像素精確**: 腳本自動貼合不透明邊界，確保圖片沒有多餘空白。
-*   **快速疊代**: 從拿到素材到遊戲中看到單位跑動，過程只需不到一分鐘。
+#### C. 使用者介面 (UI)
+*   路徑：`Resources/UI/{Category}/`
+*   範例：`Buttons/BlackMask.png`, `Bars/BlueBar.png`。
+
+#### D. 環境背景 (Backgrounds)
+*   路徑：`Resources/Backgrounds/`
+
+## 4. 命名與數據規範 (Conventions)
+
+1.  **序列幀**：必須從 `0.png` 開始遞增編號（例如 `0.png`, `1.png`, `2.png`）。
+2.  **單位數據註冊**：
+    *   修改 `Resources/Data/Units.json`：定義 HP、ATK、速度、成本及動畫幀數。
+    *   修改 `src/UIManager.cpp`：將新的貓咪名稱加入 `catNames` 列表以顯示在 UI。
+3.  **資源格式**：一律轉換為帶 Alpha 通道的 `.png`。
+
+## 5. 注意事項
+*   **基準點對齊**：目前遊戲引擎以「圖片底部中央」作為 Pivot。若素材裁切不精確，會導致角色在動畫切換時跳動或浮空。
+*   **圖示對齊**：所有出兵按鈕圖示應保持相近的視覺比例。若 icon 尺寸差異過大，應在 `input/` 階段先行縮放或在整合時確認像素大小。

@@ -37,6 +37,7 @@ void UnitFactory::Init() {
                 unit.attackFrames = item["attackFrames"];
                 unit.cost = item["cost"];
                 unit.cooldown = item["cooldown"];
+                unit.yOffset = item["yOffset"];
                 unit.iconPath = item["iconPath"];
                 
                 s_Registry[unit.name] = unit;
@@ -61,7 +62,7 @@ std::shared_ptr<Unit> UnitFactory::Create(const std::string& name, Unit::Team te
     auto walkPaths = GeneratePaths(data.resourcePath, "Walk", data.walkFrames);
     auto attackPaths = GeneratePaths(data.resourcePath, "Attack", data.attackFrames);
 
-    return std::make_shared<Unit>(team, data.stats, walkPaths, attackPaths);
+    return std::make_shared<Unit>(team, data.stats, walkPaths, attackPaths, data.yOffset);
 }
 
 std::vector<std::string> UnitFactory::GeneratePaths(const std::string& folder, const std::string& state, int count) {

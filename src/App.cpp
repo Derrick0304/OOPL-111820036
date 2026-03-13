@@ -25,14 +25,14 @@ void App::Start() {
     bgObj->m_Transform.translation.y = 50.0f; // 調高背景
     m_Root->AddChild(bgObj);
 
-    // 2. 初始化基地 (調高座標)
+    // 2. 初始化基地 (基準點已改為底部，與小兵對齊)
     auto catBase = std::make_shared<Tower>(Unit::Team::CAT, 1000.0f, RESOURCE_DIR"/Towers/CatBase/base.png");
     catBase->m_Transform.scale = {1.2f, 1.2f};
-    catBase->m_Transform.translation = {500.0f, -50.0f}; // 從 -100.0f 調高
+    catBase->m_Transform.translation = {500.0f, -150.0f}; // 與小兵地平線一致
 
     auto enemyBase = std::make_shared<Tower>(Unit::Team::ENEMY, 1000.0f, RESOURCE_DIR"/Towers/EnemyBase/base.png");
     enemyBase->m_Transform.scale = {0.9f, 0.9f};
-    enemyBase->m_Transform.translation = {-500.0f, -50.0f}; // 從 -100.0f 調高
+    enemyBase->m_Transform.translation = {-500.0f, -150.0f}; // 與小兵地平線一致
 
 
     m_UnitManager->SetBases(catBase, enemyBase);
@@ -44,7 +44,7 @@ void App::Update() {
     float dt = Util::Time::GetDeltaTimeMs() / 1000.0f;
     
     // 1. 金錢隨時間增加
-    m_Money += 50.0f * dt; // 每秒 50 元
+    m_Money += 150.0f * dt; // 每秒 50 元
 
     // 2. 出兵按鈕與出兵扣錢 (透過回調處理)
     // 這裡我們稍微修改 UIManager 以支援扣錢回調

@@ -14,10 +14,10 @@ UIManager::UIManager(std::shared_ptr<Util::GameObject> root, UnitManager* unitMa
     m_Root->AddChild(m_MoneyObj);
 }
 void UIManager::SetupButtons() {
-    // 註冊目前已有的貓咪種類
+    // 註冊目前已有的貓咪種類，加入 CowCat, BirdCat，其餘用 BasicCat 填補
     std::vector<std::string> catNames = {
-        "BasicCat", "TankCat", "AxeCat", "GrossCat", "BasicCat",
-        "BasicCat", "BasicCat", "BasicCat", "BasicCat", "BasicCat"
+        "BasicCat", "TankCat", "AxeCat", "GrossCat", "CowCat",
+        "BirdCat", "BasicCat", "BasicCat", "BasicCat", "BasicCat"
     };
 
 
