@@ -14,17 +14,17 @@ UIManager::UIManager(std::shared_ptr<Util::GameObject> root, UnitManager* unitMa
     m_Root->AddChild(m_MoneyObj);
 }
 void UIManager::SetupButtons() {
-    // 註冊目前已有的貓咪種類，加入 CowCat, BirdCat，其餘用 BasicCat 填補
+    // 註冊目前已有的貓咪種類，其餘用 BasicCat 填補
     std::vector<std::string> catNames = {
         "BasicCat", "TankCat", "AxeCat", "GrossCat", "CowCat",
-        "BirdCat", "FishCat", "LizardCat", "BasicCat", "BasicCat"
+        "BirdCat", "FishCat", "LizardCat", "TitanCat", "KillerCat"
     };
 
 
-    float paddingX = 100.0f; // 按鈕更小，間距再縮小
+    float paddingX = 100.0f;
     float paddingY = 80.0f;
     float startX = -((5 - 1) * paddingX) / 2.0f;
-    float startY = -310.0f; // 從 -280.0f 下移至 -310.0f
+    float startY = -310.0f;
 
     for (size_t i = 0; i < catNames.size(); ++i) {
         std::string name = catNames[i];

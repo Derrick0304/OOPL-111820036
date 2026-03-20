@@ -54,7 +54,21 @@
       "stats": { "hp": 250.0, "atk": 300.0, "range": 220.0, "speed": 15.0, "atkInterval": 2.5 },
       "resourcePath": "/Units/Cats/LizardCat",
       "walkFrames": 5, "attackFrames": 6, "cost": 800.0, "cooldown": 12.0, "yOffset": 0.0,
-      "iconPath": "/Units/Cats/BasicCat/icon.png"
+      "iconPath": "/Units/Cats/LizardCat/icon.png"
+    },
+    {
+      "name": "TitanCat",
+      "stats": { "hp": 1200.0, "atk": 400.0, "range": 50.0, "speed": 10.0, "atkInterval": 3.0 },
+      "resourcePath": "/Units/Cats/TitanCat",
+      "walkFrames": 7, "attackFrames": 3, "cost": 1500.0, "cooldown": 25.0, "yOffset": 0.0,
+      "iconPath": "/Units/Cats/TitanCat/icon.png"
+    },
+    {
+      "name": "KillerCat",
+      "stats": { "hp": 100.0, "atk": 150.0, "range": 60.0, "speed": 40.0, "atkInterval": 0.5 },
+      "resourcePath": "/Units/Cats/KillerCat",
+      "walkFrames": 3, "attackFrames": 2, "cost": 75.0, "cooldown": 1.5, "yOffset": 0.0,
+      "iconPath": "/Units/Cats/KillerCat/icon.png"
     }
   ],
   "Enemies": [
