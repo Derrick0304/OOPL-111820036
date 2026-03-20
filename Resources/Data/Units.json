@@ -41,6 +41,20 @@
       "resourcePath": "/Units/Cats/BirdCat",
       "walkFrames": 4, "attackFrames": 5, "cost": 650.0, "cooldown": 8.0, "yOffset": 60.0,
       "iconPath": "/Units/Cats/BirdCat/icon.png"
+    },
+    {
+      "name": "FishCat",
+      "stats": { "hp": 300.0, "atk": 180.0, "range": 60.0, "speed": 25.0, "atkInterval": 1.2 },
+      "resourcePath": "/Units/Cats/FishCat",
+      "walkFrames": 8, "attackFrames": 4, "cost": 400.0, "cooldown": 6.0, "yOffset": 0.0,
+      "iconPath": "/Units/Cats/FishCat/icon.png"
+    },
+    {
+      "name": "LizardCat",
+      "stats": { "hp": 250.0, "atk": 300.0, "range": 220.0, "speed": 15.0, "atkInterval": 2.5 },
+      "resourcePath": "/Units/Cats/LizardCat",
+      "walkFrames": 5, "attackFrames": 6, "cost": 800.0, "cooldown": 12.0, "yOffset": 0.0,
+      "iconPath": "/Units/Cats/BasicCat/icon.png"
     }
   ],
   "Enemies": [

@@ -35,6 +35,7 @@ public:
     Team GetTeam() const { return m_Team; }
     State GetState() const { return m_State; }
     void SetState(State state); // 修改狀態時自動切換動畫
+    void TriggerAttackAnimation(); // 強制重播攻擊動畫
     bool IsAttackAnimationEnded() const; // 檢查攻擊動畫是否播完
     
     float GetAttackDamage() const { return m_Stats.attackDamage; }

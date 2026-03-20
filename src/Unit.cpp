@@ -28,12 +28,18 @@ Unit::Unit(Team team, const Stats &stats,
     m_ZIndex = 1.0f;
 }
 
+void Unit::TriggerAttackAnimation() {
+    if (m_State != State::ATTACK) {
+        SetState(State::ATTACK);
+    }
+}
+
 void Unit::SetState(State state) {
     if (m_State == state) return; 
     
-    // 如果現在在攻擊，且動畫還沒結束，則不允許切換到 WALK
+    // 如果想要從 ATTACK 切換到 WALK，必須等到動畫結束
     if (m_State == State::ATTACK && state == State::WALK) {
-        if (!IsAttackAnimationEnded()) return;
+        if (!IsAttackAnimationEnded()) return; // 沒播完，拒絕切換
     }
 
     m_State = state;
@@ -42,7 +48,7 @@ void Unit::SetState(State state) {
         m_WalkAnim->Play();
     } else if (m_State == State::ATTACK) {
         SetDrawable(m_AttackAnim);
-        m_AttackAnim->SetCurrentFrame(0); // 每次攻擊都從第 0 幀開始
+        m_AttackAnim->SetCurrentFrame(0);
         m_AttackAnim->Play();
     }
 }
@@ -53,11 +59,31 @@ bool Unit::IsAttackAnimationEnded() const {
 }
 
 void Unit::Update() {
-    // --- 動態更新 Pivot 以確保底部對齊 (並加入 yOffset 偏移) ---
+    // --- 動態更新 Pivot 以確保對齊 (並加入 yOffset 偏移) ---
     if (m_Drawable) {
         glm::vec2 currentSize = m_Drawable->GetSize();
-        // 將 Pivot 向下推，圖片就會向上浮起
-        m_Pivot = {0, -currentSize.y / 2.0f - m_YOffset};
+        
+        // 核心邏輯：根據陣營鎖定邊緣，防止因圖片寬度不同而跳動
+        float pivotX = 0.0f;
+        if (m_Team == Team::CAT) {
+            // 貓咪面向左 (x 減少)，鎖定圖片右邊緣 (身體後方)
+            // PTSD 引擎中，正的 Pivot.x 會將圖片往負方向 (左) 推
+            pivotX = currentSize.x / 2.0f;
+        } else {
+            // 敵人面向右 (x 增加)，鎖定圖片左邊緣 (身體後方)
+            pivotX = -currentSize.x / 2.0f;
+        }
+
+        // y 軸維持底部對齊
+        m_Pivot = {pivotX, -currentSize.y / 2.0f - m_YOffset};
+    }
+
+    // --- 自動循環攻擊動畫 ---
+    if (m_State == State::ATTACK) {
+        if (IsAttackAnimationEnded()) {
+            m_AttackAnim->SetCurrentFrame(0);
+            m_AttackAnim->Play();
+        }
     }
 
     float dt = Util::Time::GetDeltaTimeMs() / 1000.0f;

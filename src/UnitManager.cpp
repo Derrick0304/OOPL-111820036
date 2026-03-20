@@ -30,11 +30,25 @@ void UnitManager::Update() {
 void UnitManager::HandleCollisionAndCombat() {
     for (auto &unitA : m_Units) {
         bool blocked = false;
-        
+        float widthA = unitA->GetScaledSize().x;
+        // 計算 A 的「前端」座標
+        float frontA = (unitA->GetTeam() == Unit::Team::CAT) ? 
+                        unitA->m_Transform.translation.x - widthA : 
+                        unitA->m_Transform.translation.x + widthA;
+
         // 1. 檢查與敵方小兵的碰撞
         for (auto &unitB : m_Units) {
             if (unitA->GetTeam() == unitB->GetTeam()) continue;
-            float dist = std::abs(unitA->m_Transform.translation.x - unitB->m_Transform.translation.x);
+            
+            float widthB = unitB->GetScaledSize().x;
+            // 計算 B 的「前端」座標
+            float frontB = (unitB->GetTeam() == Unit::Team::CAT) ? 
+                            unitB->m_Transform.translation.x - widthB : 
+                            unitB->m_Transform.translation.x + widthB;
+
+            // 距離 = 兩個前端之間的絕對距離
+            float dist = std::abs(frontA - frontB);
+
             if (dist < unitA->GetAttackRange()) {
                 blocked = true;
                 if (unitA->CanAttack()) {
@@ -45,12 +59,13 @@ void UnitManager::HandleCollisionAndCombat() {
             }
         }
         
-        // 2. 如果沒被小兵擋住，檢查是否在敵方基地射程內
+        // 2. 檢查敵方基地
         if (!blocked) {
             auto enemyBase = (unitA->GetTeam() == Unit::Team::CAT) ? m_EnemyBase : m_CatBase;
             if (enemyBase) {
-                float distToBase = std::abs(unitA->m_Transform.translation.x - enemyBase->m_Transform.translation.x);
-                if (distToBase < unitA->GetAttackRange() + 50.0f) { // 基地體積較大，加成射程
+                // 基地通常較寬，我們暫定基地的中心點即為碰撞點 (可視需求調整)
+                float distToBase = std::abs(frontA - enemyBase->m_Transform.translation.x);
+                if (distToBase < unitA->GetAttackRange() + 20.0f) { 
                     blocked = true;
                     if (unitA->CanAttack()) {
                         enemyBase->TakeDamage(unitA->GetAttackDamage());
