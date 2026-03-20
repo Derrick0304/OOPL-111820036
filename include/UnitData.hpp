@@ -15,6 +15,7 @@ struct UnitData {
     float cooldown;     // 冷卻時間 (秒)
     float yOffset;      // 新增：垂直偏移量（用於漂浮單位）
     bool isAreaAttack;  // 新增：是否為範圍攻擊
+    int knockbackCount; // 新增：總擊退次數
     std::string iconPath; // 按鈕圖示路徑
 };
 

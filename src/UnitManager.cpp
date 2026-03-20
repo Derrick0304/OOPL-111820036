@@ -30,6 +30,8 @@ void UnitManager::Update() {
 
 void UnitManager::HandleCollisionAndCombat() {
     for (auto &unitA : m_Units) {
+        if (unitA->IsKnockback() || unitA->IsDead()) continue; // 正在擊退或死亡中的單位不執行動作
+
         bool blocked = false;
         float widthA = unitA->GetScaledSize().x;
         float frontA = (unitA->GetTeam() == Unit::Team::CAT) ? 
@@ -98,7 +100,7 @@ void UnitManager::HandleCollisionAndCombat() {
 
 void UnitManager::CleanupDeadUnits() {
     auto it = std::remove_if(m_Units.begin(), m_Units.end(), [this](const std::shared_ptr<Unit> &u) {
-        if (u->IsDead()) {
+        if (u->IsDeadAnimationEnded()) {
             m_Root->RemoveChild(u);
             return true;
         }

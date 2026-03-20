@@ -32,6 +32,7 @@ void UnitFactory::Init() {
                 unit.stats.attackDamage = item["stats"]["atk"];
                 unit.stats.attackInterval = item["stats"]["atkInterval"];
                 unit.stats.isAreaAttack = item["isAreaAttack"];
+                unit.stats.knockbackCount = item["knockbackCount"];
 
                 unit.resourcePath = item["resourcePath"];
                 unit.walkFrames = item["walkFrames"];
