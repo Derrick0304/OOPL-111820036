@@ -18,6 +18,7 @@ public:
         float attackRange;
         float attackDamage;
         float attackInterval;
+        bool isAreaAttack; // 新增：是否為範圍攻擊
     };
 
     // 建構子改為接收動畫路徑列表與 yOffset
@@ -38,6 +39,7 @@ public:
     void TriggerAttackAnimation(); // 強制重播攻擊動畫
     bool IsAttackAnimationEnded() const; // 檢查攻擊動畫是否播完
     
+    bool IsAreaAttack() const { return m_Stats.isAreaAttack; } // 新增
     float GetAttackDamage() const { return m_Stats.attackDamage; }
     float GetAttackRange() const { return m_Stats.attackRange; }
     bool IsDead() const { return m_CurrentHP <= 0; }

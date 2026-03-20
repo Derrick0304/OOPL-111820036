@@ -4,70 +4,70 @@
       "name": "BasicCat",
       "stats": { "hp": 100.0, "atk": 150.0, "range": 60.0, "speed": 20.0, "atkInterval": 0.5 },
       "resourcePath": "/Units/Cats/BasicCat",
-      "walkFrames": 2, "attackFrames": 2, "cost": 50.0, "cooldown": 2.0, "yOffset": 0.0,
+      "walkFrames": 2, "attackFrames": 2, "cost": 50.0, "cooldown": 2.0, "yOffset": 0.0, "isAreaAttack": false,
       "iconPath": "/Units/Cats/BasicCat/icon.png"
     },
     {
       "name": "TankCat",
-      "stats": { "hp": 400.0, "atk": 80.0, "range": 50.0, "speed": 10.0, "atkInterval": 1.0 },
+      "stats": { "hp": 400.0, "atk": 50.0, "range": 50.0, "speed": 10.0, "atkInterval": 1.0 },
       "resourcePath": "/Units/Cats/TankCat",
-      "walkFrames": 3, "attackFrames": 5, "cost": 150.0, "cooldown": 5.0, "yOffset": 0.0,
+      "walkFrames": 3, "attackFrames": 5, "cost": 150.0, "cooldown": 5.0, "yOffset": 0.0, "isAreaAttack": false,
       "iconPath": "/Units/Cats/TankCat/icon.png"
     },
     {
       "name": "AxeCat",
       "stats": { "hp": 180.0, "atk": 120.0, "range": 70.0, "speed": 40.0, "atkInterval": 0.8 },
       "resourcePath": "/Units/Cats/AxeCat",
-      "walkFrames": 3, "attackFrames": 5, "cost": 200.0, "cooldown": 3.5, "yOffset": 0.0,
+      "walkFrames": 3, "attackFrames": 5, "cost": 200.0, "cooldown": 3.5, "yOffset": 0.0, "isAreaAttack": false,
       "iconPath": "/Units/Cats/AxeCat/icon.png"
     },
     {
       "name": "GrossCat",
       "stats": { "hp": 200.0, "atk": 100.0, "range": 150.0, "speed": 50.0, "atkInterval": 1.5 },
       "resourcePath": "/Units/Cats/GrossCat",
-      "walkFrames": 6, "attackFrames": 4, "cost": 400.0, "cooldown": 6.0, "yOffset": 0.0,
+      "walkFrames": 6, "attackFrames": 4, "cost": 400.0, "cooldown": 6.0, "yOffset": 0.0, "isAreaAttack": true,
       "iconPath": "/Units/Cats/GrossCat/icon.png"
     },
     {
       "name": "CowCat",
       "stats": { "hp": 250.0, "atk": 50.0, "range": 60.0, "speed": 80.0, "atkInterval": 0.3 },
       "resourcePath": "/Units/Cats/CowCat",
-      "walkFrames": 4, "attackFrames": 5, "cost": 500.0, "cooldown": 4.0, "yOffset": 0.0,
+      "walkFrames": 4, "attackFrames": 5, "cost": 500.0, "cooldown": 4.0, "yOffset": 0.0, "isAreaAttack": false,
       "iconPath": "/Units/Cats/CowCat/icon.png"
     },
     {
       "name": "BirdCat",
       "stats": { "hp": 220.0, "atk": 250.0, "range": 50.0, "speed": 15.0, "atkInterval": 2.0 },
       "resourcePath": "/Units/Cats/BirdCat",
-      "walkFrames": 4, "attackFrames": 5, "cost": 650.0, "cooldown": 8.0, "yOffset": 60.0,
+      "walkFrames": 4, "attackFrames": 5, "cost": 650.0, "cooldown": 8.0, "yOffset": 60.0, "isAreaAttack": true,
       "iconPath": "/Units/Cats/BirdCat/icon.png"
     },
     {
       "name": "FishCat",
       "stats": { "hp": 300.0, "atk": 180.0, "range": 60.0, "speed": 25.0, "atkInterval": 1.2 },
       "resourcePath": "/Units/Cats/FishCat",
-      "walkFrames": 8, "attackFrames": 4, "cost": 400.0, "cooldown": 6.0, "yOffset": 0.0,
+      "walkFrames": 8, "attackFrames": 4, "cost": 400.0, "cooldown": 6.0, "yOffset": 0.0, "isAreaAttack": false,
       "iconPath": "/Units/Cats/FishCat/icon.png"
     },
     {
       "name": "LizardCat",
       "stats": { "hp": 250.0, "atk": 300.0, "range": 220.0, "speed": 15.0, "atkInterval": 2.5 },
       "resourcePath": "/Units/Cats/LizardCat",
-      "walkFrames": 5, "attackFrames": 6, "cost": 800.0, "cooldown": 12.0, "yOffset": 0.0,
+      "walkFrames": 5, "attackFrames": 6, "cost": 800.0, "cooldown": 12.0, "yOffset": 0.0, "isAreaAttack": false,
       "iconPath": "/Units/Cats/LizardCat/icon.png"
     },
     {
       "name": "TitanCat",
       "stats": { "hp": 1200.0, "atk": 400.0, "range": 50.0, "speed": 10.0, "atkInterval": 3.0 },
       "resourcePath": "/Units/Cats/TitanCat",
-      "walkFrames": 7, "attackFrames": 3, "cost": 1500.0, "cooldown": 25.0, "yOffset": 0.0,
+      "walkFrames": 7, "attackFrames": 3, "cost": 1500.0, "cooldown": 25.0, "yOffset": 0.0, "isAreaAttack": true,
       "iconPath": "/Units/Cats/TitanCat/icon.png"
     },
     {
       "name": "KillerCat",
       "stats": { "hp": 100.0, "atk": 150.0, "range": 60.0, "speed": 40.0, "atkInterval": 0.5 },
       "resourcePath": "/Units/Cats/KillerCat",
-      "walkFrames": 3, "attackFrames": 2, "cost": 75.0, "cooldown": 1.5, "yOffset": 0.0,
+      "walkFrames": 3, "attackFrames": 2, "cost": 75.0, "cooldown": 1.5, "yOffset": 0.0, "isAreaAttack": false,
       "iconPath": "/Units/Cats/KillerCat/icon.png"
     }
   ],
@@ -76,7 +76,7 @@
       "name": "Doge",
       "stats": { "hp": 150.0, "atk": 80.0, "range": 60.0, "speed": 10.0, "atkInterval": 1.0 },
       "resourcePath": "/Units/Enemies/Doge",
-      "walkFrames": 2, "attackFrames": 2, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0,
+      "walkFrames": 2, "attackFrames": 2, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false,
       "iconPath": ""
     }
   ]

@@ -2,6 +2,7 @@
 #include "Util/Logger.hpp"
 #include <algorithm>
 #include <cmath>
+#include <vector>
 
 UnitManager::UnitManager(std::shared_ptr<Util::GameObject> root) : m_Root(root) {}
 
@@ -31,50 +32,66 @@ void UnitManager::HandleCollisionAndCombat() {
     for (auto &unitA : m_Units) {
         bool blocked = false;
         float widthA = unitA->GetScaledSize().x;
-        // 計算 A 的「前端」座標
         float frontA = (unitA->GetTeam() == Unit::Team::CAT) ? 
                         unitA->m_Transform.translation.x - widthA : 
                         unitA->m_Transform.translation.x + widthA;
 
-        // 1. 檢查與敵方小兵的碰撞
+        std::vector<std::shared_ptr<Unit>> targetsInRange;
+
+        // 1. 搜集射程內的所有敵人
         for (auto &unitB : m_Units) {
             if (unitA->GetTeam() == unitB->GetTeam()) continue;
             
             float widthB = unitB->GetScaledSize().x;
-            // 計算 B 的「前端」座標
             float frontB = (unitB->GetTeam() == Unit::Team::CAT) ? 
                             unitB->m_Transform.translation.x - widthB : 
                             unitB->m_Transform.translation.x + widthB;
 
-            // 距離 = 兩個前端之間的絕對距離
             float dist = std::abs(frontA - frontB);
 
             if (dist < unitA->GetAttackRange()) {
                 blocked = true;
-                if (unitA->CanAttack()) {
-                    unitB->TakeDamage(unitA->GetAttackDamage());
-                    unitA->ResetAttackTimer();
-                }
-                break;
+                targetsInRange.push_back(unitB);
             }
         }
         
         // 2. 檢查敵方基地
+        std::shared_ptr<Tower> targetBase = nullptr;
         if (!blocked) {
             auto enemyBase = (unitA->GetTeam() == Unit::Team::CAT) ? m_EnemyBase : m_CatBase;
             if (enemyBase) {
-                // 基地通常較寬，我們暫定基地的中心點即為碰撞點 (可視需求調整)
                 float distToBase = std::abs(frontA - enemyBase->m_Transform.translation.x);
                 if (distToBase < unitA->GetAttackRange() + 20.0f) { 
                     blocked = true;
-                    if (unitA->CanAttack()) {
-                        enemyBase->TakeDamage(unitA->GetAttackDamage());
-                        unitA->ResetAttackTimer();
-                    }
+                    targetBase = enemyBase;
                 }
             }
         }
         
+        // 3. 執行傷害邏輯
+        if (blocked && unitA->CanAttack()) {
+            // 對小兵造成傷害
+            if (!targetsInRange.empty()) {
+                if (unitA->IsAreaAttack()) {
+                    // 範圍攻擊：傷害所有目標
+                    for (auto &target : targetsInRange) {
+                        target->TakeDamage(unitA->GetAttackDamage());
+                    }
+                } else {
+                    // 單體攻擊：僅傷害最前面的目標 (這裡假設搜集順序即為位置順序，或可再精確排序)
+                    targetsInRange[0]->TakeDamage(unitA->GetAttackDamage());
+                }
+            }
+
+            // 對基地造成傷害
+            if (targetBase) {
+                targetBase->TakeDamage(unitA->GetAttackDamage());
+            }
+
+            unitA->TriggerAttackAnimation();
+            unitA->ResetAttackTimer();
+        }
+
         unitA->SetState(blocked ? Unit::State::ATTACK : Unit::State::WALK);
     }
 }
@@ -88,8 +105,6 @@ void UnitManager::CleanupDeadUnits() {
         return false;
     });
     m_Units.erase(it, m_Units.end());
-    
-    // 基地死亡不移除，改由 Game Over 邏輯處理
 }
 
 bool UnitManager::IsGameOver() const {

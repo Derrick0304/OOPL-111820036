@@ -14,6 +14,7 @@ struct UnitData {
     float cost;         // 出兵成本
     float cooldown;     // 冷卻時間 (秒)
     float yOffset;      // 新增：垂直偏移量（用於漂浮單位）
+    bool isAreaAttack;  // 新增：是否為範圍攻擊
     std::string iconPath; // 按鈕圖示路徑
 };
 
