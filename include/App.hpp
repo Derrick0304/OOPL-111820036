@@ -2,10 +2,9 @@
 #define APP_HPP
 
 #include "pch.hpp"
-#include "UnitManager.hpp"
-#include "UIManager.hpp"
+#include "Scene/IScene.hpp"
 #include "Util/Renderer.hpp"
-#include "Util/Image.hpp"
+
 #include <memory>
 
 class App {
@@ -16,19 +15,19 @@ public:
     void Start();
     void Update();
     void End();
+    void ChangeScene(std::unique_ptr<IScene> nextScene);
+    void RequestExit() { m_State = State::END; }
+
+    Util::Renderer& GetRenderer() { return m_Renderer; }
 
 private:
+    void ApplyPendingSceneChange();
+
     State m_State = State::START;
     Util::Renderer m_Renderer;
-    
-    std::shared_ptr<Util::GameObject> m_Root;
-    std::unique_ptr<UnitManager> m_UnitManager;
-    std::unique_ptr<UIManager> m_UIManager;
-
-    float m_Money = 100.0f;
-
-    // 背景
-    std::shared_ptr<Util::Image> m_BackgroundImage;
+    std::unique_ptr<IScene> m_CurrentScene;
+    std::unique_ptr<IScene> m_PendingScene;
+    bool m_IsUpdatingScene = false;
 };
 
 #endif

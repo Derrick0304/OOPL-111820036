@@ -1,61 +1,96 @@
-# 貓咪大戰爭 - 開發進度報告 (Development Progress)
+# Development Progress
 
-## 1. 目前開發狀態 (截止至 2026/03/20 12:00)
-專案已進入 **Week 11** 的核心機制深化階段。目前已完成全數 10 隻基礎貓咪單位的填充，並實作了多項關鍵的戰鬥物理與視覺反饋系統。
+## Summary
 
----
+The project has moved from a single hard-coded battle prototype to a scene-based structure.
 
-## 2. 已完成功能 (Completed Features)
+Completed in the current codebase:
 
-### 單位陣容完整填充 (New!)
-*   **10 隻貓咪全數到位**：包含 Basic, Tank, Axe, Gross, Cow, Bird, Fish, Lizard, Titan, Killer。
-*   **全資料驅動**：所有單位的 HP, ATK, Range, Speed, Cost, Cooldown, `isAreaAttack`, `knockbackCount` 皆由 `Units.json` 控制。
-*   **專屬 Icon 整合**：所有出兵按鈕皆具備去背裁切後的專屬圖示。
+- Main menu scene
+- Stage select scene
+- Battle scene extraction from `App`
+- Stage data loading from `Stages.json`
+- Wave-based enemy spawning
+- Battle result overlay with retry and navigation actions
 
-### 戰鬥機制深化 (New!)
-*   **範圍攻擊系統 (Area Attack)**：
-    *   單位現在具備單體/範圍傷害屬性。
-    *   BirdCat, TitanCat, GrossCat 可同時傷害射程內的所有敵人。
-*   **受傷擊退機制 (Knockback)**：
-    *   依據血量百分比門檻觸發。
-    *   受傷時單位會向後滑行、傾斜並伴隨上下跳動的視覺回饋。
-    *   擊退期間具備短暫硬直（無法攻擊與移動）。
-*   **死亡演出優化**：
-    *   單位死亡時不再直接消失，而是觸發強化版的擊退動畫。
-    *   具備向後噴飛、向上彈跳以及逐漸縮小消散的演出，持續 0.8 秒。
+## Completed Features
 
-### 核心物理與對齊邏輯 (Technical Update)
-*   **後跟鎖定對齊 (Pivot Locking)**：
-    *   修正了單位基準點邏輯，改為鎖定「後方邊緣」。
-    *   解決了如 Lizard Cat 噴火時因圖片變寬導致的身體水平閃爍問題。
-*   **前端碰撞判定 (Front-Edge Collision)**：
-    *   採用單位前端座標計算距離，確保不同尺寸的單位皆能在正確射程停下，避免重疊。
+### Core Battle
 
----
+- 10 cat units and 1 enemy unit defined in `Resources/Data/Units.json`
+- Data-driven unit stats and animation frame counts
+- Combat resolution in `UnitManager`
+- Area attack support
+- Knockback support
+- Death animation and cleanup
+- Enemy and player base destruction ending the battle
 
-## 3. 程式架構說明 (Architecture)
+### UI and Flow
 
-*   **`Unit` 類別**：新增 `DEAD` 與 `KNOCKBACK` 狀態機，負責處理複雜的受傷與死亡位移邏輯。
-*   **`UnitManager`**：升級了傷害判定迴圈，支援範圍搜集目標並延遲清理（Cleanup）直到死亡動畫結束。
-*   **`UnitFactory`**：擴充解析欄位，支援更多戰鬥屬性的動態載入。
+- Main menu with `Start` and `Exit`
+- Stage select screen with a text-based stage list
+- Battle result overlay with:
+  - Retry
+  - Back to Stage Select
+  - Back to Main Menu
+- Battle deployment UI and money display remain active inside battle
 
----
+### Stage System
 
-## 4. 接下來的計畫 (Upcoming Tasks)
+- `Resources/Data/Stages.json` introduced
+- Each stage currently supports:
+  - `id`
+  - `displayName`
+  - `background`
+  - `enemyBaseHp`
+  - `waves`
+- Wave entries currently support:
+  - `triggerTime`
+  - `spawns`
+  - per-spawn `unit`, `count`, `interval`
 
-### 關卡與流程系統 (Week 12 預定)
-*   [ ] **關卡資料化 (Stages.json)**：實作關卡載入機制，定義不同關卡的敵人配置與難度。
-*   [ ] **勝負結算 UI**：製作視覺化的 "Victory" / "Defeat" 彈窗。
-*   [ ] **主選單與場景切換**：建立基本的遊戲導航流程。
+## Architecture Update
 
-### 視覺效果擴充
-*   [ ] **基地血條顯示**：在主堡上方即時顯示剩餘血量。
-*   [ ] **出兵 AI 優化**：實作更具挑戰性的敵軍生成邏輯。
+### App
 
----
+`App` now owns scene switching instead of directly owning battle logic.
 
-## 5. 資源配置常數
-*   **地平線位置**: `y = -150`
-*   **擊退速度**: `150.0f` / **死亡噴飛速度**: `250.0f`
-*   **金錢成長率**: `150 / sec` (測試環境)
-*   **解析度**: `1280 x 720`
+- `App::ChangeScene(...)` performs deferred scene switching
+- This avoids switching scenes while a current scene update is still executing
+
+### Scenes
+
+New scene classes:
+
+- `MainMenuScene`
+- `StageSelectScene`
+- `BattleScene`
+
+Shared interface:
+
+- `IScene`
+
+### Stage Data
+
+New stage-related modules:
+
+- `StageData`
+- `StageLoader`
+- `WaveSpawner`
+
+## Known Limitations
+
+- Menu and stage select use temporary text UI instead of finalized art-driven widgets
+- Stage backgrounds are temporary integrated assets
+- Available unit lists are not stage-specific yet
+- Money rules are still global, not per-stage
+- Enemy wave rules are time-triggered only for now
+
+## Next Tasks
+
+- Expand `Stages.json` to support richer wave conditions and metadata
+- Move menu and select UI from temporary text overlay to final interface assets
+- Add clearer battle result presentation
+- Add stage descriptions or preview metadata in stage select
+- Consider stage-specific available unit lists
+- Consider stage-specific economy settings if needed later

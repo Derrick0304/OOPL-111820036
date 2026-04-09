@@ -5,6 +5,12 @@ set(SRC_FILES
     UnitFactory.cpp
     UnitButton.cpp
     UIManager.cpp
+    UI/TextButton.cpp
+    Stage/StageLoader.cpp
+    Battle/WaveSpawner.cpp
+    Scene/MainMenuScene.cpp
+    Scene/StageSelectScene.cpp
+    Scene/BattleScene.cpp
 )
 
 set(INCLUDE_FILES
@@ -16,6 +22,14 @@ set(INCLUDE_FILES
     UnitFactory.hpp
     UnitButton.hpp
     UIManager.hpp
+    UI/TextButton.hpp
+    Stage/StageData.hpp
+    Stage/StageLoader.hpp
+    Battle/WaveSpawner.hpp
+    Scene/IScene.hpp
+    Scene/MainMenuScene.hpp
+    Scene/StageSelectScene.hpp
+    Scene/BattleScene.hpp
 )
 
 set(TEST_FILES

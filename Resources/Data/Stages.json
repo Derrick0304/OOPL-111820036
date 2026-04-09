@@ -1,0 +1,56 @@
+{
+  "stages": [
+    {
+      "id": "stage_001",
+      "displayName": "First Battle",
+      "background": "/Backgrounds/background.png",
+      "enemyBaseHp": 1000.0,
+      "waves": [
+        {
+          "triggerTime": 2.0,
+          "spawns": [
+            { "unit": "Doge", "count": 1, "interval": 0.0 }
+          ]
+        },
+        {
+          "triggerTime": 8.0,
+          "spawns": [
+            { "unit": "Doge", "count": 2, "interval": 1.0 }
+          ]
+        },
+        {
+          "triggerTime": 16.0,
+          "spawns": [
+            { "unit": "Doge", "count": 4, "interval": 0.8 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_002",
+      "displayName": "many dog",
+      "background": "/Backgrounds/background.png",
+      "enemyBaseHp": 1400.0,
+      "waves": [
+        {
+          "triggerTime": 3.0,
+          "spawns": [
+            { "unit": "Doge", "count": 20, "interval": 0.5 }
+          ]
+        },
+        {
+          "triggerTime": 10.0,
+          "spawns": [
+            { "unit": "Doge", "count": 30, "interval": 0.6 }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "spawns": [
+            { "unit": "Doge", "count": 50, "interval": 0.4 }
+          ]
+        }
+      ]
+    }
+  ]
+}
