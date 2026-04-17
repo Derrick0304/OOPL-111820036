@@ -22,27 +22,32 @@ void UnitFactory::Init() {
         
         auto registerGroup = [](const json& group) {
             for (const auto& item : group) {
-                UnitData unit;
-                unit.name = item["name"];
-                
-                // 嚴格按照 Unit::Stats 結構順序進行顯式初始化
-                unit.stats.maxHp = item["stats"]["hp"];
-                unit.stats.speed = item["stats"]["speed"];
-                unit.stats.attackRange = item["stats"]["range"];
-                unit.stats.attackDamage = item["stats"]["atk"];
-                unit.stats.attackInterval = item["stats"]["atkInterval"];
-                unit.stats.isAreaAttack = item["isAreaAttack"];
-                unit.stats.knockbackCount = item["knockbackCount"];
+                try {
+                    UnitData unit;
+                    unit.name = item.value("name", "Unknown");
+                    
+                    const auto& stats = item["stats"];
+                    unit.stats.maxHp = stats.value("hp", 100.0f);
+                    unit.stats.speed = stats.value("speed", 1.0f);
+                    unit.stats.attackRange = stats.value("range", 50.0f);
+                    unit.stats.attackDamage = stats.value("atk", 10.0f);
+                    unit.stats.attackInterval = stats.value("atkInterval", 1.0f);
+                    
+                    unit.stats.isAreaAttack = item.value("isAreaAttack", false);
+                    unit.stats.knockbackCount = item.value("knockbackCount", 3);
 
-                unit.resourcePath = item["resourcePath"];
-                unit.walkFrames = item["walkFrames"];
-                unit.attackFrames = item["attackFrames"];
-                unit.cost = item["cost"];
-                unit.cooldown = item["cooldown"];
-                unit.yOffset = item["yOffset"];
-                unit.iconPath = item["iconPath"];
-                
-                s_Registry[unit.name] = unit;
+                    unit.resourcePath = item.value("resourcePath", "");
+                    unit.walkFrames = item.value("walkFrames", 1);
+                    unit.attackFrames = item.value("attackFrames", 1);
+                    unit.cost = item.value("cost", 0.0f);
+                    unit.cooldown = item.value("cooldown", 0.0f);
+                    unit.yOffset = item.value("yOffset", 0.0f);
+                    unit.iconPath = item.value("iconPath", "");
+                    
+                    s_Registry[unit.name] = unit;
+                } catch (const std::exception& e) {
+                    LOG_ERROR("Failed to parse a unit: {}", e.what());
+                }
             }
         };
 

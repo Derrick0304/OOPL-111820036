@@ -23,9 +23,17 @@ public:
 private:
     void HandleCollisionAndCombat();
     void CleanupDeadUnits();
+    
+    // 輔助函式：針對單一陣營處理戰鬥
+    void ProcessTeamBattle(std::vector<std::shared_ptr<Unit>>& attackers, 
+                          std::vector<std::shared_ptr<Unit>>& defenders, 
+                          std::shared_ptr<Tower> enemyBase);
 
     std::shared_ptr<Util::GameObject> m_Root;
-    std::vector<std::shared_ptr<Unit>> m_Units;
+    
+    // 拆分單位清單以優化效能
+    std::vector<std::shared_ptr<Unit>> m_Cats;
+    std::vector<std::shared_ptr<Unit>> m_Enemies;
 
     std::shared_ptr<Tower> m_CatBase;
     std::shared_ptr<Tower> m_EnemyBase;

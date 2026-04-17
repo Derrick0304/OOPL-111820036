@@ -65,7 +65,7 @@
     },
     {
       "name": "KillerCat",
-      "stats": { "hp": 100.0, "atk": 150.0, "range": 60.0, "speed": 40.0, "atkInterval": 0.5 },
+      "stats": { "hp": 10000.0, "atk": 1500.0, "range": 60.0, "speed": 400.0, "atkInterval": 0.5 },
       "resourcePath": "/Units/Cats/KillerCat",
       "walkFrames": 3, "attackFrames": 2, "cost": 75.0, "cooldown": 1.5, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 3,
       "iconPath": "/Units/Cats/KillerCat/icon.png"
@@ -77,6 +77,13 @@
       "stats": { "hp": 150.0, "atk": 40.0, "range": 60.0, "speed": 30.0, "atkInterval": 3.0 },
       "resourcePath": "/Units/Enemies/Doge",
       "walkFrames": 2, "attackFrames": 2, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 3,
+      "iconPath": ""
+    },
+    {
+      "name": "Snache",
+      "stats": { "hp": 150.0, "atk": 40.0, "range": 60.0, "speed": 30.0, "atkInterval": 3.0 },
+      "resourcePath": "/Units/Enemies/Snache",
+      "walkFrames": 4, "attackFrames": 4, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 3,
       "iconPath": ""
     }
   ]

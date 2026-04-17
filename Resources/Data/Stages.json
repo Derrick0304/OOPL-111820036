@@ -28,26 +28,26 @@
     },
     {
       "id": "stage_002",
-      "displayName": "many dog",
+      "displayName": "Snache and Dog",
       "background": "/Backgrounds/background.png",
       "enemyBaseHp": 1400.0,
       "waves": [
         {
           "triggerTime": 3.0,
           "spawns": [
-            { "unit": "Doge", "count": 20, "interval": 0.5 }
+            { "unit": "Snache", "count": 20, "interval": 0.5 }
           ]
         },
         {
-          "triggerTime": 10.0,
+          "triggerTime": 6.0,
           "spawns": [
             { "unit": "Doge", "count": 30, "interval": 0.6 }
           ]
         },
         {
-          "triggerTime": 20.0,
+          "triggerTime": 9.0,
           "spawns": [
-            { "unit": "Doge", "count": 50, "interval": 0.4 }
+            { "unit": "Snache", "count": 50, "interval": 0.4 }
           ]
         }
       ]
