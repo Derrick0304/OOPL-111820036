@@ -153,6 +153,33 @@ std::string UnitManager::GetWinner() const {
     return "";
 }
 
+void UnitManager::ApplyCannonDamage(float damage) {
+    for (auto& enemy : m_Enemies) {
+        if (!enemy->IsDead()) {
+            enemy->TakeDamage(damage);
+            enemy->ForceKnockback();
+        }
+    }
+}
+
+void UnitManager::ApplyCannonDamageInArea(float minX, float maxX, float damage, std::set<Unit*>& hitList) {
+    for (auto& enemy : m_Enemies) {
+        if (enemy->IsDead()) continue;
+        
+        // 檢查該單位是否已經被這發貓咪砲打過了
+        if (hitList.find(enemy.get()) != hitList.end()) continue;
+
+        float enemyX = enemy->m_Transform.translation.x;
+        // 由於敵人是向右走，我們檢查其中心點是否在範圍內
+        // 也可以考慮加上單位寬度判定
+        if (enemyX >= minX && enemyX <= maxX) {
+            enemy->TakeDamage(damage);
+            enemy->ForceKnockback();
+            hitList.insert(enemy.get()); // 標記已擊中
+        }
+    }
+}
+
 void UnitManager::ClearUnits() {
     for (auto& unit : m_Cats) m_Root->RemoveChild(unit);
     for (auto& unit : m_Enemies) m_Root->RemoveChild(unit);

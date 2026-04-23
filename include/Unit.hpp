@@ -31,6 +31,7 @@ public:
     virtual void Update();
     
     void TakeDamage(float damage);
+    void ForceKnockback();
     bool CanAttack();
     void ResetAttackTimer();
     

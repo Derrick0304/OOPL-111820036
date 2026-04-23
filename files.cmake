@@ -4,10 +4,13 @@ set(SRC_FILES
     UnitManager.cpp
     UnitFactory.cpp
     UnitButton.cpp
+    UI/WorkerCatButton.cpp
+    UI/CatCannonButton.cpp
     UIManager.cpp
     UI/TextButton.cpp
     Stage/StageLoader.cpp
     Battle/WaveSpawner.cpp
+    Battle/CatCannonEffect.cpp
     Scene/MainMenuScene.cpp
     Scene/StageSelectScene.cpp
     Scene/BattleScene.cpp
@@ -21,11 +24,14 @@ set(INCLUDE_FILES
     UnitData.hpp
     UnitFactory.hpp
     UnitButton.hpp
+    UI/WorkerCatButton.hpp
+    UI/CatCannonButton.hpp
     UIManager.hpp
     UI/TextButton.hpp
     Stage/StageData.hpp
     Stage/StageLoader.hpp
     Battle/WaveSpawner.hpp
+    Battle/CatCannonEffect.hpp
     Scene/IScene.hpp
     Scene/MainMenuScene.hpp
     Scene/StageSelectScene.hpp

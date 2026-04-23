@@ -69,7 +69,8 @@ Each spawn job then creates units using:
 - `UnitManager`
 - `UIManager`
 - `WaveSpawner`
-- money accumulation
+- `CatCannonEffect`
+- money accumulation and Worker Cat level tracking
 - battle result overlay
 
 This keeps stage-specific logic inside the battle scene rather than in `App`.

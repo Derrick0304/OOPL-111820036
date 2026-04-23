@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <vector>
+#include <set>
 
 class UnitManager {
 public:
@@ -16,6 +17,8 @@ public:
     void AddUnit(std::shared_ptr<Unit> unit);
     void Update();
     void ClearUnits();
+    void ApplyCannonDamage(float damage);
+    void ApplyCannonDamageInArea(float minX, float maxX, float damage, std::set<Unit*>& hitList);
 
     bool IsGameOver() const;
     std::string GetWinner() const;

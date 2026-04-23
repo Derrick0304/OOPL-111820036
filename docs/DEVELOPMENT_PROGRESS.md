@@ -24,6 +24,7 @@ Completed in the current codebase:
 - Knockback support
 - Death animation and cleanup
 - Enemy and player base destruction ending the battle
+- **Cat Cannon**: Area damage and knockback ability with cooldown, featuring a sweeping purple laser and sequential explosion effects.
 
 ### UI and Flow
 
@@ -34,6 +35,8 @@ Completed in the current codebase:
   - Back to Stage Select
   - Back to Main Menu
 - Battle deployment UI and money display remain active inside battle
+- **Worker Cat Upgrade System**: Upgradeable money generation rate and max money cap.
+- **Cat Cannon UI**: Dynamic cooldown button that charges up and flashes when ready.
 
 ### Stage System
 
@@ -48,6 +51,9 @@ Completed in the current codebase:
   - `triggerTime`
   - `spawns`
   - per-spawn `unit`, `count`, `interval`
+
+### Tools
+- **SpriteProcessor**: A Python-based automation tool to split and crop `.webp`/`.png` sprite sheets into individual transparent frames for easy engine integration.
 
 ## Architecture Update
 

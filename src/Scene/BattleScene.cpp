@@ -37,6 +37,41 @@ void BattleScene::Update() {
 
     const float dt = Util::Time::GetDeltaTimeMs() / 1000.0f;
     m_Money += m_MoneyPerSecond * dt;
+    if (m_Money > m_MaxMoney) {
+        m_Money = m_MaxMoney;
+    }
+
+    if (m_CannonCooldown < CANNON_MAX_COOLDOWN) {
+        m_CannonCooldown += dt;
+    }
+
+    if (m_CatCannonEffect) {
+        m_CatCannonEffect->Update(dt);
+    }
+
+    // --- 貓咪砲傷害波邏輯 ---
+    if (m_CannonEffectTimer >= 0.0f) {
+        m_CannonEffectTimer += dt;
+        
+        // 傷害波應與 CatCannonEffect 中的爆炸時間同步
+        // 爆炸在 0.4s 開始，並在 0.5s 內完成橫掃
+        if (m_CannonEffectTimer >= 0.4f && m_CannonEffectTimer <= 0.9f) {
+            float progress = (m_CannonEffectTimer - 0.4f) / 0.5f;
+            // 計算當前爆炸波的 X 位置 (從我方 500 到 敵方 -500)
+            float currentX = 500.0f + (-500.0f - 500.0f) * progress;
+            
+            // 判定範圍：當前 X 座標前後 100 像素
+            if (m_UnitManager) {
+                m_UnitManager->ApplyCannonDamageInArea(currentX - 50.0f, currentX + 50.0f, 200.0f, m_CannonHitList);
+            }
+        }
+        
+        // 特效結束後清理計時器與清單
+        if (m_CannonEffectTimer > 1.5f) {
+            m_CannonEffectTimer = -1.0f;
+            m_CannonHitList.clear();
+        }
+    }
 
     if (m_WaveSpawner) {
         m_WaveSpawner->Update(dt);
@@ -45,7 +80,9 @@ void BattleScene::Update() {
         m_UnitManager->Update();
     }
     if (m_UIManager) {
-        m_UIManager->Update(m_Money);
+        float nextCost = (m_WorkerLevel < 8) ? m_WorkerUpgradeCosts[m_WorkerLevel - 1] : 0.0f;
+        float cannonProgress = std::min(m_CannonCooldown / CANNON_MAX_COOLDOWN, 1.0f);
+        m_UIManager->Update(m_Money, m_WorkerLevel, nextCost, cannonProgress);
     }
 
     if (m_UnitManager && m_UnitManager->IsGameOver()) {
@@ -73,13 +110,48 @@ void BattleScene::SetupBattlefield() {
     m_Root->AddChild(m_StageTitleObject);
 
     m_UnitManager = std::make_unique<UnitManager>(m_Root);
-    m_UIManager = std::make_unique<UIManager>(m_Root, m_UnitManager.get(), [this](float amount) {
-        if (m_Money < amount) {
-            return false;
+    
+    // 初始化等級 1 的數據
+    m_MaxMoney = m_MaxMoneyLevels[0];
+    m_MoneyPerSecond = m_MoneyRateLevels[0];
+    m_WorkerLevel = 1;
+
+    m_CatCannonEffect = std::make_unique<CatCannonEffect>(m_Root);
+
+    m_UIManager = std::make_unique<UIManager>(m_Root, m_UnitManager.get(), 
+        [this](float amount) {
+            if (m_Money < amount) return false;
+            m_Money -= amount;
+            return true;
+        },
+        [this]() {
+            if (m_WorkerLevel < 8) {
+                float cost = m_WorkerUpgradeCosts[m_WorkerLevel - 1];
+                if (m_Money >= cost) {
+                    m_Money -= cost;
+                    m_WorkerLevel++;
+                    m_MaxMoney = m_MaxMoneyLevels[m_WorkerLevel - 1];
+                    m_MoneyPerSecond = m_MoneyRateLevels[m_WorkerLevel - 1];
+                    LOG_INFO("Worker upgraded to Lv. {}! Max: {}, Rate: {}", 
+                             m_WorkerLevel, m_MaxMoney, m_MoneyPerSecond);
+                }
+            }
+        },
+        [this]() {
+            if (m_CannonCooldown >= CANNON_MAX_COOLDOWN) {
+                m_CannonCooldown = 0.0f;
+                // 觸發視覺特效
+                m_CatCannonEffect->Trigger(500.0f, -500.0f, -150.0f);
+
+                // 啟動傷害波計時器，並清空擊中清單
+                m_CannonEffectTimer = 0.0f;
+                m_CannonHitList.clear();
+
+                LOG_INFO("Cat Cannon Fired! Damage wave started.");
+            }
         }
-        m_Money -= amount;
-        return true;
-    });
+
+    );
 
     auto catBase = std::make_shared<Tower>(Unit::Team::CAT, 1000.0f, RESOURCE_DIR"/Towers/CatBase/base.png");
     catBase->m_Transform.scale = {1.2f, 1.2f};

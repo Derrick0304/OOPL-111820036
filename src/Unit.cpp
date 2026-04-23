@@ -132,6 +132,15 @@ void Unit::Update() {
     }
 }
 
+void Unit::ForceKnockback() {
+    if (m_State != State::DEAD) {
+        // 先強制將狀態設為 WALK 再轉為 KNOCKBACK，以確保 SetState 的防護邏輯能通過
+        State oldState = m_State;
+        m_State = State::WALK; 
+        SetState(State::KNOCKBACK);
+    }
+}
+
 void Unit::TakeDamage(float damage) {
     if (m_State == State::DEAD) return;
 
