@@ -28,8 +28,9 @@ Completed in the current codebase:
 
 ### UI and Flow
 
-- Main menu with `Start` and `Exit`
-- Stage select screen with a text-based stage list
+- Main menu with `Start` and `Exit` using `ImageTextButton` (with border flashing and scale animations)
+- Stage select screen with `ImageTextButton` list
+- **UI Layout Externalization**: All major UI positions (Battle, Menu, Select) are now loaded from `Resources/Data/UI_Layout.json`
 - Battle result overlay with:
   - Retry
   - Back to Stage Select
@@ -54,6 +55,7 @@ Completed in the current codebase:
 
 ### Tools
 - **SpriteProcessor**: A Python-based automation tool to split and crop `.webp`/`.png` sprite sheets into individual transparent frames for easy engine integration.
+- **UI Layout Editor**: A Python/Tkinter tool to visually adjust UI positions, supporting multiple scenes and dynamic element addition.
 
 ## Architecture Update
 
@@ -86,7 +88,6 @@ New stage-related modules:
 
 ## Known Limitations
 
-- Menu and stage select use temporary text UI instead of finalized art-driven widgets
 - Stage backgrounds are temporary integrated assets
 - Available unit lists are not stage-specific yet
 - Money rules are still global, not per-stage
@@ -95,7 +96,6 @@ New stage-related modules:
 ## Next Tasks
 
 - Expand `Stages.json` to support richer wave conditions and metadata
-- Move menu and select UI from temporary text overlay to final interface assets
 - Add clearer battle result presentation
 - Add stage descriptions or preview metadata in stage select
 - Consider stage-specific available unit lists
