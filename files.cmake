@@ -8,6 +8,7 @@ set(SRC_FILES
     UI/CatCannonButton.cpp
     UIManager.cpp
     UI/TextButton.cpp
+    UI/ImageTextButton.cpp
     Stage/StageLoader.cpp
     Battle/WaveSpawner.cpp
     Battle/CatCannonEffect.cpp
@@ -28,6 +29,7 @@ set(INCLUDE_FILES
     UI/CatCannonButton.hpp
     UIManager.hpp
     UI/TextButton.hpp
+    UI/ImageTextButton.hpp
     Stage/StageData.hpp
     Stage/StageLoader.hpp
     Battle/WaveSpawner.hpp

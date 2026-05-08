@@ -4,11 +4,11 @@
 #include "Scene/IScene.hpp"
 #include "Util/Image.hpp"
 #include "Util/Text.hpp"
+#include "UI/ImageTextButton.hpp"
 
 #include <memory>
 
 class App;
-class TextButton;
 
 class MainMenuScene : public IScene {
 public:
@@ -28,8 +28,8 @@ private:
     std::shared_ptr<Util::GameObject> m_PanelObject;
     std::shared_ptr<Util::Text> m_TitleText;
     std::shared_ptr<Util::GameObject> m_TitleObject;
-    std::shared_ptr<TextButton> m_StartButton;
-    std::shared_ptr<TextButton> m_ExitButton;
+    std::shared_ptr<ImageTextButton> m_StartButton;
+    std::shared_ptr<ImageTextButton> m_ExitButton;
 };
 
 #endif

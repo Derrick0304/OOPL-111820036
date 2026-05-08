@@ -1,0 +1,64 @@
+{
+  "BattleScene": {
+    "MoneyText": {
+      "x": 459.0,
+      "y": 288.0
+    },
+    "WorkerButton": {
+      "x": -550.0,
+      "y": -310.0
+    },
+    "CatCannonButton": {
+      "x": 550.0,
+      "y": -310.0
+    },
+    "UnitGrid": {
+      "x": 0.0,
+      "y": -310.0,
+      "paddingX": 100.0,
+      "paddingY": 80.0,
+      "columns": 5
+    }
+  },
+  "MainMenuScene": {
+    "TitleText": {
+      "x": 0.0,
+      "y": 70.0
+    },
+    "StartButton": {
+      "x": 0.0,
+      "y": -40.0
+    },
+    "ExitButton": {
+      "x": 0.0,
+      "y": -110.0
+    },
+    "Panel": {
+      "x": 0.0,
+      "y": -20.0,
+      "scaleX": 4.8,
+      "scaleY": 3.2
+    }
+  },
+  "StageSelectScene": {
+    "TitleText": {
+      "x": 0.0,
+      "y": 170.0
+    },
+    "BackButton": {
+      "x": 0.0,
+      "y": -180.0
+    },
+    "StageList": {
+      "x": 0.0,
+      "y": 90.0,
+      "spacingY": 55.0
+    },
+    "Panel": {
+      "x": 0.0,
+      "y": 0.0,
+      "scaleX": 6.0,
+      "scaleY": 4.2
+    }
+  }
+}
