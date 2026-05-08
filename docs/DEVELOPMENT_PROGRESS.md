@@ -29,7 +29,8 @@ Completed in the current codebase:
 ### UI and Flow
 
 - Main menu with `Start` and `Exit` using `ImageTextButton` (with border flashing and scale animations)
-- Stage select screen with `ImageTextButton` list
+- **Stage Select Carousel**: A horizontal scrolling stage selector with mouse drag support, auto-snapping, and dynamic scaling feedback.
+- **Battle Start System**: A dedicated deployment button in the stage select screen that triggers the currently centered stage.
 - **UI Layout Externalization**: All major UI positions (Battle, Menu, Select) are now loaded from `Resources/Data/UI_Layout.json`
 - Battle result overlay with:
   - Retry

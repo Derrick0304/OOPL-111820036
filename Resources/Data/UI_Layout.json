@@ -37,16 +37,19 @@
   "StageSelectScene": {
     "TitleText": {
       "x": 0.0,
-      "y": 170.0
+      "y": 250.0
     },
     "BackButton": {
-      "x": 0.0,
-      "y": -180.0
+      "x": -538.0,
+      "y": -303.0
     },
-    "StageList": {
-      "x": 0.0,
-      "y": 90.0,
-      "spacingY": 55.0
+    "StartButton": {
+      "x": 526.0,
+      "y": -303.0
+    },
+    "Carousel": {
+      "y": 0.0,
+      "spacingX": 350.0
     }
   }
 }
