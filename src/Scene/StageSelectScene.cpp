@@ -23,8 +23,6 @@ void StageSelectScene::Enter() {
     float backX = 0.0f, backY = -180.0f;
     float listX = 0.0f, listY = 90.0f;
     float listSpacingY = 55.0f;
-    float panelX = 0.0f, panelY = 0.0f;
-    float panelScaleX = 6.0f, panelScaleY = 4.2f;
 
     std::ifstream file(RESOURCE_DIR"/Data/UI_Layout.json");
     if (file.is_open()) {
@@ -45,12 +43,6 @@ void StageSelectScene::Enter() {
                     listY = scene["StageList"]["y"].get<float>();
                     if (scene["StageList"].contains("spacingY")) listSpacingY = scene["StageList"]["spacingY"].get<float>();
                 }
-                if (scene.contains("Panel")) {
-                    panelX = scene["Panel"]["x"].get<float>();
-                    panelY = scene["Panel"]["y"].get<float>();
-                    if (scene["Panel"].contains("scaleX")) panelScaleX = scene["Panel"]["scaleX"].get<float>();
-                    if (scene["Panel"].contains("scaleY")) panelScaleY = scene["Panel"]["scaleY"].get<float>();
-                }
             }
         } catch (const std::exception& e) {
             LOG_ERROR("Failed to parse UI_Layout.json in StageSelectScene: {}", e.what());
@@ -62,12 +54,6 @@ void StageSelectScene::Enter() {
     m_BackgroundObject->m_Transform.scale = {1.28f, 1.28f};
     m_BackgroundObject->m_Transform.translation = {0.0f, 30.0f};
     m_Root->AddChild(m_BackgroundObject);
-
-    m_PanelImage = std::make_shared<Util::Image>(RESOURCE_DIR"/UI/Buttons/BlackMask.png");
-    m_PanelObject = std::make_shared<Util::GameObject>(m_PanelImage, 5.0f);
-    m_PanelObject->m_Transform.scale = {panelScaleX, panelScaleY};
-    m_PanelObject->m_Transform.translation = {panelX, panelY};
-    m_Root->AddChild(m_PanelObject);
 
     m_TitleText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 48, "Select Stage", Util::Color(255, 255, 255));
     m_TitleObject = std::make_shared<Util::GameObject>(m_TitleText, 15.0f);

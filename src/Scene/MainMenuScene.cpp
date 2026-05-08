@@ -20,8 +20,6 @@ void MainMenuScene::Enter() {
     float titleX = 0.0f, titleY = 70.0f;
     float startX = 0.0f, startY = -40.0f;
     float exitX = 0.0f, exitY = -110.0f;
-    float panelX = 0.0f, panelY = -20.0f;
-    float panelScaleX = 4.8f, panelScaleY = 3.2f;
 
     std::ifstream file(RESOURCE_DIR"/Data/UI_Layout.json");
     if (file.is_open()) {
@@ -41,12 +39,6 @@ void MainMenuScene::Enter() {
                     exitX = scene["ExitButton"]["x"].get<float>();
                     exitY = scene["ExitButton"]["y"].get<float>();
                 }
-                if (scene.contains("Panel")) {
-                    panelX = scene["Panel"]["x"].get<float>();
-                    panelY = scene["Panel"]["y"].get<float>();
-                    if (scene["Panel"].contains("scaleX")) panelScaleX = scene["Panel"]["scaleX"].get<float>();
-                    if (scene["Panel"].contains("scaleY")) panelScaleY = scene["Panel"]["scaleY"].get<float>();
-                }
             }
         } catch (const std::exception& e) {
             LOG_ERROR("Failed to parse UI_Layout.json in MainMenuScene: {}", e.what());
@@ -58,12 +50,6 @@ void MainMenuScene::Enter() {
     m_BackgroundObject->m_Transform.scale = {1.4f, 1.4f};
     m_BackgroundObject->m_Transform.translation = {0.0f, 40.0f};
     m_Root->AddChild(m_BackgroundObject);
-
-    m_PanelImage = std::make_shared<Util::Image>(RESOURCE_DIR"/UI/Buttons/BlackMask.png");
-    m_PanelObject = std::make_shared<Util::GameObject>(m_PanelImage, 5.0f);
-    m_PanelObject->m_Transform.scale = {panelScaleX, panelScaleY};
-    m_PanelObject->m_Transform.translation = {panelX, panelY};
-    m_Root->AddChild(m_PanelObject);
 
     m_TitleText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 56, "Battle Cats", Util::Color(255, 255, 255));
     m_TitleObject = std::make_shared<Util::GameObject>(m_TitleText, 15.0f);

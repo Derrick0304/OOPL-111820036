@@ -24,8 +24,6 @@ private:
     std::shared_ptr<Util::GameObject> m_Root;
     std::shared_ptr<Util::Image> m_BackgroundImage;
     std::shared_ptr<Util::GameObject> m_BackgroundObject;
-    std::shared_ptr<Util::Image> m_PanelImage;
-    std::shared_ptr<Util::GameObject> m_PanelObject;
     std::shared_ptr<Util::Text> m_TitleText;
     std::shared_ptr<Util::GameObject> m_TitleObject;
     std::shared_ptr<ImageTextButton> m_StartButton;
