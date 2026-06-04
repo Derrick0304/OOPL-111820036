@@ -9,17 +9,17 @@
         {
           "triggerTime": 2.0,
           "spawns": [
-            { "unit": "Doge", "count": 1, "interval": 0.0 }
+            { "unit": "Sir Seal", "count": 1, "interval": 0.0 }
           ]
         },
         {
-          "triggerTime": 8.0,
+          "triggerTime": 15.0,
           "spawns": [
             { "unit": "Doge", "count": 2, "interval": 1.0 }
           ]
         },
         {
-          "triggerTime": 16.0,
+          "triggerTime": 30.0,
           "spawns": [
             { "unit": "Doge", "count": 4, "interval": 0.8 }
           ]

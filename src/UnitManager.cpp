@@ -86,8 +86,6 @@ void UnitManager::ProcessTeamBattle(std::vector<std::shared_ptr<Unit>>& attacker
         // 2. 若無單位，則偵測基地
         std::shared_ptr<Tower> targetBase = nullptr;
         if (targetsInRange.empty() && enemyBase && !enemyBase->IsDead()) {
-            // 基地寬度同樣受 Pivot 影響
-            const float baseWidth = enemyBase->GetScaledSize().x;
             // 敵方基地的「受擊點」
             // 若我是 CAT (向左)，敵方基地是 ENEMY (渲染於 [x, x+w]) -> 受擊點在 x
             // 若我是 ENEMY (向右)，敵方基地是 CAT (渲染於 [x-w, x]) -> 受擊點在 x
@@ -185,4 +183,15 @@ void UnitManager::ClearUnits() {
     for (auto& unit : m_Enemies) m_Root->RemoveChild(unit);
     m_Cats.clear();
     m_Enemies.clear();
+}
+
+int UnitManager::GetEnemyCount() const {
+    return static_cast<int>(m_Enemies.size());
+}
+
+float UnitManager::GetEnemyBaseHpPercentage() const {
+    if (m_EnemyBase) {
+        return m_EnemyBase->GetHpPercentage(); // Assuming Tower has this or similar, otherwise compute it
+    }
+    return 100.0f; // Default if no base exists
 }

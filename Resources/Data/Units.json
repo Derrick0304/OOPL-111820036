@@ -85,6 +85,55 @@
       "resourcePath": "/Units/Enemies/Snache",
       "walkFrames": 4, "attackFrames": 4, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 3,
       "iconPath": ""
+    },
+    {
+      "name": "Those Guys",
+      "stats": { "hp": 200.0, "atk": 20.0, "range": 110.0, "speed": 10.0, "atkInterval": 1.0 },
+      "resourcePath": "/Units/Enemies/ThoseGuys",
+      "walkFrames": 4, "attackFrames": 4, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 1,
+      "iconPath": "/Units/Enemies/ThoseGuys/icon.png"
+    },
+    {
+      "name": "Hippoe",
+      "stats": { "hp": 1000.0, "atk": 100.0, "range": 160.0, "speed": 4.0, "atkInterval": 2.23 },
+      "resourcePath": "/Units/Enemies/Hippoe",
+      "walkFrames": 3, "attackFrames": 5, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": true, "knockbackCount": 1,
+      "iconPath": "/Units/Enemies/Hippoe/icon.png"
+    },
+    {
+      "name": "Pigge",
+      "stats": { "hp": 1500.0, "atk": 120.0, "range": 150.0, "speed": 5.0, "atkInterval": 2.43 },
+      "resourcePath": "/Units/Enemies/Pigge",
+      "walkFrames": 4, "attackFrames": 6, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": true, "knockbackCount": 2,
+      "iconPath": ""
+    },
+    {
+      "name": "Jackie Peng",
+      "stats": { "hp": 1300.0, "atk": 80.0, "range": 150.0, "speed": 11.0, "atkInterval": 0.8 },
+      "resourcePath": "/Units/Enemies/JackiePeng",
+      "walkFrames": 11, "attackFrames": 7, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 3,
+      "iconPath": ""
+    },
+    {
+      "name": "Gory",
+      "stats": { "hp": 1000.0, "atk": 80.0, "range": 150.0, "speed": 15.0, "atkInterval": 0.53 },
+      "resourcePath": "/Units/Enemies/Gory",
+      "walkFrames": 6, "attackFrames": 6, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 3,
+      "iconPath": ""
+    },
+    {
+      "name": "Baabaa",
+      "stats": { "hp": 500.0, "atk": 50.0, "range": 110.0, "speed": 7.0, "atkInterval": 1.77 },
+      "resourcePath": "/Units/Enemies/Baabaa",
+      "walkFrames": 5, "attackFrames": 5, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 3,
+      "iconPath": ""
+    },
+    {
+      "name": "Sir Seal",
+      "stats": { "hp": 2500.0, "atk": 150.0, "range": 170.0, "speed": 10.0, "atkInterval": 0.77 },
+      "resourcePath": "/Units/Enemies/SirSeal",
+      "walkFrames": 3, "attackFrames": 6, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 1,
+      "iconPath": ""
     }
   ]
 }

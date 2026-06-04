@@ -32,19 +32,34 @@ bool StageLoader::Load() {
             stage.id = item.at("id").get<std::string>();
             stage.displayName = item.at("displayName").get<std::string>();
             stage.background = item.at("background").get<std::string>();
-            stage.enemyBaseHp = item.at("enemyBaseHp").get<float>();
+            stage.enemyBaseHp = item.value("enemyBaseHp", 1000.0f);
+            stage.cost = item.value("cost", 0);
+            stage.maxEnemies = item.value("maxEnemies", 10);
+            stage.stageLength = item.value("stageLength", 3000.0f);
+            stage.xpReward = item.value("xpReward", 0);
 
             if (item.contains("waves") && item["waves"].is_array()) {
                 for (const auto& waveItem : item["waves"]) {
                     WaveData wave;
-                    wave.triggerTime = waveItem.at("triggerTime").get<float>();
+                    wave.triggerTime = waveItem.value("triggerTime", -1.0f);
+                    wave.triggerBaseHpPercentage = waveItem.value("triggerBaseHpPercentage", -1.0f);
 
                     if (waveItem.contains("spawns") && waveItem["spawns"].is_array()) {
                         for (const auto& spawnItem : waveItem["spawns"]) {
                             SpawnEntry spawn;
                             spawn.unit = spawnItem.at("unit").get<std::string>();
-                            spawn.count = spawnItem.at("count").get<int>();
-                            spawn.interval = spawnItem.at("interval").get<float>();
+                            spawn.count = spawnItem.value("count", 0);
+                            
+                            if (spawnItem.contains("interval")) {
+                                float val = spawnItem.at("interval").get<float>();
+                                spawn.intervalMin = val;
+                                spawn.intervalMax = val;
+                            } else {
+                                spawn.intervalMin = spawnItem.value("intervalMin", 0.0f);
+                                spawn.intervalMax = spawnItem.value("intervalMax", 0.0f);
+                            }
+                            
+                            spawn.magnification = spawnItem.value("magnification", 1.0f);
                             wave.spawns.push_back(spawn);
                         }
                     }

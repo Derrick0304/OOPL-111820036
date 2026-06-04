@@ -162,7 +162,7 @@ void BattleScene::SetupBattlefield() {
     enemyBase->m_Transform.translation = {-500.0f, -150.0f};
 
     m_UnitManager->SetBases(catBase, enemyBase);
-    m_WaveSpawner = std::make_unique<WaveSpawner>(m_Stage.waves, m_UnitManager.get());
+    m_WaveSpawner = std::make_unique<WaveSpawner>(m_Stage, m_UnitManager.get());
 }
 
 void BattleScene::SetupResultOverlay() {

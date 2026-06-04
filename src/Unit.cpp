@@ -135,7 +135,6 @@ void Unit::Update() {
 void Unit::ForceKnockback() {
     if (m_State != State::DEAD) {
         // 先強制將狀態設為 WALK 再轉為 KNOCKBACK，以確保 SetState 的防護邏輯能通過
-        State oldState = m_State;
         m_State = State::WALK; 
         SetState(State::KNOCKBACK);
     }
@@ -164,4 +163,17 @@ bool Unit::CanAttack() {
 
 void Unit::ResetAttackTimer() {
     m_AttackTimer = 0.0f;
+}
+
+void Unit::ApplyMagnification(float multiplier) {
+    if (multiplier <= 0.0f) return;
+    m_Stats.maxHp *= multiplier;
+    m_Stats.attackDamage *= multiplier;
+    m_CurrentHP = m_Stats.maxHp; // Reset HP to new max
+
+    // Update knockback steps if applicable
+    if (m_Stats.knockbackCount > 0) {
+        m_KnockbackHPStep = m_Stats.maxHp / (m_Stats.knockbackCount + 1);
+        m_NextKnockbackHP = m_Stats.maxHp - m_KnockbackHPStep;
+    }
 }

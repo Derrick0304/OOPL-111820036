@@ -23,6 +23,9 @@ public:
     bool IsGameOver() const;
     std::string GetWinner() const;
 
+    int GetEnemyCount() const;
+    float GetEnemyBaseHpPercentage() const;
+
 private:
     void HandleCollisionAndCombat();
     void CleanupDeadUnits();

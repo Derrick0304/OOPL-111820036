@@ -34,6 +34,7 @@ public:
     void ForceKnockback();
     bool CanAttack();
     void ResetAttackTimer();
+    void ApplyMagnification(float multiplier);
     
     Team GetTeam() const { return m_Team; }
     State GetState() const { return m_State; }
@@ -48,6 +49,7 @@ public:
     bool IsDeadAnimationEnded() const { return m_State == State::DEAD && m_DeadTimer <= 0; } // 新增
     bool IsKnockback() const { return m_State == State::KNOCKBACK; }
     float GetHP() const { return m_CurrentHP; }
+    float GetHpPercentage() const { return (m_Stats.maxHp > 0) ? (m_CurrentHP / m_Stats.maxHp) * 100.0f : 0.0f; }
 
 protected:
     Team m_Team;
