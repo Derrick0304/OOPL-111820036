@@ -65,7 +65,7 @@
     },
     {
       "name": "KillerCat",
-      "stats": { "hp": 10000.0, "atk": 1500.0, "range": 60.0, "speed": 400.0, "atkInterval": 0.5 },
+      "stats": { "hp": 10000.0, "atk": 10000.0, "range": 60.0, "speed": 400.0, "atkInterval": 0.5 },
       "resourcePath": "/Units/Cats/KillerCat",
       "walkFrames": 3, "attackFrames": 2, "cost": 75.0, "cooldown": 1.5, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 3,
       "iconPath": "/Units/Cats/KillerCat/icon.png"
@@ -134,6 +134,69 @@
       "resourcePath": "/Units/Enemies/SirSeal",
       "walkFrames": 3, "attackFrames": 6, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 1,
       "iconPath": ""
+    },
+    {
+      "name": "Croco",
+      "stats": { "hp": 70.0, "atk": 30.0, "range": 110.0, "speed": 14.0, "atkInterval": 0.6 },
+      "resourcePath": "/Units/Enemies/Croco",
+      "walkFrames": 5, "attackFrames": 6, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 1,
+      "iconPath": "/Units/Enemies/Croco/icon.png"
+    },
+    {
+      "name": "Le'boin",
+      "stats": { "hp": 4000.0, "atk": 654.0, "range": 400.0, "speed": 4.0, "atkInterval": 6.23 },
+      "resourcePath": "/Units/Enemies/Le'boin",
+      "walkFrames": 3, "attackFrames": 3, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": true, "knockbackCount": 5,
+      "iconPath": "/Units/Enemies/Le'boin/icon.png"
+    },
+    {
+      "name": "B.B.Bunny",
+      "stats": { "hp": 500.0, "atk": 50.0, "range": 110.0, "speed": 22.0, "atkInterval": 1.37 },
+      "resourcePath": "/Units/Enemies/B.B.Bunny",
+      "walkFrames": 6, "attackFrames": 5, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 3,
+      "iconPath": "/Units/Enemies/B.B.Bunny/icon.png"
+    },
+    {
+      "name": "Squire Rel",
+      "stats": { "hp": 80.0, "atk": 30.0, "range": 110.0, "speed": 30.0, "atkInterval": 0.53 },
+      "resourcePath": "/Units/Enemies/Squire Rel",
+      "walkFrames": 5, "attackFrames": 3, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 3,
+      "iconPath": "/Units/Enemies/Squire Rel/icon.png"
+    },
+    {
+      "name": "Mooth",
+      "stats": { "hp": 5000.0, "atk": 350.0, "range": 340.0, "speed": 20.0, "atkInterval": 2.93 },
+      "resourcePath": "/Units/Enemies/Mooth",
+      "walkFrames": 3, "attackFrames": 4, "cost": 0.0, "cooldown": 0.0, "yOffset": 100.0, "isAreaAttack": true, "knockbackCount": 1,
+      "iconPath": "/Units/Enemies/Mooth/icon.png"
+    },
+    {
+      "name": "Kang Roo",
+      "stats": { "hp": 4000.0, "atk": 250.0, "range": 160.0, "speed": 20.0, "atkInterval": 1.2 },
+      "resourcePath": "/Units/Enemies/Kang Roo",
+      "walkFrames": 4, "attackFrames": 3, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 1,
+      "iconPath": "/Units/Enemies/Kang Roo/icon.png"
+    },
+    {
+      "name": "One Horn",
+      "stats": { "hp": 15000.0, "atk": 500.0, "range": 40.0, "speed": 3.0, "atkInterval": 0.53 },
+      "resourcePath": "/Units/Enemies/One Horn",
+      "walkFrames": 3, "attackFrames": 3, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 1,
+      "iconPath": "/Units/Enemies/One Horn/icon.png"
+    },
+    {
+      "name": "Teacher Bear",
+      "stats": { "hp": 3000.0, "atk": 1000.0, "range": 350.0, "speed": 4.0, "atkInterval": 3.57 },
+      "resourcePath": "/Units/Enemies/Teacher Bear",
+      "walkFrames": 4, "attackFrames": 3, "cost": 0.0, "cooldown": 0.0, "yOffset": 0.0, "isAreaAttack": false, "knockbackCount": 10,
+      "iconPath": "/Units/Enemies/Teacher Bear/icon.png"
+    },
+    {
+      "name": "The Face",
+      "stats": { "hp": 99999.0, "atk": 2000.0, "range": 400.0, "speed": 1.0, "atkInterval": 9.1 },
+      "resourcePath": "/Units/Enemies/The Face",
+      "walkFrames": 1, "attackFrames": 4, "cost": 0.0, "cooldown": 0.0, "yOffset": 150.0, "isAreaAttack": true, "knockbackCount": 3,
+      "iconPath": "/Units/Enemies/The Face/icon.png"
     }
   ]
 }

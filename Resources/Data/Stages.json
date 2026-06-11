@@ -9,7 +9,7 @@
         {
           "triggerTime": 2.0,
           "spawns": [
-            { "unit": "Sir Seal", "count": 1, "interval": 0.0 }
+            { "unit": "The Face", "count": 1, "interval": 0.0 }
           ]
         },
         {
