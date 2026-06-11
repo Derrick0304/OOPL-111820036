@@ -12,9 +12,29 @@ void UnitManager::SetBases(std::shared_ptr<Tower> catBase, std::shared_ptr<Tower
     m_Root->AddChild(m_EnemyBase);
 }
 
+void UnitManager::ShiftAll(float dx) {
+    if (m_CatBase) m_CatBase->m_Transform.translation.x += dx;
+    if (m_EnemyBase) m_EnemyBase->m_Transform.translation.x += dx;
+    for (auto& unit : m_Cats) unit->m_Transform.translation.x += dx;
+    for (auto& unit : m_Enemies) unit->m_Transform.translation.x += dx;
+}
+
+float UnitManager::GetCatBaseX() const {
+    return m_CatBase ? m_CatBase->m_Transform.translation.x : 0.0f;
+}
+
+float UnitManager::GetEnemyBaseX() const {
+    return m_EnemyBase ? m_EnemyBase->m_Transform.translation.x : 0.0f;
+}
+
 void UnitManager::AddUnit(std::shared_ptr<Unit> unit) {
     if (!unit) return;
     
+    // Set initial spawn position exactly at the base's current screen position
+    unit->m_Transform.translation.x = (unit->GetTeam() == Unit::Team::CAT) 
+                                        ? GetCatBaseX() 
+                                        : GetEnemyBaseX();
+
     if (unit->GetTeam() == Unit::Team::CAT) {
         m_Cats.push_back(unit);
     } else {

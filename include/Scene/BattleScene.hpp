@@ -32,6 +32,8 @@ private:
     App& m_App;
     StageData m_Stage;
     std::shared_ptr<Util::GameObject> m_Root;
+    std::shared_ptr<Util::GameObject> m_WorldRoot;
+
     std::unique_ptr<UnitManager> m_UnitManager;
     std::unique_ptr<UIManager> m_UIManager;
     std::unique_ptr<WaveSpawner> m_WaveSpawner;
@@ -50,12 +52,20 @@ private:
 
     bool m_BattleEnded = false;
 
+    // 鏡頭與捲動
+    float m_CameraX = 0.0f;
+    float m_TargetCameraX = 0.0f;
+    bool m_IsDragging = false;
+    float m_LastMouseX = 0.0f;
+
     // 升級數據
     const std::vector<float> m_WorkerUpgradeCosts = {100, 200, 500, 1000, 2000, 4000, 7000};
     const std::vector<float> m_MaxMoneyLevels = {1000, 1500, 2500, 4000, 6000, 9000, 13000, 20000};
     const std::vector<float> m_MoneyRateLevels = {150, 200, 300, 450, 700, 1000, 1500, 2200};
 
     std::shared_ptr<Util::Image> m_BackgroundImage;
+    std::vector<std::shared_ptr<Util::GameObject>> m_Backgrounds;
+
     std::shared_ptr<Util::Text> m_StageTitleText;
     std::shared_ptr<Util::GameObject> m_StageTitleObject;
     std::shared_ptr<Util::Text> m_ResultText;

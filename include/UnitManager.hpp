@@ -11,7 +11,7 @@
 
 class UnitManager {
 public:
-    explicit UnitManager(std::shared_ptr<Util::GameObject> root);
+    UnitManager(std::shared_ptr<Util::GameObject> root);
 
     void SetBases(std::shared_ptr<Tower> catBase, std::shared_ptr<Tower> enemyBase);
     void AddUnit(std::shared_ptr<Unit> unit);
@@ -19,6 +19,10 @@ public:
     void ClearUnits();
     void ApplyCannonDamage(float damage);
     void ApplyCannonDamageInArea(float minX, float maxX, float damage, std::set<Unit*>& hitList);
+
+    void ShiftAll(float dx);
+    float GetCatBaseX() const;
+    float GetEnemyBaseX() const;
 
     bool IsGameOver() const;
     std::string GetWinner() const;

@@ -23,6 +23,7 @@ private:
     bool m_IsActive = false;
     float m_Timer = 0.0f;
     float m_StartX, m_EndX, m_Y;
+    int m_CurrentExplosionCount = 10;
 
     const float LASER_DURATION = 0.5f;
     const float EXPLOSION_DELAY = 0.4f;

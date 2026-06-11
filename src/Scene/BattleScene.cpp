@@ -1,6 +1,7 @@
 #include "Scene/BattleScene.hpp"
 
 #include "App.hpp"
+#include "Core/Context.hpp"
 #include "Scene/MainMenuScene.hpp"
 #include "Scene/StageSelectScene.hpp"
 #include "Tower.hpp"
@@ -19,6 +20,8 @@ void BattleScene::Enter() {
 }
 
 void BattleScene::Update() {
+    float dt = Util::Time::GetDeltaTimeMs() / 1000.0f;
+
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE)) {
         m_App.ChangeScene(std::make_unique<StageSelectScene>(m_App));
         return;
@@ -28,6 +31,52 @@ void BattleScene::Update() {
         return;
     }
 
+    // --- Camera Handling ---
+    glm::vec2 cursor = Util::Input::GetCursorPosition();
+
+    // Only start dragging if not interacting with UI (simplified check: if y < 200, assume gameplay area)
+    // Actually, let's just allow drag anywhere for now, but ensure the state transitions are correct.
+    if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+        m_IsDragging = true;
+        m_LastMouseX = cursor.x;
+    }
+
+    if (m_IsDragging) {
+        if (Util::Input::IsKeyPressed(Util::Keycode::MOUSE_LB)) {
+            float dx = cursor.x - m_LastMouseX;
+            m_TargetCameraX -= dx;
+            m_LastMouseX = cursor.x;
+        } 
+        if (Util::Input::IsKeyUp(Util::Keycode::MOUSE_LB)) {
+            m_IsDragging = false;
+        }
+    }
+
+    if (Util::Input::IsKeyPressed(Util::Keycode::LEFT)) {
+        m_TargetCameraX -= 1500.0f * dt;
+    }
+    if (Util::Input::IsKeyPressed(Util::Keycode::RIGHT)) {
+        m_TargetCameraX += 1500.0f * dt;
+    }
+
+    float halfWinWidth = Core::Context::GetInstance()->GetWindowWidth() / 2.0f;
+    float maxCamX = (m_Stage.stageLength / 2.0f) - halfWinWidth;
+    if (maxCamX < 0) maxCamX = 0;
+    m_TargetCameraX = std::max(-maxCamX, std::min(m_TargetCameraX, maxCamX));
+
+    float oldCameraX = m_CameraX;
+    m_CameraX += (m_TargetCameraX - m_CameraX) * 15.0f * dt;
+    float dx = m_CameraX - oldCameraX;
+
+    if (dx != 0.0f) {
+        for (auto& bg : m_Backgrounds) {
+            bg->m_Transform.translation.x -= dx;
+        }
+        if (m_UnitManager) {
+            m_UnitManager->ShiftAll(-dx);
+        }
+    }
+
     if (m_BattleEnded) {
         m_RetryButton->Update();
         m_StageSelectButton->Update();
@@ -35,7 +84,6 @@ void BattleScene::Update() {
         return;
     }
 
-    const float dt = Util::Time::GetDeltaTimeMs() / 1000.0f;
     m_Money += m_MoneyPerSecond * dt;
     if (m_Money > m_MaxMoney) {
         m_Money = m_MaxMoney;
@@ -53,20 +101,17 @@ void BattleScene::Update() {
     if (m_CannonEffectTimer >= 0.0f) {
         m_CannonEffectTimer += dt;
         
-        // 傷害波應與 CatCannonEffect 中的爆炸時間同步
-        // 爆炸在 0.4s 開始，並在 0.5s 內完成橫掃
         if (m_CannonEffectTimer >= 0.4f && m_CannonEffectTimer <= 0.9f) {
             float progress = (m_CannonEffectTimer - 0.4f) / 0.5f;
-            // 計算當前爆炸波的 X 位置 (從我方 500 到 敵方 -500)
-            float currentX = 500.0f + (-500.0f - 500.0f) * progress;
+            float startX = m_Stage.stageLength / 2.0f;
+            float endX = -m_Stage.stageLength / 2.0f;
+            float currentX = startX + (endX - startX) * progress;
             
-            // 判定範圍：當前 X 座標前後 100 像素
             if (m_UnitManager) {
                 m_UnitManager->ApplyCannonDamageInArea(currentX - 50.0f, currentX + 50.0f, 200.0f, m_CannonHitList);
             }
         }
         
-        // 特效結束後清理計時器與清單
         if (m_CannonEffectTimer > 1.5f) {
             m_CannonEffectTimer = -1.0f;
             m_CannonHitList.clear();
@@ -95,28 +140,40 @@ void BattleScene::Exit() {
         m_UnitManager->ClearUnits();
     }
     m_Root = std::make_shared<Util::GameObject>();
+    m_WorldRoot.reset();
+    m_Backgrounds.clear();
 }
 
 void BattleScene::SetupBattlefield() {
+    m_WorldRoot = std::make_shared<Util::GameObject>();
+    m_Root->AddChild(m_WorldRoot);
+
     m_BackgroundImage = std::make_shared<Util::Image>(RESOURCE_DIR + m_Stage.background);
-    auto backgroundObject = std::make_shared<Util::GameObject>(m_BackgroundImage, -10.0f);
-    backgroundObject->m_Transform.scale = {1.7f, 1.7f};
-    backgroundObject->m_Transform.translation.y = 50.0f;
-    m_Root->AddChild(backgroundObject);
+    float bgWidth = m_BackgroundImage->GetSize().x * 1.7f;
+    int numTiles = static_cast<int>(std::ceil(m_Stage.stageLength / bgWidth)) + 2;
+
+    for (int i = -1; i < numTiles; i++) {
+        auto bgObj = std::make_shared<Util::GameObject>(m_BackgroundImage, -10.0f);
+        bgObj->m_Transform.scale = {1.7f, 1.7f};
+        float startX = -m_Stage.stageLength / 2.0f;
+        bgObj->m_Transform.translation.x = startX + (bgWidth / 2.0f) + i * bgWidth;
+        bgObj->m_Transform.translation.y = 50.0f;
+        m_WorldRoot->AddChild(bgObj);
+        m_Backgrounds.push_back(bgObj);
+    }
 
     m_StageTitleText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 24, m_Stage.displayName);
     m_StageTitleObject = std::make_shared<Util::GameObject>(m_StageTitleText, 15.0f);
     m_StageTitleObject->m_Transform.translation = {-500.0f, 320.0f};
     m_Root->AddChild(m_StageTitleObject);
 
-    m_UnitManager = std::make_unique<UnitManager>(m_Root);
+    m_UnitManager = std::make_unique<UnitManager>(m_WorldRoot);
     
-    // 初始化等級 1 的數據
     m_MaxMoney = m_MaxMoneyLevels[0];
     m_MoneyPerSecond = m_MoneyRateLevels[0];
     m_WorkerLevel = 1;
 
-    m_CatCannonEffect = std::make_unique<CatCannonEffect>(m_Root);
+    m_CatCannonEffect = std::make_unique<CatCannonEffect>(m_WorldRoot);
 
     m_UIManager = std::make_unique<UIManager>(m_Root, m_UnitManager.get(), 
         [this](float amount) {
@@ -132,37 +189,45 @@ void BattleScene::SetupBattlefield() {
                     m_WorkerLevel++;
                     m_MaxMoney = m_MaxMoneyLevels[m_WorkerLevel - 1];
                     m_MoneyPerSecond = m_MoneyRateLevels[m_WorkerLevel - 1];
-                    LOG_INFO("Worker upgraded to Lv. {}! Max: {}, Rate: {}", 
-                             m_WorkerLevel, m_MaxMoney, m_MoneyPerSecond);
                 }
             }
         },
         [this]() {
             if (m_CannonCooldown >= CANNON_MAX_COOLDOWN) {
                 m_CannonCooldown = 0.0f;
-                // 觸發視覺特效
-                m_CatCannonEffect->Trigger(500.0f, -500.0f, -150.0f);
-
-                // 啟動傷害波計時器，並清空擊中清單
+                // Calculate correct absolute edges for cannon effect based on current base positions
+                float catBaseX = m_UnitManager->GetCatBaseX();
+                float enemyBaseX = m_UnitManager->GetEnemyBaseX();
+                m_CatCannonEffect->Trigger(catBaseX, enemyBaseX, -150.0f);
                 m_CannonEffectTimer = 0.0f;
                 m_CannonHitList.clear();
-
-                LOG_INFO("Cat Cannon Fired! Damage wave started.");
             }
         }
-
     );
 
     auto catBase = std::make_shared<Tower>(Unit::Team::CAT, 1000.0f, RESOURCE_DIR"/Towers/CatBase/base.png");
     catBase->m_Transform.scale = {1.2f, 1.2f};
-    catBase->m_Transform.translation = {500.0f, -150.0f};
+    catBase->m_Transform.translation = {m_Stage.stageLength / 2.0f, -150.0f};
 
     auto enemyBase = std::make_shared<Tower>(Unit::Team::ENEMY, m_Stage.enemyBaseHp, RESOURCE_DIR"/Towers/EnemyBase/base.png");
     enemyBase->m_Transform.scale = {0.9f, 0.9f};
-    enemyBase->m_Transform.translation = {-500.0f, -150.0f};
+    enemyBase->m_Transform.translation = {-m_Stage.stageLength / 2.0f, -150.0f};
 
     m_UnitManager->SetBases(catBase, enemyBase);
     m_WaveSpawner = std::make_unique<WaveSpawner>(m_Stage, m_UnitManager.get());
+
+    // Initialize Camera Position (Look at Cat Base)
+    float halfWinWidth = Core::Context::GetInstance()->GetWindowWidth() / 2.0f;
+    float maxCamX = (m_Stage.stageLength / 2.0f) - halfWinWidth;
+    if (maxCamX < 0) maxCamX = 0;
+    m_CameraX = maxCamX;
+    m_TargetCameraX = maxCamX;
+    
+    // Apply initial shift manually since we bypassed m_WorldRoot transform
+    for (auto& bg : m_Backgrounds) {
+        bg->m_Transform.translation.x -= m_CameraX;
+    }
+    m_UnitManager->ShiftAll(-m_CameraX);
 }
 
 void BattleScene::SetupResultOverlay() {

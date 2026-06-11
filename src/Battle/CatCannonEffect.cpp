@@ -31,6 +31,17 @@ void CatCannonEffect::Trigger(float startX, float endX, float y) {
     m_StartX = startX;
     m_EndX = endX;
     m_Y = y;
+
+    // Dynamically adjust the number of explosion objects based on the distance (one every 80 pixels)
+    float distance = std::abs(endX - startX);
+    m_CurrentExplosionCount = std::max(10, static_cast<int>(distance / 80.0f));
+
+    while (m_Explosions.size() < static_cast<size_t>(m_CurrentExplosionCount)) {
+        auto exp = std::make_shared<Util::GameObject>(m_ExplosionFrames[0], 51.0f);
+        exp->SetVisible(false);
+        m_Explosions.push_back(exp);
+        m_Root->AddChild(exp);
+    }
 }
 
 void CatCannonEffect::Update(float dt) {
@@ -68,13 +79,18 @@ void CatCannonEffect::Update(float dt) {
         float explosionTotalLife = 0.5f; // 單個爆炸點持續 0.5 秒
         
         for (size_t i = 0; i < m_Explosions.size(); ++i) {
-            // 每個爆炸點依序啟動 (0.5 秒內觸發完 10 個)
-            float triggerTime = (static_cast<float>(i) / m_Explosions.size()) * 0.5f;
+            if (i >= static_cast<size_t>(m_CurrentExplosionCount)) {
+                m_Explosions[i]->SetVisible(false);
+                continue;
+            }
+
+            // 每個爆炸點依序啟動 (0.5 秒內觸發完)
+            float triggerTime = (static_cast<float>(i) / m_CurrentExplosionCount) * 0.5f;
             float lifeTime = (m_Timer - EXPLOSION_DELAY) - triggerTime;
 
             if (lifeTime > 0 && lifeTime < explosionTotalLife) {
                 m_Explosions[i]->SetVisible(true);
-                float posX = m_StartX + (m_EndX - m_StartX) * (static_cast<float>(i) / m_Explosions.size());
+                float posX = m_StartX + (m_EndX - m_StartX) * (static_cast<float>(i) / std::max(1, m_CurrentExplosionCount - 1));
                 m_Explosions[i]->m_Transform.translation = {posX, m_Y};
                 
                 // 計算當前應該顯示哪一幀 (4 幀平分 0.5 秒)
@@ -83,7 +99,7 @@ void CatCannonEffect::Update(float dt) {
                 
                 m_Explosions[i]->SetDrawable(m_ExplosionFrames[frameIdx]);
                 
-                // 基礎縮放 (根據圖片性質，您可能需要調整 scale)
+                // 基礎縮放
                 m_Explosions[i]->m_Transform.scale = {2.0f, 2.0f}; 
             } else {
                 m_Explosions[i]->SetVisible(false);
