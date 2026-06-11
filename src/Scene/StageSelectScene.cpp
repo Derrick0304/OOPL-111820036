@@ -2,7 +2,7 @@
 
 #include "App.hpp"
 #include "Scene/BattleScene.hpp"
-#include "Scene/MainMenuScene.hpp"
+#include "Scene/ChapterSelectScene.hpp"
 #include "Stage/StageLoader.hpp"
 #include "UI/ImageTextButton.hpp"
 #include "Util/Input.hpp"
@@ -15,11 +15,11 @@
 
 using json = nlohmann::json;
 
-StageSelectScene::StageSelectScene(App& app)
-    : m_App(app), m_Root(std::make_shared<Util::GameObject>()) {}
+StageSelectScene::StageSelectScene(App& app, int chapterId)
+    : m_App(app), m_ChapterId(chapterId), m_Root(std::make_shared<Util::GameObject>()) {}
 
 void StageSelectScene::Enter() {
-    LOG_INFO("Entering StageSelectScene");
+    LOG_INFO("Entering StageSelectScene for Chapter {}", m_ChapterId);
 
     float titleX = 0.0f, titleY = 250.0f;
     float backX = -500.0f, backY = -300.0f;
@@ -61,12 +61,20 @@ void StageSelectScene::Enter() {
     m_BackgroundObject->m_Transform.translation = {0.0f, 30.0f};
     m_Root->AddChild(m_BackgroundObject);
 
-    m_TitleText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 48, "Select Stage", Util::Color(255, 255, 255));
+    std::string titleStr = "Chapter " + std::to_string(m_ChapterId) + " Stages";
+    m_TitleText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 48, titleStr, Util::Color(255, 255, 255));
     m_TitleObject = std::make_shared<Util::GameObject>(m_TitleText, 15.0f);
     m_TitleObject->m_Transform.translation = {titleX, titleY};
     m_Root->AddChild(m_TitleObject);
 
-    m_Stages = StageLoader::GetAllStages();
+    auto allStages = StageLoader::GetAllStages();
+    m_Stages.clear();
+    for (const auto& stage : allStages) {
+        if (stage.chapterId == m_ChapterId) {
+            m_Stages.push_back(stage);
+        }
+    }
+    
     m_StageItems.clear();
 
     for (size_t i = 0; i < m_Stages.size(); ++i) {
@@ -84,7 +92,7 @@ void StageSelectScene::Enter() {
     }
 
     m_BackButton = std::make_shared<ImageTextButton>("Back", [this]() {
-        m_App.ChangeScene(std::make_unique<MainMenuScene>(m_App));
+        m_App.ChangeScene(std::make_unique<ChapterSelectScene>(m_App));
     }, ImageTextButton::Type::LONG);
     m_BackButton->m_Transform.translation = {backX, backY};
     m_Root->AddChild(m_BackButton);
@@ -108,7 +116,7 @@ void StageSelectScene::Update() {
     float dt = Util::Time::GetDeltaTimeMs() / 1000.0f;
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE)) {
-        m_App.ChangeScene(std::make_unique<MainMenuScene>(m_App));
+        m_App.ChangeScene(std::make_unique<ChapterSelectScene>(m_App));
         return;
     }
 

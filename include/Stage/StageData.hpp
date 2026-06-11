@@ -21,6 +21,7 @@ struct WaveData {
 
 struct StageData {
     std::string id;
+    int chapterId = 1;
     std::string displayName;
     std::string background;
     int cost = 0;

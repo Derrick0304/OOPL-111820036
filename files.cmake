@@ -13,6 +13,7 @@ set(SRC_FILES
     Battle/WaveSpawner.cpp
     Battle/CatCannonEffect.cpp
     Scene/MainMenuScene.cpp
+    Scene/ChapterSelectScene.cpp
     Scene/StageSelectScene.cpp
     Scene/BattleScene.cpp
 )
@@ -36,6 +37,7 @@ set(INCLUDE_FILES
     Battle/CatCannonEffect.hpp
     Scene/IScene.hpp
     Scene/MainMenuScene.hpp
+    Scene/ChapterSelectScene.hpp
     Scene/StageSelectScene.hpp
     Scene/BattleScene.hpp
 )

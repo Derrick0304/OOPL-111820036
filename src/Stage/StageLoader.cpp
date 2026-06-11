@@ -30,6 +30,7 @@ bool StageLoader::Load() {
         for (const auto& item : data["stages"]) {
             StageData stage;
             stage.id = item.at("id").get<std::string>();
+            stage.chapterId = item.value("chapterId", 1);
             stage.displayName = item.at("displayName").get<std::string>();
             stage.background = item.at("background").get<std::string>();
             stage.enemyBaseHp = item.value("enemyBaseHp", 1000.0f);

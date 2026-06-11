@@ -51,5 +51,27 @@
       "y": 0.0,
       "spacingX": 350.0
     }
+  },
+  "ChapterSelectScene": {
+    "TitleText": {
+      "x": 0.0,
+      "y": 250.0
+    },
+    "Chapter1Button": {
+      "x": 0.0,
+      "y": 100.0
+    },
+    "Chapter2Button": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "Chapter3Button": {
+      "x": 0.0,
+      "y": -100.0
+    },
+    "BackButton": {
+      "x": -538.0,
+      "y": -303.0
+    }
   }
 }

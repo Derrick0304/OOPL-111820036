@@ -14,7 +14,7 @@ class App;
 
 class StageSelectScene : public IScene {
 public:
-    explicit StageSelectScene(App& app);
+    StageSelectScene(App& app, int chapterId = 1);
 
     void Enter() override;
     void Update() override;
@@ -22,10 +22,11 @@ public:
     std::shared_ptr<Util::GameObject> GetRoot() const override { return m_Root; }
 
 private:
-    void UpdateCarousel(float dt);
     void HandleInput();
+    void UpdateCarousel(float dt);
 
     App& m_App;
+    int m_ChapterId;
     std::shared_ptr<Util::GameObject> m_Root;
     std::shared_ptr<Util::Image> m_BackgroundImage;
     std::shared_ptr<Util::GameObject> m_BackgroundObject;

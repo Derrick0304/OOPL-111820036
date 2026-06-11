@@ -2,43 +2,4910 @@
   "stages": [
     {
       "id": "stage_001",
+      "chapterId": 1,
       "displayName": "Taiwan (台灣)",
       "background": "/Backgrounds/background.png",
-      "enemyBaseHp": 500.0,
+      "cost": 5,
+      "maxEnemies": 3,
       "stageLength": 3000.0,
+      "xpReward": 1000,
+      "enemyBaseHp": 500.0,
       "waves": [
         {
           "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
           "spawns": [
-            { "unit": "Doge", "count": 20, "interval": 3.0, "groupCount": 5 }
+            {
+              "unit": "Doge",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
           ]
         },
         {
-          "triggerTime": 10.0,
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
           "spawns": [
-            { "unit": "Doge", "count": -1, "interval": 4.0 }
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 6.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
           ]
         }
       ]
     },
     {
       "id": "stage_002",
-      "displayName": "Moon (月球) - Long Stage Test",
+      "chapterId": 1,
+      "displayName": "Hong Kong (香港)",
       "background": "/Backgrounds/background.png",
-      "enemyBaseHp": 99999.0,
-      "stageLength": 6000.0,
+      "cost": 5,
+      "maxEnemies": 4,
+      "stageLength": 3000.0,
+      "xpReward": 1300,
+      "enemyBaseHp": 500.0,
       "waves": [
         {
           "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
           "spawns": [
-            { "unit": "The Face", "count": 1, "interval": 0.0 }
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 6.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
           ]
         },
         {
-          "triggerTime": 5.0,
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
           "spawns": [
-            { "unit": "Snache", "count": -1, "interval": 2.0 },
-            { "unit": "Hippoe", "count": -1, "interval": 8.0 }
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 26.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_003",
+      "chapterId": 1,
+      "displayName": "Thailand (泰國)",
+      "background": "/Backgrounds/background.png",
+      "cost": 8,
+      "maxEnemies": 30,
+      "stageLength": 3400.0,
+      "xpReward": 1600,
+      "enemyBaseHp": 500.0,
+      "waves": [
+        {
+          "triggerTime": 0.67,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": 3,
+              "intervalMin": 26.67,
+              "intervalMax": 26.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 10.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": 3,
+              "intervalMin": 26.67,
+              "intervalMax": 26.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 16.67,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": 2,
+              "intervalMin": 16.67,
+              "intervalMax": 16.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 30.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": 2,
+              "intervalMin": 13.33,
+              "intervalMax": 13.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_004",
+      "chapterId": 1,
+      "displayName": "China (中國)",
+      "background": "/Backgrounds/background.png",
+      "cost": 8,
+      "maxEnemies": 5,
+      "stageLength": 4200.0,
+      "xpReward": 1900,
+      "enemyBaseHp": 500.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 6.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 26.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 26.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_005",
+      "chapterId": 1,
+      "displayName": "Mongolia (蒙古)",
+      "background": "/Backgrounds/background.png",
+      "cost": 10,
+      "maxEnemies": 6,
+      "stageLength": 3600.0,
+      "xpReward": 2200,
+      "enemyBaseHp": 750.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 6.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 26.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 26.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_006",
+      "chapterId": 1,
+      "displayName": "Korea (韓國)",
+      "background": "/Backgrounds/background.png",
+      "cost": 10,
+      "maxEnemies": 7,
+      "stageLength": 4600.0,
+      "xpReward": 2500,
+      "enemyBaseHp": 750.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 6.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 26.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 26.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_007",
+      "chapterId": 1,
+      "displayName": "Japan (日本)",
+      "background": "/Backgrounds/background.png",
+      "cost": 16,
+      "maxEnemies": 6,
+      "stageLength": 4800.0,
+      "xpReward": 2800,
+      "enemyBaseHp": 2400.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 10.67,
+              "intervalMax": 18.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 53.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 53.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.9,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": 6,
+              "intervalMin": 2.0,
+              "intervalMax": 4.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Hippoe",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_008",
+      "chapterId": 1,
+      "displayName": "Australia (澳大利亞)",
+      "background": "/Backgrounds/background.png",
+      "cost": 12,
+      "maxEnemies": 5,
+      "stageLength": 3600.0,
+      "xpReward": 3100,
+      "enemyBaseHp": 1500.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 6.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 10.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 26.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 26.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.9,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": 20,
+              "intervalMin": 1.0,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_009",
+      "chapterId": 1,
+      "displayName": "Singapore (新加坡)",
+      "background": "/Backgrounds/background.png",
+      "cost": 12,
+      "maxEnemies": 10,
+      "stageLength": 6000.0,
+      "xpReward": 3400,
+      "enemyBaseHp": 3000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 4.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 30.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 6.0,
+              "intervalMax": 30.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 30.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 90.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 30.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.6,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": 20,
+              "intervalMin": 0.07,
+              "intervalMax": 0.13,
+              "magnification": 1.0,
+              "groupCount": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_010",
+      "chapterId": 1,
+      "displayName": "Maldives (馬爾地夫)",
+      "background": "/Backgrounds/background.png",
+      "cost": 14,
+      "maxEnemies": 5,
+      "stageLength": 3800.0,
+      "xpReward": 3700,
+      "enemyBaseHp": 2500.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 10.67,
+              "intervalMax": 18.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 8.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 53.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 53.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.95,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": 6,
+              "intervalMin": 2.0,
+              "intervalMax": 4.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Pigge",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_011",
+      "chapterId": 1,
+      "displayName": "India (印度)",
+      "background": "/Backgrounds/background.png",
+      "cost": 18,
+      "maxEnemies": 6,
+      "stageLength": 5000.0,
+      "xpReward": 4000,
+      "enemyBaseHp": 3500.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 10.67,
+              "intervalMax": 18.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 8.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 53.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.9,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": 6,
+              "intervalMin": 2.0,
+              "intervalMax": 4.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.8,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.4,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_012",
+      "chapterId": 1,
+      "displayName": "Nepal (尼泊爾)",
+      "background": "/Backgrounds/background.png",
+      "cost": 20,
+      "maxEnemies": 7,
+      "stageLength": 4800.0,
+      "xpReward": 4300,
+      "enemyBaseHp": 4000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 10.67,
+              "intervalMax": 18.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 8.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 53.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.99,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": 6,
+              "intervalMin": 2.0,
+              "intervalMax": 4.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.98,
+          "spawns": [
+            {
+              "unit": "Pigge",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.78,
+          "spawns": [
+            {
+              "unit": "Pigge",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_013",
+      "chapterId": 1,
+      "displayName": "Dubai (杜拜)",
+      "background": "/Backgrounds/background.png",
+      "cost": 18,
+      "maxEnemies": 12,
+      "stageLength": 4800.0,
+      "xpReward": 4600,
+      "enemyBaseHp": 5000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 6.67,
+              "intervalMax": 13.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 6.67,
+              "intervalMax": 13.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 6.67,
+              "intervalMax": 13.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.9,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": 6,
+              "intervalMin": 2.0,
+              "intervalMax": 4.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Jackie Peng",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.88,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 13.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Jackie Peng",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_014",
+      "chapterId": 1,
+      "displayName": "Saudi Arabia (沙烏地阿拉伯)",
+      "background": "/Backgrounds/background.png",
+      "cost": 20,
+      "maxEnemies": 3,
+      "stageLength": 4800.0,
+      "xpReward": 4900,
+      "enemyBaseHp": 6000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 21.33,
+              "intervalMax": 37.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Hippoe",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 40.0,
+              "intervalMax": 80.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 40.0,
+              "intervalMax": 80.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.99,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": 6,
+              "intervalMin": 2.0,
+              "intervalMax": 4.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.5,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_015",
+      "chapterId": 1,
+      "displayName": "Kenya (肯亞)",
+      "background": "/Backgrounds/background.png",
+      "cost": 24,
+      "maxEnemies": 4,
+      "stageLength": 3600.0,
+      "xpReward": 5200,
+      "enemyBaseHp": 6100.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.99,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": 8,
+              "intervalMin": 0.67,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Pigge",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 133.33,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Pigge",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 280.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_016",
+      "chapterId": 1,
+      "displayName": "Madagascar (馬達加斯加)",
+      "background": "/Backgrounds/background.png",
+      "cost": 26,
+      "maxEnemies": 6,
+      "stageLength": 4800.0,
+      "xpReward": 5500,
+      "enemyBaseHp": 7000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.85,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": 12,
+              "intervalMin": 0.67,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Gory",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.6,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_017",
+      "chapterId": 1,
+      "displayName": "South Africa (南非)",
+      "background": "/Backgrounds/background.png",
+      "cost": 20,
+      "maxEnemies": 10,
+      "stageLength": 5000.0,
+      "xpReward": 5800,
+      "enemyBaseHp": 7000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 100.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 102.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 133.33,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 40.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Hippoe",
+              "count": -1,
+              "intervalMin": 40.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.2,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Jackie Peng",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_018",
+      "chapterId": 1,
+      "displayName": "Ghana (迦納)",
+      "background": "/Backgrounds/background.png",
+      "cost": 24,
+      "maxEnemies": 10,
+      "stageLength": 4800.0,
+      "xpReward": 6100,
+      "enemyBaseHp": 8000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 100.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 133.33,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 40.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Jackie Peng",
+              "count": -1,
+              "intervalMin": 40.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.6,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Jackie Peng",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.61,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.62,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_019",
+      "chapterId": 1,
+      "displayName": "Sahara Desert (撒哈拉沙漠)",
+      "background": "/Backgrounds/background.png",
+      "cost": 28,
+      "maxEnemies": 10,
+      "stageLength": 3600.0,
+      "xpReward": 6400,
+      "enemyBaseHp": 9000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 10.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 100.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Baabaa",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 133.33,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": 2,
+              "intervalMin": 0.07,
+              "intervalMax": 0.07,
+              "magnification": 1.0,
+              "groupCount": 3
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.6,
+          "spawns": [
+            {
+              "unit": "Baabaa",
+              "count": 10,
+              "intervalMin": 1.0,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_020",
+      "chapterId": 1,
+      "displayName": "Egypt (埃及)",
+      "background": "/Backgrounds/background.png",
+      "cost": 30,
+      "maxEnemies": 10,
+      "stageLength": 4800.0,
+      "xpReward": 6700,
+      "enemyBaseHp": 9000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 10.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Baabaa",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 60.0,
+              "intervalMax": 120.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": -1,
+              "intervalMin": 60.0,
+              "intervalMax": 120.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 133.33,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": 4,
+              "intervalMin": 60.0,
+              "intervalMax": 120.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_021",
+      "chapterId": 1,
+      "displayName": "Turkey (土耳其)",
+      "background": "/Backgrounds/background.png",
+      "cost": 24,
+      "maxEnemies": 10,
+      "stageLength": 6000.0,
+      "xpReward": 7000,
+      "enemyBaseHp": 10000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Baabaa",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 60.0,
+              "intervalMax": 120.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": -1,
+              "intervalMin": 60.0,
+              "intervalMax": 120.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Jackie Peng",
+              "count": -1,
+              "intervalMin": 60.0,
+              "intervalMax": 120.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 133.33,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 60.0,
+              "intervalMax": 120.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_022",
+      "chapterId": 1,
+      "displayName": "Russia (俄羅斯)",
+      "background": "/Backgrounds/background.png",
+      "cost": 28,
+      "maxEnemies": 4,
+      "stageLength": 4800.0,
+      "xpReward": 7300,
+      "enemyBaseHp": 12000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Baabaa",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Jackie Peng",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.8,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": 2,
+              "intervalMin": 0.07,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 3
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.7,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": 2,
+              "intervalMin": 0.07,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 3
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.6,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": 2,
+              "intervalMin": 0.07,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_023",
+      "chapterId": 1,
+      "displayName": "Greece (希臘)",
+      "background": "/Backgrounds/background.png",
+      "cost": 32,
+      "maxEnemies": 5,
+      "stageLength": 3200.0,
+      "xpReward": 7600,
+      "enemyBaseHp": 15000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 4.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 10.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Pigge",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.95,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.93,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_024",
+      "chapterId": 1,
+      "displayName": "Italy (義大利)",
+      "background": "/Backgrounds/background.png",
+      "cost": 40,
+      "maxEnemies": 3,
+      "stageLength": 4800.0,
+      "xpReward": 7900,
+      "enemyBaseHp": 15000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Pigge",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 120.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 180.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.9,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Jackie Peng",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_025",
+      "chapterId": 1,
+      "displayName": "Monaco (摩納哥)",
+      "background": "/Backgrounds/background.png",
+      "cost": 25,
+      "maxEnemies": 5,
+      "stageLength": 4800.0,
+      "xpReward": 8200,
+      "enemyBaseHp": 15000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 10.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.5,
+          "spawns": [
+            {
+              "unit": "Baabaa",
+              "count": -1,
+              "intervalMin": 4.33,
+              "intervalMax": 8.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Jackie Peng",
+              "count": -1,
+              "intervalMin": 4.33,
+              "intervalMax": 8.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_026",
+      "chapterId": 1,
+      "displayName": "Spain (西班牙)",
+      "background": "/Backgrounds/background.png",
+      "cost": 30,
+      "maxEnemies": 20,
+      "stageLength": 3600.0,
+      "xpReward": 8500,
+      "enemyBaseHp": 15000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 10.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 5.33,
+              "intervalMax": 8.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 30.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 4.0,
+              "intervalMax": 8.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.7,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 3.0,
+              "intervalMax": 8.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 3.0,
+              "intervalMax": 8.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 0.07,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 3
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.9,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 4.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Sir Seal",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_027",
+      "chapterId": 1,
+      "displayName": "France (法國)",
+      "background": "/Backgrounds/background.png",
+      "cost": 32,
+      "maxEnemies": 8,
+      "stageLength": 4800.0,
+      "xpReward": 8800,
+      "enemyBaseHp": 15000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 13.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 10.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 6.67,
+              "intervalMax": 26.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 12.0,
+              "intervalMax": 48.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 80.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.5,
+          "spawns": [
+            {
+              "unit": "Baabaa",
+              "count": -1,
+              "intervalMin": 25.33,
+              "intervalMax": 101.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 120.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_028",
+      "chapterId": 1,
+      "displayName": "Germany (德國)",
+      "background": "/Backgrounds/background.png",
+      "cost": 36,
+      "maxEnemies": 8,
+      "stageLength": 4800.0,
+      "xpReward": 9100,
+      "enemyBaseHp": 15000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 13.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 10.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 5.0,
+              "intervalMax": 6.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 6.67,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 120.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 160.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 200.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_029",
+      "chapterId": 1,
+      "displayName": "Denmark (丹麥)",
+      "background": "/Backgrounds/background.png",
+      "cost": 40,
+      "maxEnemies": 10,
+      "stageLength": 4800.0,
+      "xpReward": 9400,
+      "enemyBaseHp": 18000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 30.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 10.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.9,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 0.07,
+              "intervalMax": 1.0,
+              "magnification": 1.0,
+              "groupCount": 3
+            },
+            {
+              "unit": "Those Guys",
+              "count": 20,
+              "intervalMin": 0.07,
+              "intervalMax": 0.07,
+              "magnification": 1.0,
+              "groupCount": 3
+            },
+            {
+              "unit": "Le'boin",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_030",
+      "chapterId": 1,
+      "displayName": "Norway (挪威)",
+      "background": "/Backgrounds/background.png",
+      "cost": 24,
+      "maxEnemies": 10,
+      "stageLength": 6000.0,
+      "xpReward": 9700,
+      "enemyBaseHp": 15000.0,
+      "waves": [
+        {
+          "triggerTime": 10.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 5.0,
+              "intervalMax": 6.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 6.67,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Baabaa",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 120.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 160.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 200.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_031",
+      "chapterId": 1,
+      "displayName": "United Kingdom (英國)",
+      "background": "/Backgrounds/background.png",
+      "cost": 26,
+      "maxEnemies": 10,
+      "stageLength": 6000.0,
+      "xpReward": 10000,
+      "enemyBaseHp": 8000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 10.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 5.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Baabaa",
+              "count": -1,
+              "intervalMin": 6.67,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Le'boin",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 180.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_032",
+      "chapterId": 1,
+      "displayName": "Greenland (格陵蘭島)",
+      "background": "/Backgrounds/background.png",
+      "cost": 30,
+      "maxEnemies": 8,
+      "stageLength": 4800.0,
+      "xpReward": 10300,
+      "enemyBaseHp": 18000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 13.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Pigge",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "B.B.Bunny",
+              "count": -1,
+              "intervalMin": 2.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.99,
+          "spawns": [
+            {
+              "unit": "B.B.Bunny",
+              "count": -1,
+              "intervalMin": 2.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "B.B.Bunny",
+              "count": -1,
+              "intervalMin": 2.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.0,
+          "spawns": [
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_033",
+      "chapterId": 1,
+      "displayName": "Canada (加拿大)",
+      "background": "/Backgrounds/background.png",
+      "cost": 35,
+      "maxEnemies": 6,
+      "stageLength": 4000.0,
+      "xpReward": 10600,
+      "enemyBaseHp": 18000.0,
+      "waves": [
+        {
+          "triggerTime": 10.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 5.0,
+              "intervalMax": 6.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 6.67,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Baabaa",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 100.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 120.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 133.33,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 200.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.5,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": 4,
+              "intervalMin": 0.07,
+              "intervalMax": 0.07,
+              "magnification": 1.0,
+              "groupCount": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_034",
+      "chapterId": 1,
+      "displayName": "New York (紐約)",
+      "background": "/Backgrounds/background.png",
+      "cost": 28,
+      "maxEnemies": 10,
+      "stageLength": 5200.0,
+      "xpReward": 10900,
+      "enemyBaseHp": 18000.0,
+      "waves": [
+        {
+          "triggerTime": 10.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 5.0,
+              "intervalMax": 6.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 6.67,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Baabaa",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 100.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 120.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 133.33,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 200.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": -1,
+              "intervalMin": 66.67,
+              "intervalMax": 133.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.9,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.7,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.5,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.3,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_035",
+      "chapterId": 1,
+      "displayName": "Bermuda (百慕達)",
+      "background": "/Backgrounds/background.png",
+      "cost": 30,
+      "maxEnemies": 10,
+      "stageLength": 4800.0,
+      "xpReward": 11200,
+      "enemyBaseHp": 20000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 4.0,
+              "intervalMax": 13.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 13.33,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 4.0,
+              "intervalMax": 13.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 4.0,
+              "intervalMax": 13.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 100.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "B.B.Bunny",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.99,
+          "spawns": [
+            {
+              "unit": "Kang Roo",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_036",
+      "chapterId": 1,
+      "displayName": "Jamaica (牙買加)",
+      "background": "/Backgrounds/background.png",
+      "cost": 40,
+      "maxEnemies": 10,
+      "stageLength": 4800.0,
+      "xpReward": 11500,
+      "enemyBaseHp": 20000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 13.33,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 100.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "B.B.Bunny",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 13.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Baabaa",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Le'boin",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 120.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 233.33,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Le'boin",
+              "count": -1,
+              "intervalMin": 133.33,
+              "intervalMax": 200.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_037",
+      "chapterId": 1,
+      "displayName": "Colombia (哥倫比亞)",
+      "background": "/Backgrounds/background.png",
+      "cost": 30,
+      "maxEnemies": 4,
+      "stageLength": 4800.0,
+      "xpReward": 11800,
+      "enemyBaseHp": 20000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 13.33,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 6.67,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 100.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "B.B.Bunny",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 13.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Baabaa",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Kang Roo",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 120.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 166.67,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Kang Roo",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_038",
+      "chapterId": 1,
+      "displayName": "Brazil (巴西)",
+      "background": "/Backgrounds/background.png",
+      "cost": 35,
+      "maxEnemies": 8,
+      "stageLength": 4000.0,
+      "xpReward": 12100,
+      "enemyBaseHp": 20000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 30.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 30.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.95,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Gory",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 30.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Squire Rel",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 30.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.99,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.97,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.93,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.92,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Squire Rel",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Mooth",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_039",
+      "chapterId": 1,
+      "displayName": "Argentina (阿根廷)",
+      "background": "/Backgrounds/background.png",
+      "cost": 40,
+      "maxEnemies": 5,
+      "stageLength": 4800.0,
+      "xpReward": 12400,
+      "enemyBaseHp": 20000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 3.0,
+              "intervalMax": 14.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 3.0,
+              "intervalMax": 14.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 6.0,
+              "intervalMax": 14.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Squire Rel",
+              "count": -1,
+              "intervalMin": 6.0,
+              "intervalMax": 14.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 66.67,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 66.67,
+              "intervalMax": 100.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 86.67,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": -1,
+              "intervalMin": 66.67,
+              "intervalMax": 100.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 106.67,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": -1,
+              "intervalMin": 66.67,
+              "intervalMax": 100.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.8,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": 3,
+              "intervalMin": 0.07,
+              "intervalMax": 0.07,
+              "magnification": 1.0,
+              "groupCount": 3
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.6,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": 8,
+              "intervalMin": 0.07,
+              "intervalMax": 0.07,
+              "magnification": 1.0,
+              "groupCount": 3
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.4,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": 4,
+              "intervalMin": 0.07,
+              "intervalMax": 0.07,
+              "magnification": 1.0,
+              "groupCount": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_040",
+      "chapterId": 1,
+      "displayName": "Machu Picchu (馬丘比丘)",
+      "background": "/Backgrounds/background.png",
+      "cost": 30,
+      "maxEnemies": 10,
+      "stageLength": 4800.0,
+      "xpReward": 12700,
+      "enemyBaseHp": 20000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 3.0,
+              "intervalMax": 14.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 3.0,
+              "intervalMax": 14.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 6.0,
+              "intervalMax": 14.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Jackie Peng",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 30.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Squire Rel",
+              "count": -1,
+              "intervalMin": 6.0,
+              "intervalMax": 14.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 40.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 66.67,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 66.67,
+              "intervalMax": 100.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 86.67,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": -1,
+              "intervalMin": 66.67,
+              "intervalMax": 100.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 100.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Le'boin",
+              "count": -1,
+              "intervalMin": 100.0,
+              "intervalMax": 100.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.8,
+          "spawns": [
+            {
+              "unit": "Kang Roo",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.6,
+          "spawns": [
+            {
+              "unit": "Kang Roo",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_041",
+      "chapterId": 1,
+      "displayName": "Easter Island (復活島)",
+      "background": "/Backgrounds/background.png",
+      "cost": 32,
+      "maxEnemies": 10,
+      "stageLength": 6000.0,
+      "xpReward": 13000,
+      "enemyBaseHp": 20000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Squire Rel",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 16.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "One Horn",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 30.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.8,
+          "spawns": [
+            {
+              "unit": "One Horn",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_042",
+      "chapterId": 1,
+      "displayName": "Mexico (墨西哥)",
+      "background": "/Backgrounds/background.png",
+      "cost": 35,
+      "maxEnemies": 5,
+      "stageLength": 4800.0,
+      "xpReward": 13300,
+      "enemyBaseHp": 25000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 3.0,
+              "intervalMax": 14.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 3.0,
+              "intervalMax": 14.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 30.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 6.0,
+              "intervalMax": 14.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 66.67,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 60.0,
+              "intervalMax": 80.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 30.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Squire Rel",
+              "count": -1,
+              "intervalMin": 6.0,
+              "intervalMax": 14.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 86.67,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": -1,
+              "intervalMin": 66.67,
+              "intervalMax": 100.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 100.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Le'boin",
+              "count": -1,
+              "intervalMin": 100.0,
+              "intervalMax": 100.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 140.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Kang Roo",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.5,
+          "spawns": [
+            {
+              "unit": "Kang Roo",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Kang Roo",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_043",
+      "chapterId": 1,
+      "displayName": "NASA (美國太空總署)",
+      "background": "/Backgrounds/background.png",
+      "cost": 30,
+      "maxEnemies": 10,
+      "stageLength": 4800.0,
+      "xpReward": 13600,
+      "enemyBaseHp": 20000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 3.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 3.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 20.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Croco",
+              "count": -1,
+              "intervalMin": 3.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "B.B.Bunny",
+              "count": -1,
+              "intervalMin": 3.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "One Horn",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 30.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 3.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 90.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "B.B.Bunny",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.8,
+          "spawns": [
+            {
+              "unit": "One Horn",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.6,
+          "spawns": [
+            {
+              "unit": "One Horn",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_044",
+      "chapterId": 1,
+      "displayName": "Las Vegas (拉斯維加斯)",
+      "background": "/Backgrounds/background.png",
+      "cost": 32,
+      "maxEnemies": 4,
+      "stageLength": 5000.0,
+      "xpReward": 13900,
+      "enemyBaseHp": 25000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Doge",
+              "count": -1,
+              "intervalMin": 3.0,
+              "intervalMax": 14.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Snache",
+              "count": -1,
+              "intervalMin": 3.0,
+              "intervalMax": 14.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 6.0,
+              "intervalMax": 14.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.99,
+          "spawns": [
+            {
+              "unit": "Teacher Bear",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Squire Rel",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_045",
+      "chapterId": 1,
+      "displayName": "Hollywood (好萊塢)",
+      "background": "/Backgrounds/background.png",
+      "cost": 40,
+      "maxEnemies": 2,
+      "stageLength": 4800.0,
+      "xpReward": 14200,
+      "enemyBaseHp": 20000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Hippoe",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 40.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Jackie Peng",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 13.33,
+              "intervalMax": 30.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": -1,
+              "intervalMin": 40.0,
+              "intervalMax": 53.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 100.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Le'boin",
+              "count": -1,
+              "intervalMin": 73.33,
+              "intervalMax": 113.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 120.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Kang Roo",
+              "count": -1,
+              "intervalMin": 43.33,
+              "intervalMax": 80.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 140.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Mooth",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_046",
+      "chapterId": 1,
+      "displayName": "Alaska (阿拉斯加)",
+      "background": "/Backgrounds/background.png",
+      "cost": 50,
+      "maxEnemies": 10,
+      "stageLength": 4800.0,
+      "xpReward": 14500,
+      "enemyBaseHp": 20000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Squire Rel",
+              "count": 20,
+              "intervalMin": 0.67,
+              "intervalMax": 1.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.99,
+          "spawns": [
+            {
+              "unit": "Teacher Bear",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Squire Rel",
+              "count": -1,
+              "intervalMin": 3.33,
+              "intervalMax": 10.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Pigge",
+              "count": -1,
+              "intervalMin": 40.0,
+              "intervalMax": 60.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "B.B.Bunny",
+              "count": -1,
+              "intervalMin": 20.0,
+              "intervalMax": 40.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 100.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Teacher Bear",
+              "count": 2,
+              "intervalMin": 100.0,
+              "intervalMax": 133.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": -1.0,
+          "triggerBaseHpPercentage": 0.9,
+          "spawns": [
+            {
+              "unit": "Mooth",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_047",
+      "chapterId": 1,
+      "displayName": "Hawaii (夏威夷)",
+      "background": "/Backgrounds/background.png",
+      "cost": 50,
+      "maxEnemies": 3,
+      "stageLength": 6000.0,
+      "xpReward": 14800,
+      "enemyBaseHp": 30000.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 0.07,
+              "intervalMax": 0.07,
+              "magnification": 1.0,
+              "groupCount": 3
+            },
+            {
+              "unit": "Hippoe",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Jackie Peng",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 60.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 13.33,
+              "intervalMax": 30.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 80.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Sir Seal",
+              "count": -1,
+              "intervalMin": 26.67,
+              "intervalMax": 53.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 100.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Le'boin",
+              "count": -1,
+              "intervalMin": 53.33,
+              "intervalMax": 100.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 120.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Kang Roo",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 50.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 140.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "One Horn",
+              "count": -1,
+              "intervalMin": 66.67,
+              "intervalMax": 86.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 160.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Teacher Bear",
+              "count": -1,
+              "intervalMin": 133.33,
+              "intervalMax": 266.67,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage_048",
+      "chapterId": 1,
+      "displayName": "Moon (月球)",
+      "background": "/Backgrounds/background.png",
+      "cost": 50,
+      "maxEnemies": 4,
+      "stageLength": 4000.0,
+      "xpReward": 15100,
+      "enemyBaseHp": 99999.0,
+      "waves": [
+        {
+          "triggerTime": 0.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Those Guys",
+              "count": -1,
+              "intervalMin": 1.0,
+              "intervalMax": 2.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Hippoe",
+              "count": -1,
+              "intervalMin": 6.67,
+              "intervalMax": 13.33,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "Jackie Peng",
+              "count": -1,
+              "intervalMin": 10.0,
+              "intervalMax": 20.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            },
+            {
+              "unit": "The Face",
+              "count": 1,
+              "intervalMin": 0.0,
+              "intervalMax": 0.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 46.67,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Gory",
+              "count": -1,
+              "intervalMin": 13.33,
+              "intervalMax": 30.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
+          ]
+        },
+        {
+          "triggerTime": 120.0,
+          "triggerBaseHpPercentage": -1.0,
+          "spawns": [
+            {
+              "unit": "Kang Roo",
+              "count": -1,
+              "intervalMin": 30.0,
+              "intervalMax": 50.0,
+              "magnification": 1.0,
+              "groupCount": 1
+            }
           ]
         }
       ]

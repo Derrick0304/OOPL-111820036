@@ -1,8 +1,10 @@
 #include "Scene/MainMenuScene.hpp"
 
 #include "App.hpp"
+#include "Scene/ChapterSelectScene.hpp"
 #include "Scene/StageSelectScene.hpp"
 #include "UI/TextButton.hpp"
+#include "UI/ImageTextButton.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
@@ -57,7 +59,7 @@ void MainMenuScene::Enter() {
     m_Root->AddChild(m_TitleObject);
 
     m_StartButton = std::make_shared<ImageTextButton>("Start", [this]() {
-        m_App.ChangeScene(std::make_unique<StageSelectScene>(m_App));
+        m_App.ChangeScene(std::make_unique<ChapterSelectScene>(m_App));
     }, ImageTextButton::Type::LONG);
     m_StartButton->m_Transform.translation = {startX, startY};
     m_Root->AddChild(m_StartButton);
