@@ -10,7 +10,7 @@
         {
           "triggerTime": 0.0,
           "spawns": [
-            { "unit": "Doge", "count": 1, "interval": 0.0 }
+            { "unit": "Doge", "count": 20, "interval": 3.0, "groupCount": 5 }
           ]
         },
         {

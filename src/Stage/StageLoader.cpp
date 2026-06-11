@@ -60,6 +60,7 @@ bool StageLoader::Load() {
                             }
                             
                             spawn.magnification = spawnItem.value("magnification", 1.0f);
+                            spawn.groupCount = spawnItem.value("groupCount", 1);
                             wave.spawns.push_back(spawn);
                         }
                     }

@@ -55,15 +55,28 @@ void WaveSpawner::Update(float dt) {
         
         // Try to spawn if timer is up and limit is not reached
         while ((spawn.entry.count == -1 || spawn.spawnedCount < spawn.entry.count) && spawn.timer <= 0.0f) {
-            // Check enemy limit before spawning
-            if (m_UnitManager && m_UnitManager->GetEnemyCount() >= m_MaxEnemies) {
-                // Limit reached: stop processing this spawn temporarily. 
-                // Keep timer at 0 or slightly negative so it spawns immediately when limit allows.
-                break; 
+            
+            int toSpawn = spawn.entry.groupCount;
+            if (spawn.entry.count != -1) {
+                toSpawn = std::min(toSpawn, spawn.entry.count - spawn.spawnedCount);
             }
 
-            SpawnUnit(spawn.entry.unit, spawn.entry.magnification);
-            ++spawn.spawnedCount;
+            int spawnedThisGroup = 0;
+            for (int i = 0; i < toSpawn; ++i) {
+                // Check enemy limit before spawning
+                if (m_UnitManager && m_UnitManager->GetEnemyCount() >= m_MaxEnemies) {
+                    break; 
+                }
+                SpawnUnit(spawn.entry.unit, spawn.entry.magnification);
+                ++spawn.spawnedCount;
+                ++spawnedThisGroup;
+            }
+
+            if (spawnedThisGroup == 0 && toSpawn > 0) {
+                // Limit reached: stop processing this spawn temporarily. 
+                // Keep timer at 0 or slightly negative so it spawns immediately when limit allows.
+                break;
+            }
             
             if (spawn.entry.count != -1 && spawn.spawnedCount >= spawn.entry.count) {
                 break;

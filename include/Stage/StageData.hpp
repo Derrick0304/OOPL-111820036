@@ -10,6 +10,7 @@ struct SpawnEntry {
     float intervalMin = 0.0f;
     float intervalMax = 0.0f;
     float magnification = 1.0f;
+    int groupCount = 1; // 每次生成的群體數量
 };
 
 struct WaveData {
