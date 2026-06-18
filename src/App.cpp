@@ -1,6 +1,7 @@
 #include "App.hpp"
 
 #include "Scene/MainMenuScene.hpp"
+#include "Scene/StartScene.hpp"
 #include "Stage/StageLoader.hpp"
 #include "UnitFactory.hpp"
 #include "Util/Logger.hpp"
@@ -11,7 +12,7 @@ void App::Start() {
 
     UnitFactory::Init();
     StageLoader::Load();
-    ChangeScene(std::make_unique<MainMenuScene>(*this));
+    ChangeScene(std::make_unique<StartScene>(*this));
 
     m_State = State::UPDATE;
 }

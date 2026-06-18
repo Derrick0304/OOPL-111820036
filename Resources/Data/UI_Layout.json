@@ -21,17 +21,55 @@
     }
   },
   "MainMenuScene": {
-    "TitleText": {
-      "x": 0.0,
-      "y": 70.0
-    },
     "StartButton": {
-      "x": 0.0,
-      "y": -40.0
+      "x": -350.0,
+      "y": 120.0
     },
-    "ExitButton": {
+    "UpgradeButton": {
+      "x": -350.0,
+      "y": 10.0
+    },
+    "EquipButton": {
+      "x": -350.0,
+      "y": -100.0
+    },
+    "BackButton": {
+      "x": -560.0,
+      "y": -290.0
+    },
+    "TopBorder": {
       "x": 0.0,
-      "y": -110.0
+      "y": 330.0,
+      "scaleX": 1.87,
+      "scaleY": 1.87
+    },
+    "BottomBorder": {
+      "x": 0.0,
+      "y": -330.0,
+      "scaleX": 1.87,
+      "scaleY": 1.87
+    },
+    "XPDisplay": {
+      "x": 530.0,
+      "y": 330.0,
+      "fontSize": 24
+    },
+    "XPIcon": {
+      "x": 460.0,
+      "y": 330.0,
+      "scaleX": 1.87,
+      "scaleY": 1.87
+    },
+    "CatFoodDisplay": {
+      "x": 530.0,
+      "y": -330.0,
+      "fontSize": 24
+    },
+    "CatFoodIcon": {
+      "x": 460.0,
+      "y": -330.0,
+      "scaleX": 1.87,
+      "scaleY": 1.87
     }
   },
   "StageSelectScene": {
@@ -114,6 +152,12 @@
     "Carousel": {
       "y": 0.0,
       "spacingX": 350.0
+    }
+  },
+  "StartScene": {
+    "PlayButton": {
+      "x": 0.0,
+      "y": -200.0
     }
   }
 }
