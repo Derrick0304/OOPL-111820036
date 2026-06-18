@@ -30,9 +30,6 @@ private:
     std::shared_ptr<Util::GameObject> m_Root;
     std::shared_ptr<Util::Image> m_BackgroundImage;
     std::shared_ptr<Util::GameObject> m_BackgroundObject;
-    
-    std::shared_ptr<Util::Text> m_TitleText;
-    std::shared_ptr<Util::GameObject> m_TitleObject;
 
     std::vector<StageData> m_Stages;
     
@@ -59,11 +56,15 @@ private:
     std::shared_ptr<Util::Text> m_StageSelectTitleText;
     std::shared_ptr<Util::GameObject> m_StageSelectTitleObject;
 
-    // 頂部 XP 顯示
+    // 頂部 XP 顯示與圖示
+    std::shared_ptr<Util::Image> m_XPIconImage;
+    std::shared_ptr<Util::GameObject> m_XPIconObject;
     std::shared_ptr<Util::Text> m_XPText;
     std::shared_ptr<Util::GameObject> m_XPObject;
 
-    // 底部貓罐頭顯示
+    // 底部貓罐頭顯示與圖示
+    std::shared_ptr<Util::Image> m_CatFoodIconImage;
+    std::shared_ptr<Util::GameObject> m_CatFoodIconObject;
     std::shared_ptr<Util::Text> m_CatFoodText;
     std::shared_ptr<Util::GameObject> m_CatFoodObject;
 

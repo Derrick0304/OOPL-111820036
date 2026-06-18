@@ -32,6 +32,13 @@ public:
 
     void SetFlashEnabled(bool enabled) { m_FlashEnabled = enabled; }
 
+    void SetZIndex(float zIndex) {
+        Util::GameObject::SetZIndex(zIndex);
+        if (m_YellowBorder) m_YellowBorder->SetZIndex(zIndex + 1.0f);
+        if (m_PurpleBorder) m_PurpleBorder->SetZIndex(zIndex + 2.0f);
+        if (m_TextObj) m_TextObj->SetZIndex(zIndex + 5.0f);
+    }
+
 private:
     bool IsCursorInside() const;
 

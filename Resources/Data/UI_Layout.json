@@ -69,14 +69,26 @@
       "fontSize": 32
     },
     "XPDisplay": {
-      "x": 540.0,
+      "x": 530.0,
       "y": 330.0,
       "fontSize": 24
     },
+    "XPIcon": {
+      "x": 460.0,
+      "y": 330.0,
+      "scaleX": 1.87,
+      "scaleY": 1.87
+    },
     "CatFoodDisplay": {
-      "x": 580.0,
+      "x": 530.0,
       "y": -330.0,
       "fontSize": 24
+    },
+    "CatFoodIcon": {
+      "x": 460.0,
+      "y": -330.0,
+      "scaleX": 1.87,
+      "scaleY": 1.87
     },
     "EnergyBar": {
       "x": 430.0,

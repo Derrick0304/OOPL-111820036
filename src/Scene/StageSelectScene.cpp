@@ -21,7 +21,6 @@ StageSelectScene::StageSelectScene(App& app, int chapterId)
 void StageSelectScene::Enter() {
     LOG_INFO("Entering StageSelectScene for Chapter {}", m_ChapterId);
 
-    float titleX = 0.0f, titleY = 250.0f;
     float backX = -500.0f, backY = -300.0f;
     float startBtnX = 500.0f, startBtnY = -300.0f;
     m_CarouselY = 0.0f;
@@ -31,10 +30,12 @@ void StageSelectScene::Enter() {
     float bottomBorderX = 0.0f, bottomBorderY = -330.0f, bottomBorderScaleX = 1.87f, bottomBorderScaleY = 1.87f;
     float stageSelectTitleX = -480.0f, stageSelectTitleY = 330.0f;
     int stageSelectTitleFontSize = 32;
-    float xpX = 540.0f, xpY = 330.0f;
+    float xpX = 530.0f, xpY = 330.0f;
     int xpFontSize = 24;
-    float catFoodX = 580.0f, catFoodY = -330.0f;
+    float xpIconX = 460.0f, xpIconY = 330.0f, xpIconScaleX = 1.87f, xpIconScaleY = 1.87f;
+    float catFoodX = 530.0f, catFoodY = -330.0f;
     int catFoodFontSize = 24;
+    float catFoodIconX = 460.0f, catFoodIconY = -330.0f, catFoodIconScaleX = 1.87f, catFoodIconScaleY = 1.87f;
 
     float energyBarX = 430.0f, energyBarY = -70.0f, energyBarScaleX = 1.5f, energyBarScaleY = 1.5f;
     float energyTextX = 485.0f, energyTextY = -70.0f;
@@ -46,10 +47,6 @@ void StageSelectScene::Enter() {
             json layout = json::parse(file);
             if (layout.contains("StageSelectScene")) {
                 auto& scene = layout["StageSelectScene"];
-                if (scene.contains("TitleText")) {
-                    titleX = scene["TitleText"]["x"].get<float>();
-                    titleY = scene["TitleText"]["y"].get<float>();
-                }
                 if (scene.contains("BackButton")) {
                     backX = scene["BackButton"]["x"].get<float>();
                     backY = scene["BackButton"]["y"].get<float>();
@@ -84,10 +81,22 @@ void StageSelectScene::Enter() {
                     xpY = scene["XPDisplay"]["y"].get<float>();
                     xpFontSize = scene["XPDisplay"]["fontSize"].get<int>();
                 }
+                if (scene.contains("XPIcon")) {
+                    xpIconX = scene["XPIcon"]["x"].get<float>();
+                    xpIconY = scene["XPIcon"]["y"].get<float>();
+                    xpIconScaleX = scene["XPIcon"]["scaleX"].get<float>();
+                    xpIconScaleY = scene["XPIcon"]["scaleY"].get<float>();
+                }
                 if (scene.contains("CatFoodDisplay")) {
                     catFoodX = scene["CatFoodDisplay"]["x"].get<float>();
                     catFoodY = scene["CatFoodDisplay"]["y"].get<float>();
                     catFoodFontSize = scene["CatFoodDisplay"]["fontSize"].get<int>();
+                }
+                if (scene.contains("CatFoodIcon")) {
+                    catFoodIconX = scene["CatFoodIcon"]["x"].get<float>();
+                    catFoodIconY = scene["CatFoodIcon"]["y"].get<float>();
+                    catFoodIconScaleX = scene["CatFoodIcon"]["scaleX"].get<float>();
+                    catFoodIconScaleY = scene["CatFoodIcon"]["scaleY"].get<float>();
                 }
                 if (scene.contains("EnergyBar")) {
                     energyBarX = scene["EnergyBar"]["x"].get<float>();
@@ -108,15 +117,9 @@ void StageSelectScene::Enter() {
 
     m_BackgroundImage = std::make_shared<Util::Image>(RESOURCE_DIR"/Backgrounds/StageSelect.png");
     m_BackgroundObject = std::make_shared<Util::GameObject>(m_BackgroundImage, -20.0f);
-    m_BackgroundObject->m_Transform.scale = {1.28f, 1.28f};
-    m_BackgroundObject->m_Transform.translation = {0.0f, 30.0f};
+    m_BackgroundObject->m_Transform.scale = {1.54f, 1.54f};
+    m_BackgroundObject->m_Transform.translation = {0.0f, 15.0f};
     m_Root->AddChild(m_BackgroundObject);
-
-    std::string titleStr = "Chapter " + std::to_string(m_ChapterId) + " Stages";
-    m_TitleText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 48, titleStr, Util::Color(255, 255, 255));
-    m_TitleObject = std::make_shared<Util::GameObject>(m_TitleText, 15.0f);
-    m_TitleObject->m_Transform.translation = {titleX, titleY};
-    m_Root->AddChild(m_TitleObject);
 
     // 建立頂部與底部邊框
     m_BorderImage = std::make_shared<Util::Image>(RESOURCE_DIR"/UI/UI_Border.png");
@@ -137,15 +140,27 @@ void StageSelectScene::Enter() {
     m_StageSelectTitleObject->m_Transform.translation = {stageSelectTitleX, stageSelectTitleY};
     m_Root->AddChild(m_StageSelectTitleObject);
 
-    // 建立頂部 XP 顯示
-    std::string xpStr = "XP  " + std::to_string(m_App.GetTotalXP());
+    // 建立頂部 XP 圖示與數值顯示
+    m_XPIconImage = std::make_shared<Util::Image>(RESOURCE_DIR"/UI/UI_XPIcon.png");
+    m_XPIconObject = std::make_shared<Util::GameObject>(m_XPIconImage, 19.0f);
+    m_XPIconObject->m_Transform.translation = {xpIconX, xpIconY};
+    m_XPIconObject->m_Transform.scale = {xpIconScaleX, xpIconScaleY};
+    m_Root->AddChild(m_XPIconObject);
+
+    std::string xpStr = std::to_string(m_App.GetTotalXP());
     m_XPText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", xpFontSize, xpStr, Util::Color(0, 0, 0));
     m_XPObject = std::make_shared<Util::GameObject>(m_XPText, 19.0f);
     m_XPObject->m_Transform.translation = {xpX, xpY};
     m_Root->AddChild(m_XPObject);
 
-    // 建立底部貓罐頭顯示
-    std::string catFoodStr = "Cat Food  " + std::to_string(m_App.GetCatFood());
+    // 建立底部貓罐頭圖示與數值顯示
+    m_CatFoodIconImage = std::make_shared<Util::Image>(RESOURCE_DIR"/UI/UI_CatFoodIcon.png");
+    m_CatFoodIconObject = std::make_shared<Util::GameObject>(m_CatFoodIconImage, 19.0f);
+    m_CatFoodIconObject->m_Transform.translation = {catFoodIconX, catFoodIconY};
+    m_CatFoodIconObject->m_Transform.scale = {catFoodIconScaleX, catFoodIconScaleY};
+    m_Root->AddChild(m_CatFoodIconObject);
+
+    std::string catFoodStr = std::to_string(m_App.GetCatFood());
     m_CatFoodText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", catFoodFontSize, catFoodStr, Util::Color(0, 0, 0));
     m_CatFoodObject = std::make_shared<Util::GameObject>(m_CatFoodText, 19.0f);
     m_CatFoodObject->m_Transform.translation = {catFoodX, catFoodY};
@@ -212,6 +227,7 @@ void StageSelectScene::Enter() {
     }, "/UI/Buttons/Btn_Back_Circle.png"); // 這裡不傳入自定義黃/紫邊框，將自動使用預設
     m_BackButton->SetFlashEnabled(false); // 圓形按鈕不需要閃爍外框
     m_BackButton->m_Transform.translation = {backX, backY};
+    m_BackButton->SetZIndex(20.0f); // 提升 Z-Index，使其顯示在底部棕色橫條 (18.0f) 上方
     m_Root->AddChild(m_BackButton);
     for (auto& part : m_BackButton->GetParts()) m_Root->AddChild(part);
 
@@ -228,6 +244,7 @@ void StageSelectScene::Enter() {
         }
     }, "/UI/Buttons/Btn_Attack_Base.png");
     m_StartButton->m_Transform.translation = {startBtnX, startBtnY};
+    m_StartButton->SetZIndex(20.0f); // 提升 Z-Index 到 20.0f
     m_Root->AddChild(m_StartButton);
     for (auto& part : m_StartButton->GetParts()) m_Root->AddChild(part);
 
@@ -259,10 +276,10 @@ void StageSelectScene::Update() {
 
     // 動態更新 XP 與貓罐頭的文字顯示
     if (m_XPText) {
-        m_XPText->SetText("XP  " + std::to_string(m_App.GetTotalXP()));
+        m_XPText->SetText(std::to_string(m_App.GetTotalXP()));
     }
     if (m_CatFoodText) {
-        m_CatFoodText->SetText("Cat Food  " + std::to_string(m_App.GetCatFood()));
+        m_CatFoodText->SetText(std::to_string(m_App.GetCatFood()));
     }
     if (m_EnergyValText) {
         m_EnergyValText->SetText(std::to_string(m_App.GetCurrentEnergy()));
@@ -344,8 +361,12 @@ void StageSelectScene::Exit() {
     m_BorderImage.reset();
     m_StageSelectTitleText.reset();
     m_StageSelectTitleObject.reset();
+    m_XPIconImage.reset();
+    m_XPIconObject.reset();
     m_XPText.reset();
     m_XPObject.reset();
+    m_CatFoodIconImage.reset();
+    m_CatFoodIconObject.reset();
     m_CatFoodText.reset();
     m_CatFoodObject.reset();
     m_EnergyBarImage.reset();
