@@ -38,6 +38,41 @@ ImageTextButton::ImageTextButton(const std::string& label, std::function<void()>
     m_TextObj = std::make_shared<Util::GameObject>(m_Text, 15.0f);
 }
 
+ImageTextButton::ImageTextButton(const std::string& label, std::function<void()> onClick, 
+                                 const std::string& customBase, 
+                                 const std::string& customYellow, 
+                                 const std::string& customPurple)
+    : m_OnClick(std::move(onClick)) {
+    
+    // 底圖
+    SetDrawable(std::make_shared<Util::Image>(RESOURCE_DIR + customBase));
+    SetZIndex(10.0f);
+
+    // 黃色邊框
+    if (!customYellow.empty()) {
+        m_YellowBorder = std::make_shared<Util::GameObject>(
+            std::make_shared<Util::Image>(RESOURCE_DIR + customYellow), 11.0f);
+    } else {
+        m_YellowBorder = std::make_shared<Util::GameObject>(
+            std::make_shared<Util::Image>(RESOURCE_DIR"/UI/Buttons/ButtonLong_Yellow.png"), 11.0f);
+    }
+    m_YellowBorder->SetVisible(false);
+
+    // 紫色邊框
+    if (!customPurple.empty()) {
+        m_PurpleBorder = std::make_shared<Util::GameObject>(
+            std::make_shared<Util::Image>(RESOURCE_DIR + customPurple), 12.0f);
+    } else {
+        m_PurpleBorder = std::make_shared<Util::GameObject>(
+            std::make_shared<Util::Image>(RESOURCE_DIR"/UI/Buttons/ButtonLong_Purple.png"), 12.0f);
+    }
+    m_PurpleBorder->SetVisible(false);
+
+    // 文字
+    m_Text = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 24, label, Util::Color(0, 0, 0));
+    m_TextObj = std::make_shared<Util::GameObject>(m_Text, 15.0f);
+}
+
 void ImageTextButton::Update() {
     if (!m_Visible) return;
 
@@ -45,7 +80,7 @@ void ImageTextButton::Update() {
     const bool hovered = IsCursorInside();
 
     // --- 邊框閃爍動畫 ---
-    if (hovered) {
+    if (hovered && m_FlashEnabled) {
         m_FlashTimer += dt;
         if (m_FlashTimer > 0.15f) {
             m_FlashTimer = 0.0f;

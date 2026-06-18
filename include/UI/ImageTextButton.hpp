@@ -19,12 +19,18 @@ public:
     };
 
     ImageTextButton(const std::string& label, std::function<void()> onClick, Type type = Type::LONG);
+    ImageTextButton(const std::string& label, std::function<void()> onClick, 
+                    const std::string& customBase, 
+                    const std::string& customYellow = "", 
+                    const std::string& customPurple = "");
 
     void Update();
     void SetLabel(const std::string& label);
     
     // 為了讓 Renderer 能渲染所有零件
     std::vector<std::shared_ptr<Util::GameObject>> GetParts() const;
+
+    void SetFlashEnabled(bool enabled) { m_FlashEnabled = enabled; }
 
 private:
     bool IsCursorInside() const;
@@ -40,6 +46,7 @@ private:
     float m_ScaleAnimTimer = 0.0f;
     bool m_IsPressed = false;
     bool m_BorderToggle = true;
+    bool m_FlashEnabled = true;
 };
 
 #endif

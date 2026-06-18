@@ -39,13 +39,33 @@ private:
     // 捲動列表項目 (關卡卡片)
     struct StageItem {
         std::shared_ptr<Util::GameObject> base;
+        std::shared_ptr<Util::GameObject> header;
         std::shared_ptr<Util::GameObject> textObj;
+        std::shared_ptr<Util::GameObject> energyTxtObj;
+        std::shared_ptr<Util::GameObject> clearedTxtObj;
         StageData data;
     };
     std::vector<StageItem> m_StageItems;
 
     std::shared_ptr<ImageTextButton> m_BackButton;
     std::shared_ptr<ImageTextButton> m_StartButton;
+
+    // 頂部與底部邊框
+    std::shared_ptr<Util::Image> m_BorderImage;
+    std::shared_ptr<Util::GameObject> m_TopBorder;
+    std::shared_ptr<Util::GameObject> m_BottomBorder;
+
+    // 頂部選關英文標題
+    std::shared_ptr<Util::Text> m_StageSelectTitleText;
+    std::shared_ptr<Util::GameObject> m_StageSelectTitleObject;
+
+    // 頂部 XP 顯示
+    std::shared_ptr<Util::Text> m_XPText;
+    std::shared_ptr<Util::GameObject> m_XPObject;
+
+    // 底部貓罐頭顯示
+    std::shared_ptr<Util::Text> m_CatFoodText;
+    std::shared_ptr<Util::GameObject> m_CatFoodObject;
 
     // 捲動邏輯變數
     float m_CurrentScrollX = 0.0f;

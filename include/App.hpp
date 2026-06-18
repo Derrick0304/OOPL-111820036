@@ -20,6 +20,14 @@ public:
 
     Util::Renderer& GetRenderer() { return m_Renderer; }
 
+    int GetTotalXP() const { return m_TotalXP; }
+    void SetTotalXP(int xp) { m_TotalXP = xp; }
+    void AddXP(int xp) { m_TotalXP += xp; }
+
+    int GetCatFood() const { return m_CatFood; }
+    void SetCatFood(int catFood) { m_CatFood = catFood; }
+    void AddCatFood(int catFood) { m_CatFood += catFood; }
+
 private:
     void ApplyPendingSceneChange();
 
@@ -28,6 +36,9 @@ private:
     std::unique_ptr<IScene> m_CurrentScene;
     std::unique_ptr<IScene> m_PendingScene;
     bool m_IsUpdatingScene = false;
+
+    int m_TotalXP = 85735;
+    int m_CatFood = 31;
 };
 
 #endif
