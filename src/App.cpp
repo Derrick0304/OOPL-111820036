@@ -4,6 +4,7 @@
 #include "Stage/StageLoader.hpp"
 #include "UnitFactory.hpp"
 #include "Util/Logger.hpp"
+#include "Util/Time.hpp"
 
 void App::Start() {
     LOG_TRACE("Game Started");
@@ -20,6 +21,17 @@ void App::Update() {
         m_IsUpdatingScene = true;
         m_CurrentScene->Update();
         m_IsUpdatingScene = false;
+    }
+
+    // 體力自動回復邏輯 (每 10 秒回復 1 點體力)
+    if (m_CurrentEnergy < m_MaxEnergy) {
+        m_EnergyRecoveryTimer += Util::Time::GetDeltaTimeMs() / 1000.0f;
+        if (m_EnergyRecoveryTimer >= 10.0f) {
+            m_CurrentEnergy = std::min(m_MaxEnergy, m_CurrentEnergy + 1);
+            m_EnergyRecoveryTimer = 0.0f;
+        }
+    } else {
+        m_EnergyRecoveryTimer = 0.0f;
     }
 
     ApplyPendingSceneChange();

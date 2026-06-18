@@ -28,6 +28,13 @@ public:
     void SetCatFood(int catFood) { m_CatFood = catFood; }
     void AddCatFood(int catFood) { m_CatFood += catFood; }
 
+    int GetCurrentEnergy() const { return m_CurrentEnergy; }
+    void SetCurrentEnergy(int energy) { m_CurrentEnergy = energy; }
+    void AddEnergy(int energy) { m_CurrentEnergy = std::min(m_MaxEnergy, m_CurrentEnergy + energy); }
+
+    int GetMaxEnergy() const { return m_MaxEnergy; }
+    void SetMaxEnergy(int maxEnergy) { m_MaxEnergy = maxEnergy; }
+
 private:
     void ApplyPendingSceneChange();
 
@@ -39,6 +46,9 @@ private:
 
     int m_TotalXP = 85735;
     int m_CatFood = 31;
+    int m_CurrentEnergy = 294;
+    int m_MaxEnergy = 999;
+    float m_EnergyRecoveryTimer = 0.0f;
 };
 
 #endif

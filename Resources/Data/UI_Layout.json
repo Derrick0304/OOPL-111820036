@@ -77,6 +77,17 @@
       "x": 580.0,
       "y": -330.0,
       "fontSize": 24
+    },
+    "EnergyBar": {
+      "x": 430.0,
+      "y": -70.0,
+      "scaleX": 1.5,
+      "scaleY": 1.5
+    },
+    "EnergyText": {
+      "x": 485.0,
+      "y": -70.0,
+      "fontSize": 20
     }
   },
   "ChapterSelectScene": {

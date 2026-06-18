@@ -36,6 +36,10 @@ void StageSelectScene::Enter() {
     float catFoodX = 580.0f, catFoodY = -330.0f;
     int catFoodFontSize = 24;
 
+    float energyBarX = 430.0f, energyBarY = -70.0f, energyBarScaleX = 1.5f, energyBarScaleY = 1.5f;
+    float energyTextX = 485.0f, energyTextY = -70.0f;
+    int energyTextFontSize = 20;
+
     std::ifstream file(RESOURCE_DIR"/Data/UI_Layout.json");
     if (file.is_open()) {
         try {
@@ -84,6 +88,17 @@ void StageSelectScene::Enter() {
                     catFoodX = scene["CatFoodDisplay"]["x"].get<float>();
                     catFoodY = scene["CatFoodDisplay"]["y"].get<float>();
                     catFoodFontSize = scene["CatFoodDisplay"]["fontSize"].get<int>();
+                }
+                if (scene.contains("EnergyBar")) {
+                    energyBarX = scene["EnergyBar"]["x"].get<float>();
+                    energyBarY = scene["EnergyBar"]["y"].get<float>();
+                    energyBarScaleX = scene["EnergyBar"]["scaleX"].get<float>();
+                    energyBarScaleY = scene["EnergyBar"]["scaleY"].get<float>();
+                }
+                if (scene.contains("EnergyText")) {
+                    energyTextX = scene["EnergyText"]["x"].get<float>();
+                    energyTextY = scene["EnergyText"]["y"].get<float>();
+                    energyTextFontSize = scene["EnergyText"]["fontSize"].get<int>();
                 }
             }
         } catch (const std::exception& e) {
@@ -135,6 +150,20 @@ void StageSelectScene::Enter() {
     m_CatFoodObject = std::make_shared<Util::GameObject>(m_CatFoodText, 19.0f);
     m_CatFoodObject->m_Transform.translation = {catFoodX, catFoodY};
     m_Root->AddChild(m_CatFoodObject);
+
+    // 建立體力條與體力數值顯示
+    m_EnergyBarImage = std::make_shared<Util::Image>(RESOURCE_DIR"/UI/UI_EnergyBar.png");
+    
+    m_EnergyBarObject = std::make_shared<Util::GameObject>(m_EnergyBarImage, 15.0f);
+    m_EnergyBarObject->m_Transform.translation = {energyBarX, energyBarY};
+    m_EnergyBarObject->m_Transform.scale = {energyBarScaleX, energyBarScaleY};
+    m_Root->AddChild(m_EnergyBarObject);
+
+    std::string energyStr = std::to_string(m_App.GetCurrentEnergy());
+    m_EnergyValText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", energyTextFontSize, energyStr, Util::Color(255, 255, 255));
+    m_EnergyValObject = std::make_shared<Util::GameObject>(m_EnergyValText, 16.0f);
+    m_EnergyValObject->m_Transform.translation = {energyTextX, energyTextY};
+    m_Root->AddChild(m_EnergyValObject);
 
     auto allStages = StageLoader::GetAllStages();
     m_Stages.clear();
@@ -188,12 +217,26 @@ void StageSelectScene::Enter() {
 
     m_StartButton = std::make_shared<ImageTextButton>(" ", [this]() {
         if (m_CurrentIndex >= 0 && m_CurrentIndex < m_Stages.size()) {
-            m_App.ChangeScene(std::make_unique<BattleScene>(m_App, m_Stages[m_CurrentIndex]));
+            int cost = m_Stages[m_CurrentIndex].cost;
+            if (m_App.GetCurrentEnergy() >= cost) {
+                m_App.SetCurrentEnergy(m_App.GetCurrentEnergy() - cost);
+                m_App.ChangeScene(std::make_unique<BattleScene>(m_App, m_Stages[m_CurrentIndex]));
+            } else {
+                LOG_WARN("Not enough energy! Cost: {}, Current: {}", cost, m_App.GetCurrentEnergy());
+                ShowEnergyWarning();
+            }
         }
     }, "/UI/Buttons/Btn_Attack_Base.png");
     m_StartButton->m_Transform.translation = {startBtnX, startBtnY};
     m_Root->AddChild(m_StartButton);
     for (auto& part : m_StartButton->GetParts()) m_Root->AddChild(part);
+
+    // 建立體力不足警告提示 (居中，紅色)
+    m_WarningText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 36, "Not Enough Energy!", Util::Color(255, 0, 0));
+    m_WarningObject = std::make_shared<Util::GameObject>(m_WarningText, 25.0f);
+    m_WarningObject->m_Transform.translation = {0.0f, 0.0f};
+    m_WarningObject->SetVisible(false);
+    m_Root->AddChild(m_WarningObject);
 
     // 初始化捲動位置，對齊到目前索引
     m_CurrentScrollX = -m_CurrentIndex * m_SpacingX;
@@ -220,6 +263,17 @@ void StageSelectScene::Update() {
     }
     if (m_CatFoodText) {
         m_CatFoodText->SetText("Cat Food  " + std::to_string(m_App.GetCatFood()));
+    }
+    if (m_EnergyValText) {
+        m_EnergyValText->SetText(std::to_string(m_App.GetCurrentEnergy()));
+    }
+
+    // 更新體力警告計時器
+    if (m_WarningTimer > 0.0f) {
+        m_WarningTimer -= dt;
+        if (m_WarningTimer <= 0.0f && m_WarningObject) {
+            m_WarningObject->SetVisible(false);
+        }
     }
 }
 
@@ -294,4 +348,17 @@ void StageSelectScene::Exit() {
     m_XPObject.reset();
     m_CatFoodText.reset();
     m_CatFoodObject.reset();
+    m_EnergyBarImage.reset();
+    m_EnergyBarObject.reset();
+    m_EnergyValText.reset();
+    m_EnergyValObject.reset();
+    m_WarningText.reset();
+    m_WarningObject.reset();
+}
+
+void StageSelectScene::ShowEnergyWarning() {
+    if (m_WarningObject) {
+        m_WarningObject->SetVisible(true);
+        m_WarningTimer = 2.0f;
+    }
 }

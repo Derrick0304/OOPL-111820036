@@ -67,6 +67,18 @@ private:
     std::shared_ptr<Util::Text> m_CatFoodText;
     std::shared_ptr<Util::GameObject> m_CatFoodObject;
 
+    // 體力條與體力數值顯示
+    std::shared_ptr<Util::Image> m_EnergyBarImage;
+    std::shared_ptr<Util::GameObject> m_EnergyBarObject;
+    std::shared_ptr<Util::Text> m_EnergyValText;
+    std::shared_ptr<Util::GameObject> m_EnergyValObject;
+
+    // 體力不足警告提示
+    std::shared_ptr<Util::Text> m_WarningText;
+    std::shared_ptr<Util::GameObject> m_WarningObject;
+    float m_WarningTimer = 0.0f;
+    void ShowEnergyWarning();
+
     // 捲動邏輯變數
     float m_CurrentScrollX = 0.0f;
     float m_TargetScrollX = 0.0f;
