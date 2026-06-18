@@ -3,13 +3,14 @@
 #include "App.hpp"
 #include "Scene/MainMenuScene.hpp"
 #include "Scene/StageSelectScene.hpp"
-#include "UI/TextButton.hpp"
-#include "UI/ImageTextButton.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
+#include "Util/Time.hpp"
 #include <fstream>
 #include <nlohmann/json.hpp>
+#include <cmath>
+#include <algorithm>
 
 using json = nlohmann::json;
 
@@ -19,11 +20,8 @@ ChapterSelectScene::ChapterSelectScene(App& app)
 void ChapterSelectScene::Enter() {
     LOG_INFO("Entering ChapterSelectScene");
 
-    float titleX = 0.0f, titleY = 250.0f;
-    float ch1X = 0.0f, ch1Y = 100.0f;
-    float ch2X = 0.0f, ch2Y = 0.0f;
-    float ch3X = 0.0f, ch3Y = -100.0f;
-    float backX = -538.0f, backY = -303.0f;
+    m_CarouselY = 0.0f;
+    m_SpacingX = 400.0f;
 
     std::ifstream file(RESOURCE_DIR"/Data/UI_Layout.json");
     if (file.is_open()) {
@@ -31,25 +29,9 @@ void ChapterSelectScene::Enter() {
             json layout = json::parse(file);
             if (layout.contains("ChapterSelectScene")) {
                 auto& scene = layout["ChapterSelectScene"];
-                if (scene.contains("TitleText")) {
-                    titleX = scene["TitleText"]["x"].get<float>();
-                    titleY = scene["TitleText"]["y"].get<float>();
-                }
-                if (scene.contains("Chapter1Button")) {
-                    ch1X = scene["Chapter1Button"]["x"].get<float>();
-                    ch1Y = scene["Chapter1Button"]["y"].get<float>();
-                }
-                if (scene.contains("Chapter2Button")) {
-                    ch2X = scene["Chapter2Button"]["x"].get<float>();
-                    ch2Y = scene["Chapter2Button"]["y"].get<float>();
-                }
-                if (scene.contains("Chapter3Button")) {
-                    ch3X = scene["Chapter3Button"]["x"].get<float>();
-                    ch3Y = scene["Chapter3Button"]["y"].get<float>();
-                }
-                if (scene.contains("BackButton")) {
-                    backX = scene["BackButton"]["x"].get<float>();
-                    backY = scene["BackButton"]["y"].get<float>();
+                if (scene.contains("Carousel")) {
+                    m_CarouselY = scene["Carousel"]["y"].get<float>();
+                    m_SpacingX = scene["Carousel"]["spacingX"].get<float>();
                 }
             }
         } catch (const std::exception& e) {
@@ -57,58 +39,123 @@ void ChapterSelectScene::Enter() {
         }
     }
 
-    m_BackgroundImage = std::make_shared<Util::Image>(RESOURCE_DIR"/Backgrounds/StageSelect.png");
+    // 載入新的背景圖片 (ChapterSelectSceneBackgrounds.png)
+    m_BackgroundImage = std::make_shared<Util::Image>(RESOURCE_DIR"/Backgrounds/ChapterSelectSceneBackgrounds.png");
     m_BackgroundObject = std::make_shared<Util::GameObject>(m_BackgroundImage, -20.0f);
-    m_BackgroundObject->m_Transform.scale = {1.28f, 1.28f};
-    m_BackgroundObject->m_Transform.translation = {0.0f, 30.0f};
+    m_BackgroundObject->m_Transform.scale = {1.34f, 1.34f};
+    m_BackgroundObject->m_Transform.translation = {0.0f, 0.0f};
     m_Root->AddChild(m_BackgroundObject);
 
-    m_TitleText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 48, "Select Chapter", Util::Color(255, 255, 255));
-    m_TitleObject = std::make_shared<Util::GameObject>(m_TitleText, 15.0f);
-    m_TitleObject->m_Transform.translation = {titleX, titleY};
-    m_Root->AddChild(m_TitleObject);
+    // 定義 4 個選單項目 (返回、第一章、第二章、第三章)
+    struct ItemInitData {
+        std::string path;
+        std::function<void()> onClick;
+    };
 
-    m_Chapter1Button = std::make_shared<ImageTextButton>("Ch1: The Battle Cats Rising", [this]() {
-        m_App.ChangeScene(std::make_unique<StageSelectScene>(m_App, 1));
-    }, ImageTextButton::Type::LONG);
-    m_Chapter1Button->m_Transform.translation = {ch1X, ch1Y};
-    m_Root->AddChild(m_Chapter1Button);
-    for (auto& part : m_Chapter1Button->GetParts()) m_Root->AddChild(part);
+    std::vector<ItemInitData> items = {
+        { "/UI/Buttons/BackMenuButton.png", [this]() { m_App.ChangeScene(std::make_unique<MainMenuScene>(m_App)); } },
+        { "/UI/Buttons/ch1.png", [this]() { m_App.ChangeScene(std::make_unique<StageSelectScene>(m_App, 1)); } },
+        { "/UI/Buttons/ch2.png", [this]() { m_App.ChangeScene(std::make_unique<StageSelectScene>(m_App, 2)); } },
+        { "/UI/Buttons/ch3.png", [this]() { m_App.ChangeScene(std::make_unique<StageSelectScene>(m_App, 3)); } }
+    };
 
-    m_Chapter2Button = std::make_shared<ImageTextButton>("Ch2: The Emperor of Darkness", [this]() {
-        m_App.ChangeScene(std::make_unique<StageSelectScene>(m_App, 2));
-    }, ImageTextButton::Type::LONG);
-    m_Chapter2Button->m_Transform.translation = {ch2X, ch2Y};
-    m_Root->AddChild(m_Chapter2Button);
-    for (auto& part : m_Chapter2Button->GetParts()) m_Root->AddChild(part);
+    m_CarouselItems.clear();
+    for (size_t i = 0; i < items.size(); ++i) {
+        auto img = std::make_shared<Util::Image>(RESOURCE_DIR + items[i].path);
+        auto obj = std::make_shared<Util::GameObject>(img, 10.0f);
+        m_Root->AddChild(obj);
+        m_CarouselItems.push_back({img, obj, items[i].onClick});
+    }
 
-    m_Chapter3Button = std::make_shared<ImageTextButton>("Ch3: Revival of Bahamut-Cat", [this]() {
-        m_App.ChangeScene(std::make_unique<StageSelectScene>(m_App, 3));
-    }, ImageTextButton::Type::LONG);
-    m_Chapter3Button->m_Transform.translation = {ch3X, ch3Y};
-    m_Root->AddChild(m_Chapter3Button);
-    for (auto& part : m_Chapter3Button->GetParts()) m_Root->AddChild(part);
-
-    m_BackButton = std::make_shared<ImageTextButton>("Back", [this]() {
-        m_App.ChangeScene(std::make_unique<MainMenuScene>(m_App));
-    }, ImageTextButton::Type::LONG);
-    m_BackButton->m_Transform.translation = {backX, backY};
-    m_Root->AddChild(m_BackButton);
-    for (auto& part : m_BackButton->GetParts()) m_Root->AddChild(part);
+    // 預設將 Chapter 1 (索引 1) 置中
+    m_CurrentIndex = 1;
+    m_CurrentScrollX = -m_CurrentIndex * m_SpacingX;
+    m_TargetScrollX = m_CurrentScrollX;
 }
 
 void ChapterSelectScene::Update() {
+    float dt = Util::Time::GetDeltaTimeMs() / 1000.0f;
+
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE)) {
         m_App.ChangeScene(std::make_unique<MainMenuScene>(m_App));
         return;
     }
 
-    m_Chapter1Button->Update();
-    m_Chapter2Button->Update();
-    m_Chapter3Button->Update();
-    m_BackButton->Update();
+    HandleInput();
+    UpdateCarousel(dt);
+}
+
+void ChapterSelectScene::HandleInput() {
+    glm::vec2 cursor = Util::Input::GetCursorPosition();
+
+    if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+        m_IsDragging = true;
+        m_LastMouseX = cursor.x;
+        m_ClickStartX = cursor.x;
+    }
+
+    if (m_IsDragging) {
+        if (Util::Input::IsKeyPressed(Util::Keycode::MOUSE_LB)) {
+            float dx = cursor.x - m_LastMouseX;
+            m_CurrentScrollX += dx;
+            m_TargetScrollX = m_CurrentScrollX;
+            m_LastMouseX = cursor.x;
+        } else {
+            m_IsDragging = false;
+            m_CurrentIndex = -std::round(m_CurrentScrollX / m_SpacingX);
+            m_CurrentIndex = std::max(0, std::min((int)m_CarouselItems.size() - 1, m_CurrentIndex));
+            m_TargetScrollX = -m_CurrentIndex * m_SpacingX;
+
+            // 判斷是否為單純點擊（拖曳小於 10px）
+            float dragDistance = std::abs(cursor.x - m_ClickStartX);
+            if (dragDistance < 10.0f) {
+                for (size_t i = 0; i < m_CarouselItems.size(); ++i) {
+                    float x = m_CurrentScrollX + i * m_SpacingX;
+                    float dist = std::abs(x);
+                    float scale = 0.8f;
+                    if (dist < m_SpacingX) {
+                        scale = 0.8f + 0.3f * (1.0f - dist / m_SpacingX);
+                    }
+                    float cardWidth = 328.0f * scale;
+                    float cardHeight = 263.0f * scale;
+                    
+                    if (cursor.x >= x - cardWidth / 2.0f && cursor.x <= x + cardWidth / 2.0f &&
+                        cursor.y >= m_CarouselY - cardHeight / 2.0f && cursor.y <= m_CarouselY + cardHeight / 2.0f) {
+                        LOG_INFO("Triggering index {}", i);
+                        if (m_CarouselItems[i].onClick) {
+                            m_CarouselItems[i].onClick();
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void ChapterSelectScene::UpdateCarousel(float dt) {
+    if (!m_IsDragging) {
+        m_CurrentScrollX += (m_TargetScrollX - m_CurrentScrollX) * 10.0f * dt;
+    }
+
+    for (size_t i = 0; i < m_CarouselItems.size(); ++i) {
+        float x = m_CurrentScrollX + i * m_SpacingX;
+        float dist = std::abs(x);
+        float scale = 0.8f; // 未置中的卡片縮小至 0.8f
+        
+        // 置中卡片放大至 1.1f
+        if (dist < m_SpacingX) {
+            scale = 0.8f + 0.3f * (1.0f - dist / m_SpacingX);
+        }
+
+        m_CarouselItems[i].object->m_Transform.translation = {x, m_CarouselY};
+        m_CarouselItems[i].object->m_Transform.scale = {scale, scale};
+    }
 }
 
 void ChapterSelectScene::Exit() {
     m_Root = std::make_shared<Util::GameObject>();
+    m_CarouselItems.clear();
+    m_BackgroundImage.reset();
+    m_BackgroundObject.reset();
 }

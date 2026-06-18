@@ -105,23 +105,15 @@
   "ChapterSelectScene": {
     "TitleText": {
       "x": 0.0,
-      "y": 250.0
-    },
-    "Chapter1Button": {
-      "x": 0.0,
-      "y": 100.0
-    },
-    "Chapter2Button": {
-      "x": 0.0,
-      "y": 0.0
-    },
-    "Chapter3Button": {
-      "x": 0.0,
-      "y": -100.0
+      "y": 230.0
     },
     "BackButton": {
-      "x": -538.0,
-      "y": -303.0
+      "x": -530.0,
+      "y": -270.0
+    },
+    "Carousel": {
+      "y": 0.0,
+      "spacingX": 350.0
     }
   }
 }

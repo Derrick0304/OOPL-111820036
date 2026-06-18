@@ -4,13 +4,11 @@
 #include "Scene/IScene.hpp"
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"
-#include "Util/Text.hpp"
-
 #include <memory>
 #include <vector>
+#include <functional>
 
 class App;
-class ImageTextButton;
 
 class ChapterSelectScene : public IScene {
 public:
@@ -22,19 +20,33 @@ public:
     std::shared_ptr<Util::GameObject> GetRoot() const override { return m_Root; }
 
 private:
+    void HandleInput();
+    void UpdateCarousel(float dt);
+
     App& m_App;
     std::shared_ptr<Util::GameObject> m_Root;
 
     std::shared_ptr<Util::Image> m_BackgroundImage;
     std::shared_ptr<Util::GameObject> m_BackgroundObject;
 
-    std::shared_ptr<Util::Text> m_TitleText;
-    std::shared_ptr<Util::GameObject> m_TitleObject;
+    struct CarouselItem {
+        std::shared_ptr<Util::Image> image;
+        std::shared_ptr<Util::GameObject> object;
+        std::function<void()> onClick;
+    };
+    std::vector<CarouselItem> m_CarouselItems;
 
-    std::shared_ptr<ImageTextButton> m_Chapter1Button;
-    std::shared_ptr<ImageTextButton> m_Chapter2Button;
-    std::shared_ptr<ImageTextButton> m_Chapter3Button;
-    std::shared_ptr<ImageTextButton> m_BackButton;
+    // Carousel 捲動變數
+    float m_CurrentScrollX = 0.0f;
+    float m_TargetScrollX = 0.0f;
+    float m_CarouselY = 0.0f;
+    float m_SpacingX = 400.0f;
+    int m_CurrentIndex = 0;
+
+    // 拖曳與點擊判斷
+    bool m_IsDragging = false;
+    float m_LastMouseX = 0.0f;
+    float m_ClickStartX = 0.0f;
 };
 
 #endif
