@@ -28,8 +28,8 @@ void UnitFactory::Init() {
                     
                     const auto& stats = item["stats"];
                     unit.stats.maxHp = stats.value("hp", 100.0f);
-                    unit.stats.speed = stats.value("speed", 1.0f);
-                    unit.stats.attackRange = stats.value("range", 50.0f);
+                    unit.stats.speed = stats.value("speed", 1.0f) * 1.5f;
+                    unit.stats.attackRange = stats.value("range", 50.0f) * 0.2f;
                     unit.stats.attackDamage = stats.value("atk", 10.0f);
                     unit.stats.attackInterval = stats.value("atkInterval", 1.0f);
                     

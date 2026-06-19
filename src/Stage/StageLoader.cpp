@@ -40,7 +40,7 @@ bool StageLoader::Load() {
             stage.enemyBaseHp = item.value("enemyBaseHp", 1000.0f);
             stage.cost = item.value("cost", 0);
             stage.maxEnemies = item.value("maxEnemies", 10);
-            stage.stageLength = item.value("stageLength", 3000.0f);
+            stage.stageLength = item.value("stageLength", 3000.0f) / 2.0f;
             stage.xpReward = item.value("xpReward", 0);
 
             if (item.contains("waves") && item["waves"].is_array()) {

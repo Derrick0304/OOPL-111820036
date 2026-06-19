@@ -150,7 +150,7 @@ void UpgradeScene::Enter() {
 
     for (size_t i = 0; i < m_AvailableCats.size(); ++i) {
         std::string catId = m_AvailableCats[i];
-        auto img = std::make_shared<Util::Image>(RESOURCE_DIR"/Units/Cats/" + catId + "/icon.png");
+        auto img = std::make_shared<Util::Image>(RESOURCE_DIR + UnitFactory::Get(catId).iconPath);
         auto obj = std::make_shared<Util::GameObject>(img, 10.0f);
         m_Root->AddChild(obj);
 

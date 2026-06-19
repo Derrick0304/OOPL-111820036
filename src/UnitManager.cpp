@@ -97,7 +97,7 @@ void UnitManager::ProcessTeamBattle(std::vector<std::shared_ptr<Unit>>& attacker
                              ? (frontA - frontB) 
                              : (frontB - frontA);
 
-            if (realDist >= 0 && realDist < unitA->GetAttackRange()) {
+            if (realDist >= -std::max(widthA, widthB) && realDist < unitA->GetAttackRange()) {
                 blocked = true;
                 targetsInRange.push_back(unitB);
             }
@@ -115,7 +115,7 @@ void UnitManager::ProcessTeamBattle(std::vector<std::shared_ptr<Unit>>& attacker
                                 ? (frontA - enemyBaseHitPoint)
                                 : (enemyBaseHitPoint - frontA);
                                 
-            if (distToBase >= 0 && distToBase < unitA->GetAttackRange()) {
+            if (distToBase >= -widthA && distToBase < unitA->GetAttackRange()) {
                 blocked = true;
                 targetBase = enemyBase;
             }

@@ -116,7 +116,7 @@ void EquipScene::Enter() {
 
     for (size_t i = 0; i < m_AvailableCats.size(); ++i) {
         std::string catId = m_AvailableCats[i];
-        auto img = std::make_shared<Util::Image>(RESOURCE_DIR"/Units/Cats/" + catId + "/icon.png");
+        auto img = std::make_shared<Util::Image>(RESOURCE_DIR + UnitFactory::Get(catId).iconPath);
         auto obj = std::make_shared<Util::GameObject>(img, 10.0f);
         obj->m_Transform.scale = {0.98f, 0.98f}; // 調整列表頭像大小
         m_Root->AddChild(obj);
@@ -361,7 +361,7 @@ void EquipScene::UpdateEquippedSlots() {
                 m_SlotObjects[i].object->SetVisible(false);
                 m_SlotObjects[i].image.reset();
             } else {
-                auto img = std::make_shared<Util::Image>(RESOURCE_DIR"/Units/Cats/" + catId + "/icon.png");
+                auto img = std::make_shared<Util::Image>(RESOURCE_DIR + UnitFactory::Get(catId).iconPath);
                 m_SlotObjects[i].image = img;
                 m_SlotObjects[i].object->SetDrawable(img);
                 m_SlotObjects[i].object->SetVisible(true);
