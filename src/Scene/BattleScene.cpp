@@ -140,8 +140,8 @@ void BattleScene::Update() {
         
         if (m_CannonEffectTimer >= 0.4f && m_CannonEffectTimer <= 0.9f) {
             float progress = (m_CannonEffectTimer - 0.4f) / 0.5f;
-            float startX = m_Stage.stageLength / 2.0f;
-            float endX = -m_Stage.stageLength / 2.0f;
+            float startX = m_UnitManager->GetCatBaseX();
+            float endX = m_UnitManager->GetEnemyBaseX();
             float currentX = startX + (endX - startX) * progress;
             
             if (m_UnitManager) {
