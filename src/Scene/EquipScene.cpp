@@ -20,6 +20,7 @@ EquipScene::EquipScene(App& app)
 
 void EquipScene::Enter() {
     LOG_INFO("Entering EquipScene");
+    m_App.PlayBGM(RESOURCE_DIR"/audio/MenuScene.mp3");
 
     float backX = -560.0f, backY = -290.0f;
     float xpX = 460.0f, xpY = 322.0f;

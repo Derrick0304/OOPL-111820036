@@ -1,4 +1,5 @@
 #include "App.hpp"
+#include "Util/BGM.hpp"
 
 #include "Scene/MainMenuScene.hpp"
 #include "Scene/StartScene.hpp"
@@ -96,4 +97,14 @@ void App::ApplyPendingSceneChange() {
 
     auto nextScene = std::move(m_PendingScene);
     ChangeScene(std::move(nextScene));
+}
+
+void App::PlayBGM(const std::string& path) {
+    if (m_CurrentBGMPath == path) {
+        return;
+    }
+    m_BGM = std::make_shared<Util::BGM>(path);
+    m_BGM->SetVolume(24); 
+    m_BGM->Play();
+    m_CurrentBGMPath = path;
 }

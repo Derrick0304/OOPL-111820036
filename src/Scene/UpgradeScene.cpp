@@ -20,6 +20,7 @@ UpgradeScene::UpgradeScene(App& app)
 
 void UpgradeScene::Enter() {
     LOG_INFO("Entering UpgradeScene");
+    m_App.PlayBGM(RESOURCE_DIR"/audio/MenuScene.mp3");
 
     float backX = -560.0f, backY = -290.0f;
     float upgradeX = -420.0f, upgradeY = -160.0f;

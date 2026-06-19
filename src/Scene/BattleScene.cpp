@@ -19,6 +19,7 @@ BattleScene::BattleScene(App& app, StageData stage)
     : m_App(app), m_Stage(std::move(stage)), m_Root(std::make_shared<Util::GameObject>()) {}
 
 void BattleScene::Enter() {
+    m_App.PlayBGM(RESOURCE_DIR"/audio/BattleScene.mp3");
     SetupBattlefield();
     SetupResultOverlay();
 }

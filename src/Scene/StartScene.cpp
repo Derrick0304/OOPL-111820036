@@ -15,6 +15,7 @@ StartScene::StartScene(App& app)
 
 void StartScene::Enter() {
     LOG_INFO("Entering StartScene");
+    m_App.PlayBGM(RESOURCE_DIR"/audio/StartScene.mp3");
 
     float playX = 0.0f;
     float playY = -200.0f;

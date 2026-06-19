@@ -20,6 +20,7 @@ StageSelectScene::StageSelectScene(App& app, int chapterId)
 
 void StageSelectScene::Enter() {
     LOG_INFO("Entering StageSelectScene for Chapter {}", m_ChapterId);
+    m_App.PlayBGM(RESOURCE_DIR"/audio/MenuScene.mp3");
 
     float backX = -500.0f, backY = -300.0f;
     float startBtnX = 500.0f, startBtnY = -300.0f;

@@ -19,6 +19,7 @@ ChapterSelectScene::ChapterSelectScene(App& app)
 
 void ChapterSelectScene::Enter() {
     LOG_INFO("Entering ChapterSelectScene");
+    m_App.PlayBGM(RESOURCE_DIR"/audio/MenuScene.mp3");
 
     m_CarouselY = 0.0f;
     m_SpacingX = 400.0f;

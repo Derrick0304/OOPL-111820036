@@ -22,6 +22,7 @@ MainMenuScene::MainMenuScene(App& app)
 
 void MainMenuScene::Enter() {
     LOG_INFO("Entering MainMenuScene");
+    m_App.PlayBGM(RESOURCE_DIR"/audio/MenuScene.mp3");
 
     float startX = -350.0f, startY = 120.0f;
     float upgradeX = -350.0f, upgradeY = 10.0f;

@@ -10,6 +10,10 @@
 #include <string>
 #include <map>
 
+namespace Util {
+class BGM;
+}
+
 class App {
 public:
     enum class State { START, UPDATE, END };
@@ -20,6 +24,7 @@ public:
     void End();
     void ChangeScene(std::unique_ptr<IScene> nextScene);
     void RequestExit() { m_State = State::END; }
+    void PlayBGM(const std::string& path);
 
     Util::Renderer& GetRenderer() { return m_Renderer; }
 
@@ -93,6 +98,9 @@ private:
     std::vector<std::string> m_EquippedCats = { "BasicCat", "TankCat", "AxeCat", "GrossCat", "CowCat", "", "", "", "", "" };
     std::map<std::string, int> m_CatLevels;
     std::map<std::string, int> m_StageClearCounts;
+
+    std::shared_ptr<Util::BGM> m_BGM;
+    std::string m_CurrentBGMPath;
 };
 
 #endif
