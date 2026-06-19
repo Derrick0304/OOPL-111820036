@@ -32,6 +32,10 @@ bool StageLoader::Load() {
             stage.id = item.at("id").get<std::string>();
             stage.chapterId = item.value("chapterId", 1);
             stage.displayName = item.at("displayName").get<std::string>();
+            size_t parenPos = stage.displayName.find(" (");
+            if (parenPos != std::string::npos) {
+                stage.displayName = stage.displayName.substr(0, parenPos);
+            }
             stage.background = item.at("background").get<std::string>();
             stage.enemyBaseHp = item.value("enemyBaseHp", 1000.0f);
             stage.cost = item.value("cost", 0);
