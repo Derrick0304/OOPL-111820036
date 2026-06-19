@@ -154,6 +154,7 @@ void MainMenuScene::Enter() {
     m_StartButton = std::make_shared<ImageTextButton>("Start!!", [this]() {
         m_App.ChangeScene(std::make_unique<ChapterSelectScene>(m_App));
     }, ImageTextButton::Type::LONG);
+    m_StartButton->SetBaseScale(2.0f);
     m_StartButton->m_Transform.translation = {startX, startY};
     m_Root->AddChild(m_StartButton);
     for (auto& part : m_StartButton->GetParts()) {
@@ -164,6 +165,7 @@ void MainMenuScene::Enter() {
     m_UpgradeButton = std::make_shared<ImageTextButton>("Upgrade", [this]() {
         m_App.ChangeScene(std::make_unique<UpgradeScene>(m_App));
     }, ImageTextButton::Type::LONG);
+    m_UpgradeButton->SetBaseScale(2.0f);
     m_UpgradeButton->m_Transform.translation = {upgradeX, upgradeY};
     m_Root->AddChild(m_UpgradeButton);
     for (auto& part : m_UpgradeButton->GetParts()) {
@@ -174,6 +176,7 @@ void MainMenuScene::Enter() {
     m_EquipButton = std::make_shared<ImageTextButton>("Equip", [this]() {
         m_App.ChangeScene(std::make_unique<EquipScene>(m_App));
     }, ImageTextButton::Type::LONG);
+    m_EquipButton->SetBaseScale(2.0f);
     m_EquipButton->m_Transform.translation = {equipX, equipY};
     m_Root->AddChild(m_EquipButton);
     for (auto& part : m_EquipButton->GetParts()) {

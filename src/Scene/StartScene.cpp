@@ -46,6 +46,7 @@ void StartScene::Enter() {
     m_PlayButton = std::make_shared<ImageTextButton>("Play", [this]() {
         m_App.ChangeScene(std::make_unique<MainMenuScene>(m_App));
     }, ImageTextButton::Type::LONG);
+    m_PlayButton->SetBaseScale(2.0f);
     m_PlayButton->m_Transform.translation = {playX, playY};
     m_Root->AddChild(m_PlayButton);
     for (auto& part : m_PlayButton->GetParts()) {
