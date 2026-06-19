@@ -9,6 +9,7 @@
 using json = nlohmann::json;
 
 UIManager::UIManager(std::shared_ptr<Util::GameObject> root, UnitManager* unitManager,
+                     const std::vector<std::string>& catNames,
                      std::function<bool(float)> onSpendMoney,
                      std::function<void()> onUpgradeWorker,
                      std::function<void()> onFireCannon)
@@ -16,10 +17,10 @@ UIManager::UIManager(std::shared_ptr<Util::GameObject> root, UnitManager* unitMa
       m_OnSpendMoney(std::move(onSpendMoney)),
       m_OnUpgradeWorker(std::move(onUpgradeWorker)),
       m_OnFireCannon(std::move(onFireCannon)) {
-    SetupButtons();
+    SetupButtons(catNames);
 }
 
-void UIManager::SetupButtons() {
+void UIManager::SetupButtons(const std::vector<std::string>& catNames) {
     // 預設值
     float moneyX = 500.0f, moneyY = 300.0f;
     float workerX = -550.0f, workerY = -310.0f;
@@ -85,16 +86,14 @@ void UIManager::SetupButtons() {
         m_Root->AddChild(part);
     }
 
-    const std::vector<std::string> catNames = {
-        "BasicCat", "TankCat", "AxeCat", "GrossCat", "CowCat",
-        "BirdCat", "FishCat", "LizardCat", "TitanCat", "KillerCat"
-    };
-
     const float startX = gridX - ((columns - 1) * paddingX) / 2.0f;
     const float startY = gridY;
 
     for (size_t i = 0; i < catNames.size(); ++i) {
         const std::string name = catNames[i];
+        if (name.empty()) {
+            continue;
+        }
         const auto data = UnitFactory::Get(name);
 
         auto btn = std::make_shared<UnitButton>(data, [this, name, data]() {

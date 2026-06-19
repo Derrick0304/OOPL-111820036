@@ -159,5 +159,25 @@
       "x": 0.0,
       "y": -200.0
     }
+  },
+  "EquipScene": {
+    "BackButton": {
+      "x": -560.0,
+      "y": -290.0
+    },
+    "XPDisplay": {
+      "x": 350.0,
+      "y": 280.0,
+      "fontSize": 24
+    },
+    "CatFoodDisplay": {
+      "x": 350.0,
+      "y": -310.0,
+      "fontSize": 24
+    },
+    "CatListScroll": {
+      "y": -140.0,
+      "spacingX": 130.0
+    }
   }
 }

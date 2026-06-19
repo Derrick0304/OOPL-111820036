@@ -176,6 +176,7 @@ void BattleScene::SetupBattlefield() {
     m_CatCannonEffect = std::make_unique<CatCannonEffect>(m_WorldRoot);
 
     m_UIManager = std::make_unique<UIManager>(m_Root, m_UnitManager.get(), 
+        m_App.GetEquippedCats(),
         [this](float amount) {
             if (m_Money < amount) return false;
             m_Money -= amount;

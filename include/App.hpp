@@ -6,6 +6,8 @@
 #include "Util/Renderer.hpp"
 
 #include <memory>
+#include <vector>
+#include <string>
 
 class App {
 public:
@@ -35,6 +37,13 @@ public:
     int GetMaxEnergy() const { return m_MaxEnergy; }
     void SetMaxEnergy(int maxEnergy) { m_MaxEnergy = maxEnergy; }
 
+    const std::vector<std::string>& GetEquippedCats() const { return m_EquippedCats; }
+    void SetEquippedCat(int index, const std::string& catId) {
+        if (index >= 0 && index < 10) {
+            m_EquippedCats[index] = catId;
+        }
+    }
+
 private:
     void ApplyPendingSceneChange();
 
@@ -49,6 +58,8 @@ private:
     int m_CurrentEnergy = 294;
     int m_MaxEnergy = 999;
     float m_EnergyRecoveryTimer = 0.0f;
+
+    std::vector<std::string> m_EquippedCats = { "BasicCat", "TankCat", "AxeCat", "GrossCat", "CowCat", "", "", "", "", "" };
 };
 
 #endif

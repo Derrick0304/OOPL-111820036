@@ -9,10 +9,12 @@
 #include <functional>
 #include <memory>
 #include <vector>
+#include <string>
 
 class UIManager {
 public:
     UIManager(std::shared_ptr<Util::GameObject> root, UnitManager* unitManager,
+              const std::vector<std::string>& catNames,
               std::function<bool(float)> onSpendMoney,
               std::function<void()> onUpgradeWorker,
               std::function<void()> onFireCannon);
@@ -20,7 +22,7 @@ public:
     void Update(float currentMoney, int workerLevel, float nextUpgradeCost, float cannonProgress);
 
 private:
-    void SetupButtons();
+    void SetupButtons(const std::vector<std::string>& catNames);
 
     std::shared_ptr<Util::GameObject> m_Root;
     UnitManager* m_UnitManager;

@@ -28,10 +28,16 @@ Completed in the current codebase:
 
 ### UI and Flow
 
-- Main menu with `Start` and `Exit` using `ImageTextButton` (with border flashing and scale animations)
-- **Stage Select Carousel**: A horizontal scrolling stage selector with mouse drag support, auto-snapping, and dynamic scaling feedback.
+- **StartScene (開始介面)**：極簡首頁，使用 `ChapterSelectSceneBackgrounds.png` 作為背景，中間偏下配置 Play 按鈕進入主選單。
+- **MainMenuScene 視覺重構**：
+  - 移除了中間的 "Battle Cats" 大標題，改為雙門扉中央對接樣式。
+  - 左側排版三大按鈕：`Start!!`（進入選章節）、`Upgrade`（貓咪升級）、`Equip`（隊伍編組）。
+  - 左下角移植圓形返回按鈕 `Btn_Back_Circle.png`，點擊可流暢返回 `StartScene`。
+  - 頂部與底部加上深色邊框（`UI_Border.png`），右上角顯示 `XP` 數值，右下角顯示 `Cat Food` (貓罐頭) 數值，與選關介面視覺統一。
+- **ChapterSelectScene Carousel**：實作 4 個方形按鈕的水平拖曳選單（返回、Chapter 1~3），置中放大 1.1x 且旁側縮小 0.8x，點擊各按鈕即可直接跳轉至對應章節或返回主選單。
+- **StageSelect Carousel**：A horizontal scrolling stage selector with mouse drag support, auto-snapping, and dynamic scaling feedback.
 - **Battle Start System**: A dedicated deployment button in the stage select screen that triggers the currently centered stage.
-- **UI Layout Externalization**: All major UI positions (Battle, Menu, Select) are now loaded from `Resources/Data/UI_Layout.json`
+- **UI Layout Externalization**: All major UI positions (Start, Battle, Menu, Select, Chapter Select) are now loaded from `Resources/Data/UI_Layout.json`
 - Battle result overlay with:
   - Retry
   - Back to Stage Select

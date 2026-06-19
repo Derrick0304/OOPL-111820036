@@ -4,6 +4,7 @@
 #include "Scene/StartScene.hpp"
 #include "Scene/ChapterSelectScene.hpp"
 #include "Scene/StageSelectScene.hpp"
+#include "Scene/EquipScene.hpp"
 #include "UI/TextButton.hpp"
 #include "UI/ImageTextButton.hpp"
 #include "Util/Input.hpp"
@@ -170,7 +171,7 @@ void MainMenuScene::Enter() {
 
     // 按鈕：Equip
     m_EquipButton = std::make_shared<ImageTextButton>("Equip", [this]() {
-        LOG_INFO("Equip button clicked");
+        m_App.ChangeScene(std::make_unique<EquipScene>(m_App));
     }, ImageTextButton::Type::LONG);
     m_EquipButton->m_Transform.translation = {equipX, equipY};
     m_Root->AddChild(m_EquipButton);
