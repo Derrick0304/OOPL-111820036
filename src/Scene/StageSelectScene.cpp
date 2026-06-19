@@ -210,7 +210,8 @@ void StageSelectScene::Enter() {
         auto energyTxtObj = std::make_shared<Util::GameObject>(energyTxt, 15.0f);
 
         // 通關次數文字 - 縮小字體至 16
-        auto clearedTxt = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 16, "Cleared  0", Util::Color(0, 0, 0));
+        int clearCount = m_App.GetStageClearCount(m_Stages[i].id);
+        auto clearedTxt = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 16, "Cleared  " + std::to_string(clearCount), Util::Color(0, 0, 0));
         auto clearedTxtObj = std::make_shared<Util::GameObject>(clearedTxt, 15.0f);
 
         m_Root->AddChild(baseObj);
@@ -273,6 +274,33 @@ void StageSelectScene::Update() {
 
     m_BackButton->Update();
     m_StartButton->Update();
+
+    if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+        glm::vec2 cursor = Util::Input::GetCursorPosition();
+        auto isClickOn = [](const glm::vec2& cur, std::shared_ptr<Util::GameObject> obj, float w, float h) {
+            if (!obj) return false;
+            glm::vec2 pos = obj->m_Transform.translation;
+            return cur.x >= pos.x - w / 2.0f && cur.x <= pos.x + w / 2.0f &&
+                   cur.y >= pos.y - h / 2.0f && cur.y <= pos.y + h / 2.0f;
+        };
+
+        if (isClickOn(cursor, m_XPIconObject, 150.0f, 50.0f)) {
+            if (m_App.GetCatFood() >= 100) {
+                m_App.AddCatFood(-100);
+                m_App.AddXP(10000);
+                LOG_INFO("Exchanged 100 Cat Food for 10000 XP in StageSelect");
+            }
+        } else if (isClickOn(cursor, m_CatFoodIconObject, 150.0f, 50.0f)) {
+            m_App.AddCatFood(1000);
+            LOG_INFO("Cheat: Added 1000 Cat Food in StageSelect");
+        } else if (isClickOn(cursor, m_EnergyBarObject, 250.0f, 50.0f)) {
+            if (m_App.GetCatFood() >= 30 && m_App.GetCurrentEnergy() < m_App.GetMaxEnergy()) {
+                m_App.AddCatFood(-30);
+                m_App.SetCurrentEnergy(m_App.GetMaxEnergy());
+                LOG_INFO("Refilled Energy to max (consumed 30 Cat Food)");
+            }
+        }
+    }
 
     // 動態更新 XP 與貓罐頭的文字顯示
     if (m_XPText) {

@@ -187,5 +187,29 @@
       "y": -140.0,
       "spacingX": 130.0
     }
+  },
+  "UpgradeScene": {
+    "BackButton": {
+      "x": -522.0,
+      "y": -314.0
+    },
+    "UpgradeButton": {
+      "x": -347.0,
+      "y": -155.0
+    },
+    "XPDisplay": {
+      "x": 460.0,
+      "y": 332.0,
+      "fontSize": 24
+    },
+    "CatFoodDisplay": {
+      "x": 460.0,
+      "y": -332.0,
+      "fontSize": 24
+    },
+    "CatListScroll": {
+      "y": 37.0,
+      "spacingX": 180.0
+    }
   }
 }

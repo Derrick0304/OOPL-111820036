@@ -12,6 +12,17 @@ void App::Start() {
 
     UnitFactory::Init();
     StageLoader::Load();
+
+    std::vector<std::string> cats = { "BasicCat", "TankCat", "AxeCat", "GrossCat", "CowCat", "BirdCat", "FishCat", "LizardCat", "TitanCat", "KillerCat" };
+    for (auto& c : cats) {
+        m_CatLevels[c] = 1;
+    }
+
+    auto stages = StageLoader::GetAllStages();
+    for (auto& s : stages) {
+        m_StageClearCounts[s.id] = 0;
+    }
+
     ChangeScene(std::make_unique<StartScene>(*this));
 
     m_State = State::UPDATE;

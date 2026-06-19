@@ -18,6 +18,7 @@ set(SRC_FILES
     Scene/StageSelectScene.cpp
     Scene/BattleScene.cpp
     Scene/EquipScene.cpp
+    Scene/UpgradeScene.cpp
 )
 
 set(INCLUDE_FILES
@@ -44,6 +45,7 @@ set(INCLUDE_FILES
     Scene/StageSelectScene.hpp
     Scene/BattleScene.hpp
     Scene/EquipScene.hpp
+    Scene/UpgradeScene.hpp
 )
 
 set(TEST_FILES

@@ -15,6 +15,7 @@ class UIManager {
 public:
     UIManager(std::shared_ptr<Util::GameObject> root, UnitManager* unitManager,
               const std::vector<std::string>& catNames,
+              std::function<int(const std::string&)> getCatLevel,
               std::function<bool(float)> onSpendMoney,
               std::function<void()> onUpgradeWorker,
               std::function<void()> onFireCannon);
@@ -26,6 +27,7 @@ private:
 
     std::shared_ptr<Util::GameObject> m_Root;
     UnitManager* m_UnitManager;
+    std::function<int(const std::string&)> m_GetCatLevel;
     std::function<bool(float)> m_OnSpendMoney;
     std::function<void()> m_OnUpgradeWorker;
     std::function<void()> m_OnFireCannon;

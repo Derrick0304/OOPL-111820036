@@ -5,6 +5,7 @@
 #include "Scene/ChapterSelectScene.hpp"
 #include "Scene/StageSelectScene.hpp"
 #include "Scene/EquipScene.hpp"
+#include "Scene/UpgradeScene.hpp"
 #include "UI/TextButton.hpp"
 #include "UI/ImageTextButton.hpp"
 #include "Util/Input.hpp"
@@ -161,7 +162,7 @@ void MainMenuScene::Enter() {
 
     // 按鈕：Upgrade
     m_UpgradeButton = std::make_shared<ImageTextButton>("Upgrade", [this]() {
-        LOG_INFO("Upgrade button clicked");
+        m_App.ChangeScene(std::make_unique<UpgradeScene>(m_App));
     }, ImageTextButton::Type::LONG);
     m_UpgradeButton->m_Transform.translation = {upgradeX, upgradeY};
     m_Root->AddChild(m_UpgradeButton);
@@ -199,6 +200,27 @@ void MainMenuScene::Update() {
     m_UpgradeButton->Update();
     m_EquipButton->Update();
     m_BackButton->Update();
+
+    if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+        glm::vec2 cursor = Util::Input::GetCursorPosition();
+        auto isClickOn = [](const glm::vec2& cur, std::shared_ptr<Util::GameObject> obj, float w, float h) {
+            if (!obj) return false;
+            glm::vec2 pos = obj->m_Transform.translation;
+            return cur.x >= pos.x - w / 2.0f && cur.x <= pos.x + w / 2.0f &&
+                   cur.y >= pos.y - h / 2.0f && cur.y <= pos.y + h / 2.0f;
+        };
+
+        if (isClickOn(cursor, m_XPIconObject, 150.0f, 50.0f)) {
+            if (m_App.GetCatFood() >= 100) {
+                m_App.AddCatFood(-100);
+                m_App.AddXP(10000);
+                LOG_INFO("Exchanged 100 Cat Food for 10000 XP");
+            }
+        } else if (isClickOn(cursor, m_CatFoodIconObject, 150.0f, 50.0f)) {
+            m_App.AddCatFood(1000);
+            LOG_INFO("Cheat: Added 1000 Cat Food");
+        }
+    }
 
     if (m_XPText) {
         m_XPText->SetText(std::to_string(m_App.GetTotalXP()));

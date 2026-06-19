@@ -10,7 +10,7 @@
 class UnitFactory {
 public:
     static void Init();
-    static std::shared_ptr<Unit> Create(const std::string& name, Unit::Team team);
+    static std::shared_ptr<Unit> Create(const std::string& name, Unit::Team team, int level = 1);
     static UnitData Get(const std::string& name) { return s_Registry.at(name); }
 
 private:

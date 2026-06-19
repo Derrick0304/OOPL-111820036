@@ -100,11 +100,11 @@ void ImageTextButton::Update() {
         if (m_OnClick) m_OnClick();
     }
 
-    float currentScale = 1.0f;
+    float currentScale = m_BaseScale;
     if (m_ScaleAnimTimer > 0) {
         m_ScaleAnimTimer -= dt;
         // 點擊時縮小再放大
-        currentScale = 1.0f - 0.15f * std::sin((m_ScaleAnimTimer / 0.2f) * 3.14159f);
+        currentScale = m_BaseScale * (1.0f - 0.15f * std::sin((m_ScaleAnimTimer / 0.2f) * 3.14159f));
     }
     m_Transform.scale = {currentScale, currentScale};
 

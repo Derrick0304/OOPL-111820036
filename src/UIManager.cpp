@@ -10,10 +10,12 @@ using json = nlohmann::json;
 
 UIManager::UIManager(std::shared_ptr<Util::GameObject> root, UnitManager* unitManager,
                      const std::vector<std::string>& catNames,
+                     std::function<int(const std::string&)> getCatLevel,
                      std::function<bool(float)> onSpendMoney,
                      std::function<void()> onUpgradeWorker,
                      std::function<void()> onFireCannon)
     : m_Root(root), m_UnitManager(unitManager), 
+      m_GetCatLevel(std::move(getCatLevel)),
       m_OnSpendMoney(std::move(onSpendMoney)),
       m_OnUpgradeWorker(std::move(onUpgradeWorker)),
       m_OnFireCannon(std::move(onFireCannon)) {
@@ -100,7 +102,8 @@ void UIManager::SetupButtons(const std::vector<std::string>& catNames) {
             if (!m_OnSpendMoney(data.cost)) {
                 return;
             }
-            m_UnitManager->AddUnit(UnitFactory::Create(name, Unit::Team::CAT));
+            int lvl = m_GetCatLevel ? m_GetCatLevel(name) : 1;
+            m_UnitManager->AddUnit(UnitFactory::Create(name, Unit::Team::CAT, lvl));
         });
 
         const int row = static_cast<int>(i / columns);

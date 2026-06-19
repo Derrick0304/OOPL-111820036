@@ -8,6 +8,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <map>
 
 class App {
 public:
@@ -44,6 +45,36 @@ public:
         }
     }
 
+    int GetCatLevel(const std::string& catId) const {
+        if (catId.empty()) return 1;
+        auto it = m_CatLevels.find(catId);
+        if (it != m_CatLevels.end()) {
+            return it->second;
+        }
+        return 1;
+    }
+    void SetCatLevel(const std::string& catId, int level) {
+        m_CatLevels[catId] = level;
+    }
+    void UpgradeCat(const std::string& catId) {
+        m_CatLevels[catId] = std::min(10, GetCatLevel(catId) + 1);
+    }
+
+    int GetStageClearCount(const std::string& stageId) const {
+        if (stageId.empty()) return 0;
+        auto it = m_StageClearCounts.find(stageId);
+        if (it != m_StageClearCounts.end()) {
+            return it->second;
+        }
+        return 0;
+    }
+    void SetStageClearCount(const std::string& stageId, int count) {
+        m_StageClearCounts[stageId] = count;
+    }
+    void IncrementStageClearCount(const std::string& stageId) {
+        m_StageClearCounts[stageId] = GetStageClearCount(stageId) + 1;
+    }
+
 private:
     void ApplyPendingSceneChange();
 
@@ -53,13 +84,15 @@ private:
     std::unique_ptr<IScene> m_PendingScene;
     bool m_IsUpdatingScene = false;
 
-    int m_TotalXP = 85735;
-    int m_CatFood = 31;
+    int m_TotalXP = 50000;
+    int m_CatFood = 10000;
     int m_CurrentEnergy = 294;
     int m_MaxEnergy = 999;
     float m_EnergyRecoveryTimer = 0.0f;
 
     std::vector<std::string> m_EquippedCats = { "BasicCat", "TankCat", "AxeCat", "GrossCat", "CowCat", "", "", "", "", "" };
+    std::map<std::string, int> m_CatLevels;
+    std::map<std::string, int> m_StageClearCounts;
 };
 
 #endif

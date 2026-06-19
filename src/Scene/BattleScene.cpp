@@ -252,6 +252,9 @@ void BattleScene::SetupBattlefield() {
 
     m_UIManager = std::make_unique<UIManager>(m_Root, m_UnitManager.get(), 
         m_App.GetEquippedCats(),
+        [this](const std::string& catId) {
+            return m_App.GetCatLevel(catId);
+        },
         [this](float amount) {
             if (m_Money < amount) return false;
             m_Money -= amount;
@@ -397,6 +400,9 @@ void BattleScene::ShowResult(const std::string& resultText) {
     std::shared_ptr<Util::Image> resultImg;
     if (resultText == "CATS WIN!") {
         resultImg = std::make_shared<Util::Image>(RESOURCE_DIR"/UI/victory.png");
+        m_App.AddXP(m_Stage.xpReward);
+        m_App.IncrementStageClearCount(m_Stage.id);
+        LOG_INFO("Added {} XP for winning stage and incremented clear count", m_Stage.xpReward);
     } else {
         resultImg = std::make_shared<Util::Image>(RESOURCE_DIR"/UI/defeat.png");
     }

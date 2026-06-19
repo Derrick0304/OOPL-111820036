@@ -31,6 +31,7 @@ public:
     std::vector<std::shared_ptr<Util::GameObject>> GetParts() const;
 
     void SetFlashEnabled(bool enabled) { m_FlashEnabled = enabled; }
+    void SetBaseScale(float scale) { m_BaseScale = scale; }
 
     void SetZIndex(float zIndex) {
         Util::GameObject::SetZIndex(zIndex);
@@ -51,6 +52,7 @@ private:
     
     float m_FlashTimer = 0.0f;
     float m_ScaleAnimTimer = 0.0f;
+    float m_BaseScale = 1.0f;
     bool m_IsPressed = false;
     bool m_BorderToggle = true;
     bool m_FlashEnabled = true;

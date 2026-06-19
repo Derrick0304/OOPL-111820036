@@ -62,14 +62,21 @@ void UnitFactory::Init() {
 }
 
 
-std::shared_ptr<Unit> UnitFactory::Create(const std::string& name, Unit::Team team) {
+std::shared_ptr<Unit> UnitFactory::Create(const std::string& name, Unit::Team team, int level) {
     if (s_Registry.find(name) == s_Registry.end()) return nullptr;
 
     const auto& data = s_Registry[name];
+    Unit::Stats stats = data.stats;
+    if (team == Unit::Team::CAT) {
+        float multiplier = 1.0f + (level - 1) * 0.1f;
+        stats.maxHp *= multiplier;
+        stats.attackDamage *= multiplier;
+    }
+
     auto walkPaths = GeneratePaths(data.resourcePath, "Walk", data.walkFrames);
     auto attackPaths = GeneratePaths(data.resourcePath, "Attack", data.attackFrames);
 
-    return std::make_shared<Unit>(team, data.stats, walkPaths, attackPaths, data.yOffset);
+    return std::make_shared<Unit>(team, stats, walkPaths, attackPaths, data.yOffset);
 }
 
 std::vector<std::string> UnitFactory::GeneratePaths(const std::string& folder, const std::string& state, int count) {
