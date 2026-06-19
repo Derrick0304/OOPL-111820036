@@ -117,7 +117,7 @@ void StageSelectScene::Enter() {
 
     m_BackgroundImage = std::make_shared<Util::Image>(RESOURCE_DIR"/Backgrounds/StageSelect.png");
     m_BackgroundObject = std::make_shared<Util::GameObject>(m_BackgroundImage, -20.0f);
-    m_BackgroundObject->m_Transform.scale = {1.54f, 1.54f};
+    m_BackgroundObject->m_Transform.scale = {4.62f, 4.62f};
     m_BackgroundObject->m_Transform.translation = {0.0f, 15.0f};
     m_Root->AddChild(m_BackgroundObject);
 
@@ -244,7 +244,7 @@ void StageSelectScene::Enter() {
             }
         }
     }, "/UI/Buttons/Btn_Attack_Base.png");
-    m_StartButton->m_Transform.translation = {startBtnX, startBtnY};
+m_StartButton->m_Transform.translation = {startBtnX, startBtnY};
     m_StartButton->SetZIndex(20.0f); // 提升 Z-Index 到 20.0f
     m_Root->AddChild(m_StartButton);
     for (auto& part : m_StartButton->GetParts()) m_Root->AddChild(part);
@@ -259,6 +259,61 @@ void StageSelectScene::Enter() {
     // 初始化捲動位置，對齊到目前索引
     m_CurrentScrollX = -m_CurrentIndex * m_SpacingX;
     m_TargetScrollX = m_CurrentScrollX;
+
+    // 9. 載入世界地圖坐報與繪製紅點、連線與貓咪
+    m_MapCoords.clear();
+    std::ifstream coordFile(RESOURCE_DIR"/Data/Map_Coordinates.json");
+    if (coordFile.is_open()) {
+        try {
+            json coordJson = json::parse(coordFile);
+            if (coordJson.contains("coordinates")) {
+                for (const auto& pt : coordJson["coordinates"]) {
+                    float cx = pt["x"].get<float>();
+                    float cy = pt["y"].get<float>();
+                    m_MapCoords.push_back({cx, cy});
+                }
+            }
+        } catch (const std::exception& e) {
+            LOG_ERROR("Failed to parse Map_Coordinates.json: {}", e.what());
+        }
+    }
+
+    // 備用：如果讀取失敗或數量不足，自動生成波浪折線並放打 3 倍
+    if (m_MapCoords.size() < 48) {
+        m_MapCoords.clear();
+        for (int i = 0; i < 48; ++i) {
+            float cx = -700.0f + i * (1400.0f / 47.0f);
+            float cy = std::sin(i * 0.4f) * 150.0f + 30.0f;
+            m_MapCoords.push_back({cx * 3.0f, cy * 3.0f});
+        }
+    }
+
+    // 進入時立即設定地圖初始聚焦位置，避免畫面閃爍與抖動
+    if (m_CurrentIndex >= 0 && m_CurrentIndex < static_cast<int>(m_MapCoords.size())) {
+        float target_map_x = -m_MapCoords[m_CurrentIndex].x;
+        float target_map_y = -m_MapCoords[m_CurrentIndex].y + 45.0f;
+        target_map_x = std::max(-1670.0f, std::min(1670.0f, target_map_x));
+        target_map_y = std::max(-771.9f, std::min(771.9f, target_map_y));
+        m_BackgroundObject->m_Transform.translation = {target_map_x, target_map_y};
+    }
+
+
+
+    // 載入 BasicCat 走路動畫
+    std::vector<std::string> catPaths = {
+        RESOURCE_DIR"/Units/Cats/BasicCat/Walk/0.png",
+        RESOURCE_DIR"/Units/Cats/BasicCat/Walk/1.png"
+    };
+    m_MapCatAnim = std::make_shared<Util::Animation>(catPaths, true, 150, true, 0);
+    m_MapCatObject = std::make_shared<Util::GameObject>(m_MapCatAnim, 14.0f);
+    if (m_CurrentIndex >= 0 && m_CurrentIndex < static_cast<int>(m_MapCoords.size())) {
+        m_CatLocalPos = m_MapCoords[m_CurrentIndex];
+    } else {
+        m_CatLocalPos = {0.0f, 0.0f};
+    }
+    m_MapCatObject->m_Transform.translation = m_CatLocalPos + m_BackgroundObject->m_Transform.translation;
+    m_MapCatObject->m_Transform.scale = {1.0f, 1.0f};
+    m_BackgroundObject->AddChild(m_MapCatObject);
 }
 
 void StageSelectScene::Update() {
@@ -320,6 +375,37 @@ void StageSelectScene::Update() {
             m_WarningObject->SetVisible(false);
         }
     }
+
+    // 更新世界地圖聚焦與貓咪走路
+    if (m_MapCatObject && m_CurrentIndex >= 0 && m_CurrentIndex < static_cast<int>(m_MapCoords.size())) {
+        glm::vec2 target_pos = m_MapCoords[m_CurrentIndex];
+        
+        // 貓咪位置平滑插值 (在 local 坐標系中運作)
+        m_CatLocalPos += (target_pos - m_CatLocalPos) * 5.0f * dt;
+
+        // 貓咪轉向 (基於 local 坐標)
+        if (target_pos.x < m_CatLocalPos.x - 1.0f) {
+            m_MapCatObject->m_Transform.scale.x = -1.0f;
+        } else if (target_pos.x > m_CatLocalPos.x + 1.0f) {
+            m_MapCatObject->m_Transform.scale.x = 1.0f;
+        }
+
+        // 地圖聚焦平滑插值
+        float target_map_x = -m_MapCoords[m_CurrentIndex].x;
+        float target_map_y = -m_MapCoords[m_CurrentIndex].y + 45.0f; // 配合 3x 縮放地圖 Y 軸偏差值
+        
+        // 限制地圖邊界 (地圖大小 4620x2263.8，視窗 1280x720)
+        target_map_x = std::max(-1670.0f, std::min(1670.0f, target_map_x));
+        target_map_y = std::max(-771.9f, std::min(771.9f, target_map_y));
+
+        m_BackgroundObject->m_Transform.translation.x += (target_map_x - m_BackgroundObject->m_Transform.translation.x) * 5.0f * dt;
+        m_BackgroundObject->m_Transform.translation.y += (target_map_y - m_BackgroundObject->m_Transform.translation.y) * 5.0f * dt;
+
+        // 根據地圖背景的平滑位置計算走路貓咪的絕對渲染位置
+        m_MapCatObject->m_Transform.translation = m_CatLocalPos + m_BackgroundObject->m_Transform.translation;
+    }
+
+
 }
 
 void StageSelectScene::HandleInput() {
@@ -403,6 +489,8 @@ void StageSelectScene::Exit() {
     m_EnergyValObject.reset();
     m_WarningText.reset();
     m_WarningObject.reset();
+    m_MapCatObject.reset();
+    m_MapCatAnim.reset();
 }
 
 void StageSelectScene::ShowEnergyWarning() {

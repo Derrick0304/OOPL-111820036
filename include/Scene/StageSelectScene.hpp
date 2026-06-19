@@ -6,6 +6,7 @@
 #include "Util/Image.hpp"
 #include "Util/Text.hpp"
 #include "UI/ImageTextButton.hpp"
+#include "Util/Animation.hpp"
 
 #include <memory>
 #include <vector>
@@ -90,6 +91,12 @@ private:
     // 拖拽變數
     bool m_IsDragging = false;
     float m_LastMouseX = 0.0f;
+
+    // 世界地圖定位與走路貓咪
+    std::vector<glm::vec2> m_MapCoords;
+    std::shared_ptr<Util::GameObject> m_MapCatObject;
+    std::shared_ptr<Util::Animation> m_MapCatAnim;
+    glm::vec2 m_CatLocalPos = {0.0f, 0.0f};
 };
 
 #endif
