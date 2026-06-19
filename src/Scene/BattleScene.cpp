@@ -10,6 +10,10 @@
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
 #include "Util/Time.hpp"
+#include <fstream>
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 
 BattleScene::BattleScene(App& app, StageData stage)
     : m_App(app), m_Stage(std::move(stage)), m_Root(std::make_shared<Util::GameObject>()) {}
@@ -22,12 +26,44 @@ void BattleScene::Enter() {
 void BattleScene::Update() {
     float dt = Util::Time::GetDeltaTimeMs() / 1000.0f;
 
-    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE)) {
-        m_App.ChangeScene(std::make_unique<StageSelectScene>(m_App));
-        return;
-    }
     if (Util::Input::IfExit()) {
         m_App.RequestExit();
+        return;
+    }
+
+    if (m_IsPaused) {
+        if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+            glm::vec2 cursor = Util::Input::GetCursorPosition();
+
+            // 1. 檢測右上角黃色叉叉按鈕
+            if (glm::distance(cursor, glm::vec2(205.0f, 175.0f)) < 40.0f) {
+                m_IsPaused = false;
+                m_SettingsObject->SetVisible(false);
+                LOG_INFO("Unpaused game via X button");
+            }
+
+            // 2. 檢測中下方 Escape 按鈕
+            if (cursor.x >= -155.0f && cursor.x <= 145.0f &&
+                cursor.y >= -185.0f && cursor.y <= -115.0f) {
+                LOG_INFO("Exited battle from settings via Escape button");
+                m_App.ChangeScene(std::make_unique<StageSelectScene>(m_App, m_Stage.chapterId));
+                return;
+            }
+        }
+
+        if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE)) {
+            m_IsPaused = false;
+            m_SettingsObject->SetVisible(false);
+            LOG_INFO("Unpaused game via ESC key");
+        }
+
+        return; // 暫停時跳過所有更新
+    }
+
+    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE)) {
+        m_IsPaused = true;
+        m_SettingsObject->SetVisible(true);
+        LOG_INFO("Game paused via ESC key");
         return;
     }
 
@@ -133,6 +169,22 @@ void BattleScene::Update() {
     if (m_UnitManager && m_UnitManager->IsGameOver()) {
         ShowResult(m_UnitManager->GetWinner());
     }
+
+    if (m_PauseButton) {
+        m_PauseButton->Update();
+    }
+
+    // 動態更新雙方基地的血量文字座標與內容 (往中間靠攏 100 像素防超出畫面)
+    if (m_CatBase && m_CatBaseHPObject) {
+        m_CatBaseHPObject->m_Transform.translation = {m_CatBase->m_Transform.translation.x - 100.0f, m_CatBase->m_Transform.translation.y + 380.0f};
+        int currentHp = std::max(0, static_cast<int>(m_CatBase->GetHP()));
+        m_CatBaseHPText->SetText(std::to_string(currentHp) + " / " + std::to_string(static_cast<int>(m_CatBase->GetMaxHP())));
+    }
+    if (m_EnemyBase && m_EnemyBaseHPObject) {
+        m_EnemyBaseHPObject->m_Transform.translation = {m_EnemyBase->m_Transform.translation.x + 100.0f, m_EnemyBase->m_Transform.translation.y + 380.0f};
+        int currentHp = std::max(0, static_cast<int>(m_EnemyBase->GetHP()));
+        m_EnemyBaseHPText->SetText(std::to_string(currentHp) + " / " + std::to_string(static_cast<int>(m_EnemyBase->GetMaxHP())));
+    }
 }
 
 void BattleScene::Exit() {
@@ -142,6 +194,15 @@ void BattleScene::Exit() {
     m_Root = std::make_shared<Util::GameObject>();
     m_WorldRoot.reset();
     m_Backgrounds.clear();
+    m_PauseButton.reset();
+    m_SettingsImage.reset();
+    m_SettingsObject.reset();
+    m_CatBase.reset();
+    m_EnemyBase.reset();
+    m_CatBaseHPText.reset();
+    m_CatBaseHPObject.reset();
+    m_EnemyBaseHPText.reset();
+    m_EnemyBaseHPObject.reset();
 }
 
 void BattleScene::SetupBattlefield() {
@@ -162,9 +223,23 @@ void BattleScene::SetupBattlefield() {
         m_Backgrounds.push_back(bgObj);
     }
 
+    float titleX = -450.0f, titleY = 320.0f;
+    std::ifstream titleFile(RESOURCE_DIR"/Data/UI_Layout.json");
+    if (titleFile.is_open()) {
+        try {
+            json layout = json::parse(titleFile);
+            if (layout.contains("BattleScene") && layout["BattleScene"].contains("StageTitle")) {
+                titleX = layout["BattleScene"]["StageTitle"]["x"].get<float>();
+                titleY = layout["BattleScene"]["StageTitle"]["y"].get<float>();
+            }
+        } catch (const std::exception& e) {
+            LOG_ERROR("Failed to parse UI_Layout.json for StageTitle: {}", e.what());
+        }
+    }
+
     m_StageTitleText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 24, m_Stage.displayName);
     m_StageTitleObject = std::make_shared<Util::GameObject>(m_StageTitleText, 15.0f);
-    m_StageTitleObject->m_Transform.translation = {-500.0f, 320.0f};
+    m_StageTitleObject->m_Transform.translation = {titleX, titleY};
     m_Root->AddChild(m_StageTitleObject);
 
     m_UnitManager = std::make_unique<UnitManager>(m_WorldRoot);
@@ -206,15 +281,27 @@ void BattleScene::SetupBattlefield() {
         }
     );
 
-    auto catBase = std::make_shared<Tower>(Unit::Team::CAT, 1000.0f, RESOURCE_DIR"/Towers/CatBase/base.png");
-    catBase->m_Transform.scale = {1.2f, 1.2f};
-    catBase->m_Transform.translation = {m_Stage.stageLength / 2.0f, -150.0f};
+    m_CatBase = std::make_shared<Tower>(Unit::Team::CAT, 1000.0f, RESOURCE_DIR"/Towers/CatBase/base.png");
+    m_CatBase->m_Transform.scale = {1.2f, 1.2f};
+    m_CatBase->m_Transform.translation = {m_Stage.stageLength / 2.0f, -150.0f};
 
-    auto enemyBase = std::make_shared<Tower>(Unit::Team::ENEMY, m_Stage.enemyBaseHp, RESOURCE_DIR"/Towers/EnemyBase/base.png");
-    enemyBase->m_Transform.scale = {0.9f, 0.9f};
-    enemyBase->m_Transform.translation = {-m_Stage.stageLength / 2.0f, -150.0f};
+    m_EnemyBase = std::make_shared<Tower>(Unit::Team::ENEMY, m_Stage.enemyBaseHp, RESOURCE_DIR"/Towers/EnemyBase/base.png");
+    m_EnemyBase->m_Transform.scale = {0.9f, 0.9f};
+    m_EnemyBase->m_Transform.translation = {-m_Stage.stageLength / 2.0f, -150.0f};
 
-    m_UnitManager->SetBases(catBase, enemyBase);
+    m_UnitManager->SetBases(m_CatBase, m_EnemyBase);
+
+    // 建立雙方基地的血量顯示文字 (置於塔的上方 +380.0f 位置，往中間靠攏 100 像素防超出畫面)
+    m_CatBaseHPText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 20, "1000 / 1000", Util::Color(0, 0, 0)); // 貓咪基地文字改黑色
+    m_CatBaseHPObject = std::make_shared<Util::GameObject>(m_CatBaseHPText, 16.0f);
+    m_CatBaseHPObject->m_Transform.translation = {m_CatBase->m_Transform.translation.x - 100.0f, m_CatBase->m_Transform.translation.y + 380.0f};
+    m_Root->AddChild(m_CatBaseHPObject);
+
+    m_EnemyBaseHPText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 20, std::to_string(static_cast<int>(m_Stage.enemyBaseHp)) + " / " + std::to_string(static_cast<int>(m_Stage.enemyBaseHp)), Util::Color(255, 0, 0)); // 敵人基地文字改紅色
+    m_EnemyBaseHPObject = std::make_shared<Util::GameObject>(m_EnemyBaseHPText, 16.0f);
+    m_EnemyBaseHPObject->m_Transform.translation = {m_EnemyBase->m_Transform.translation.x + 100.0f, m_EnemyBase->m_Transform.translation.y + 380.0f};
+    m_Root->AddChild(m_EnemyBaseHPObject);
+
     m_WaveSpawner = std::make_unique<WaveSpawner>(m_Stage, m_UnitManager.get());
 
     // Initialize Camera Position (Look at Cat Base)
@@ -229,12 +316,51 @@ void BattleScene::SetupBattlefield() {
         bg->m_Transform.translation.x -= m_CameraX;
     }
     m_UnitManager->ShiftAll(-m_CameraX);
+
+    // 建立暫停與設定介面
+    float pauseX = 580.0f, pauseY = 288.0f;
+    std::ifstream uiFile(RESOURCE_DIR"/Data/UI_Layout.json");
+    if (uiFile.is_open()) {
+        try {
+            json layout = json::parse(uiFile);
+            if (layout.contains("BattleScene") && layout["BattleScene"].contains("PauseButton")) {
+                pauseX = layout["BattleScene"]["PauseButton"]["x"].get<float>();
+                pauseY = layout["BattleScene"]["PauseButton"]["y"].get<float>();
+            }
+        } catch (const std::exception& e) {
+            LOG_ERROR("Failed to parse UI_Layout.json in BattleScene: {}", e.what());
+        }
+    }
+
+    m_PauseButton = std::make_shared<ImageTextButton>(" ", [this]() {
+        m_IsPaused = true;
+        if (m_SettingsObject) {
+            m_SettingsObject->SetVisible(true);
+        }
+        LOG_INFO("Game paused");
+    }, "/UI/pause.png");
+    m_PauseButton->SetFlashEnabled(false);
+    m_PauseButton->m_Transform.translation = {pauseX, pauseY};
+    m_PauseButton->SetZIndex(15.0f);
+    m_Root->AddChild(m_PauseButton);
+    for (auto& part : m_PauseButton->GetParts()) {
+        m_Root->AddChild(part);
+    }
+
+    m_SettingsImage = std::make_shared<Util::Image>(RESOURCE_DIR"/UI/Settingsswitch.png");
+    m_SettingsObject = std::make_shared<Util::GameObject>(m_SettingsImage, 30.0f);
+    m_SettingsObject->m_Transform.translation = {0.0f, 0.0f};
+    m_SettingsObject->m_Transform.scale = {1.0f, 1.0f};
+    m_SettingsObject->SetVisible(false);
+    m_Root->AddChild(m_SettingsObject);
+
+    m_IsPaused = false;
 }
 
 void BattleScene::SetupResultOverlay() {
-    m_ResultText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 48, " ");
-    m_ResultObject = std::make_shared<Util::GameObject>(m_ResultText, 20.0f);
+    m_ResultObject = std::make_shared<Util::GameObject>(nullptr, 20.0f);
     m_ResultObject->m_Transform.translation = {0.0f, 120.0f};
+    m_ResultObject->m_Transform.scale = {1.2f, 1.2f};
     m_ResultObject->SetVisible(false);
     m_Root->AddChild(m_ResultObject);
 
@@ -267,8 +393,19 @@ void BattleScene::ShowResult(const std::string& resultText) {
 
     LOG_INFO("Battle finished: {}", resultText);
     m_BattleEnded = true;
-    m_ResultText->SetText(resultText);
-    m_ResultObject->SetVisible(true);
+
+    std::shared_ptr<Util::Image> resultImg;
+    if (resultText == "CATS WIN!") {
+        resultImg = std::make_shared<Util::Image>(RESOURCE_DIR"/UI/victory.png");
+    } else {
+        resultImg = std::make_shared<Util::Image>(RESOURCE_DIR"/UI/defeat.png");
+    }
+
+    if (m_ResultObject && resultImg) {
+        m_ResultObject->SetDrawable(resultImg);
+        m_ResultObject->SetVisible(true);
+    }
+
     m_RetryButton->SetVisible(true);
     m_StageSelectButton->SetVisible(true);
     m_MainMenuButton->SetVisible(true);

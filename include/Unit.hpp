@@ -49,6 +49,7 @@ public:
     bool IsDeadAnimationEnded() const { return m_State == State::DEAD && m_DeadTimer <= 0; } // 新增
     bool IsKnockback() const { return m_State == State::KNOCKBACK; }
     float GetHP() const { return m_CurrentHP; }
+    float GetMaxHP() const { return m_Stats.maxHp; }
     float GetHpPercentage() const { return (m_Stats.maxHp > 0) ? (m_CurrentHP / m_Stats.maxHp) * 100.0f : 0.0f; }
 
 protected:

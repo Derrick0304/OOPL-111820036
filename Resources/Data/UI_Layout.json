@@ -18,6 +18,14 @@
       "paddingX": 100.0,
       "paddingY": 80.0,
       "columns": 5
+    },
+    "PauseButton": {
+      "x": -580.0,
+      "y": 320.0
+    },
+    "StageTitle": {
+      "x": -450.0,
+      "y": 320.0
     }
   },
   "MainMenuScene": {
@@ -55,7 +63,7 @@
       "fontSize": 24
     },
     "XPIcon": {
-      "x": 460.0,
+      "x": 360.0,
       "y": 330.0,
       "scaleX": 1.87,
       "scaleY": 1.87
@@ -66,7 +74,7 @@
       "fontSize": 24
     },
     "CatFoodIcon": {
-      "x": 460.0,
+      "x": 360.0,
       "y": -330.0,
       "scaleX": 1.87,
       "scaleY": 1.87
@@ -112,7 +120,7 @@
       "fontSize": 24
     },
     "XPIcon": {
-      "x": 460.0,
+      "x": 360.0,
       "y": 330.0,
       "scaleX": 1.87,
       "scaleY": 1.87
@@ -123,7 +131,7 @@
       "fontSize": 24
     },
     "CatFoodIcon": {
-      "x": 460.0,
+      "x": 360.0,
       "y": -330.0,
       "scaleX": 1.87,
       "scaleY": 1.87

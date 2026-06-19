@@ -7,8 +7,10 @@
 #include "Stage/StageData.hpp"
 #include "UIManager.hpp"
 #include "UnitManager.hpp"
+#include "Tower.hpp"
 #include "Util/Image.hpp"
 #include "Util/Text.hpp"
+#include "UI/ImageTextButton.hpp"
 
 #include <memory>
 
@@ -68,11 +70,24 @@ private:
 
     std::shared_ptr<Util::Text> m_StageTitleText;
     std::shared_ptr<Util::GameObject> m_StageTitleObject;
-    std::shared_ptr<Util::Text> m_ResultText;
-    std::shared_ptr<Util::GameObject> m_ResultObject;
+    std::shared_ptr<Util::GameObject> m_ResultObject; // 不再需要 m_ResultText
     std::shared_ptr<TextButton> m_RetryButton;
     std::shared_ptr<TextButton> m_StageSelectButton;
     std::shared_ptr<TextButton> m_MainMenuButton;
+
+    // 暫停與設定介面
+    bool m_IsPaused = false;
+    std::shared_ptr<ImageTextButton> m_PauseButton;
+    std::shared_ptr<Util::Image> m_SettingsImage;
+    std::shared_ptr<Util::GameObject> m_SettingsObject;
+
+    // 雙方基地與血量顯示
+    std::shared_ptr<Tower> m_CatBase;
+    std::shared_ptr<Tower> m_EnemyBase;
+    std::shared_ptr<Util::Text> m_CatBaseHPText;
+    std::shared_ptr<Util::GameObject> m_CatBaseHPObject;
+    std::shared_ptr<Util::Text> m_EnemyBaseHPText;
+    std::shared_ptr<Util::GameObject> m_EnemyBaseHPObject;
 };
 
 #endif
