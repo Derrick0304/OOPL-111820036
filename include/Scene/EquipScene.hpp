@@ -57,6 +57,8 @@ private:
         std::string catId;
         std::shared_ptr<Util::Image> image;
         std::shared_ptr<Util::GameObject> object;
+        std::shared_ptr<Util::Text> costText;
+        std::shared_ptr<Util::GameObject> costObj;
     };
     std::vector<CatListItem> m_CatListItems;
 
@@ -79,6 +81,7 @@ private:
     std::string m_DraggedCatId;
     std::shared_ptr<Util::Image> m_DragImage;
     std::shared_ptr<Util::GameObject> m_DragObject;
+    int m_DragSourceSlotIndex = -1;
 
     // 點擊事件判斷
     bool m_MouseDownLastFrame = false;

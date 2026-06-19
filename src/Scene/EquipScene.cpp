@@ -2,6 +2,7 @@
 
 #include "App.hpp"
 #include "Scene/MainMenuScene.hpp"
+#include "UnitFactory.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
@@ -21,9 +22,9 @@ void EquipScene::Enter() {
     LOG_INFO("Entering EquipScene");
 
     float backX = -560.0f, backY = -290.0f;
-    float xpX = 320.0f, xpY = 322.0f;
+    float xpX = 460.0f, xpY = 322.0f;
     int xpFontSize = 24;
-    float catFoodX = 310.0f, catFoodY = -332.0f;
+    float catFoodX = 460.0f, catFoodY = -332.0f;
     int catFoodFontSize = 24;
 
     m_ListY = -140.0f;
@@ -118,14 +119,22 @@ void EquipScene::Enter() {
         auto obj = std::make_shared<Util::GameObject>(img, 10.0f);
         obj->m_Transform.scale = {0.98f, 0.98f}; // 調整列表頭像大小
         m_Root->AddChild(obj);
-        m_CatListItems.push_back({catId, img, obj});
+
+        int cost = UnitFactory::Get(catId).cost;
+        auto costTxt = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 16, "$" + std::to_string(cost), Util::Color(0, 0, 0));
+        auto costObj = std::make_shared<Util::GameObject>(costTxt, 11.0f);
+        m_Root->AddChild(costObj);
+
+        m_CatListItems.push_back({catId, img, obj, costTxt, costObj});
     }
 
-    // 設置捲動邊界
-    m_CurrentScrollX = -200.0f; // 讓列表初始偏左展示
+    m_DragSourceSlotIndex = -1;
+
+    // 設置捲動邊界 (最左或最右被拖到中間時停止)
+    m_MaxScrollX = 0.0f;
+    m_MinScrollX = -static_cast<float>(m_AvailableCats.size() - 1) * m_SpacingX;
+    m_CurrentScrollX = -300.0f; // 讓列表初始置中段展示
     m_TargetScrollX = m_CurrentScrollX;
-    m_MinScrollX = -580.0f;
-    m_MaxScrollX = 150.0f;
 
     // 8. 建立拖曳跟隨的臨時頭像物件
     m_DragObject = std::make_shared<Util::GameObject>(nullptr, 25.0f); // 放置在最上層
@@ -167,6 +176,7 @@ void EquipScene::HandleInput() {
         m_MouseDownLastFrame = true;
         m_MouseDownPos = cursor;
         m_LastMouseX = cursor.x;
+        m_DragSourceSlotIndex = -1; // 預設來源為滾動列表
 
         // 如果點擊了下方列表區域
         if (cursor.y >= -260.0f && cursor.y <= -20.0f) {
@@ -183,6 +193,15 @@ void EquipScene::HandleInput() {
                     break;
                 }
             }
+        } else {
+            // 檢查是否點選了上方格子的貓咪
+            int clickedSlot = GetSlotIndexAt(cursor);
+            if (clickedSlot != -1 && !m_App.GetEquippedCats()[clickedSlot].empty()) {
+                m_DraggedCatId = m_App.GetEquippedCats()[clickedSlot];
+                m_DragImage = m_SlotObjects[clickedSlot].image;
+                m_DragStartPos = cursor;
+                m_DragSourceSlotIndex = clickedSlot;
+            }
         }
     }
 
@@ -190,16 +209,26 @@ void EquipScene::HandleInput() {
         if (Util::Input::IsKeyPressed(Util::Keycode::MOUSE_LB)) {
             // 判斷拖曳模式
             if (!m_DraggedCatId.empty()) {
-                // 如果點選了貓咪且縱向移動大於 15 像素，開啟貓咪拖曳編組模式
                 if (!m_IsDraggingCat && !m_IsDraggingList) {
-                    float dy = cursor.y - m_DragStartPos.y;
-                    float dx = std::abs(cursor.x - m_DragStartPos.x);
-                    if (dy > 15.0f && dy > dx) {
-                        m_IsDraggingCat = true;
-                        m_DragObject->SetDrawable(m_DragImage);
-                        m_DragObject->SetVisible(true);
-                    } else if (std::abs(cursor.x - m_DragStartPos.x) > 10.0f) {
-                        m_IsDraggingList = true;
+                    if (m_DragSourceSlotIndex != -1) {
+                        // 來自上方格子：拖曳超過 15 像素即進入拖曳狀態
+                        float dist = glm::distance(cursor, m_DragStartPos);
+                        if (dist > 15.0f) {
+                            m_IsDraggingCat = true;
+                            m_DragObject->SetDrawable(m_DragImage);
+                            m_DragObject->SetVisible(true);
+                        }
+                    } else {
+                        // 來自下方列表：維持原來的縱向拖曳觸發
+                        float dy = cursor.y - m_DragStartPos.y;
+                        float dx = std::abs(cursor.x - m_DragStartPos.x);
+                        if (dy > 15.0f && dy > dx) {
+                            m_IsDraggingCat = true;
+                            m_DragObject->SetDrawable(m_DragImage);
+                            m_DragObject->SetVisible(true);
+                        } else if (std::abs(cursor.x - m_DragStartPos.x) > 10.0f) {
+                            m_IsDraggingList = true;
+                        }
                     }
                 }
             } else {
@@ -226,15 +255,39 @@ void EquipScene::HandleInput() {
             if (m_IsDraggingCat) {
                 // 貓咪拖曳結束，進行碰撞偵測
                 int slotIndex = GetSlotIndexAt(cursor);
-                if (slotIndex != -1) {
-                    // 唯一性替換：如果這隻貓咪已被編組在其他位置，則將該位置清空
-                    for (int i = 0; i < 10; ++i) {
-                        if (m_App.GetEquippedCats()[i] == m_DraggedCatId) {
-                            m_App.SetEquippedCat(i, "");
+                if (m_DragSourceSlotIndex != -1) {
+                    // 來自上方格子
+                    if (slotIndex != -1) {
+                        if (slotIndex != m_DragSourceSlotIndex) {
+                            // 拖到別的格子
+                            // 唯一性替換：如果這隻貓咪已被編組在其他位置，則將該位置清空
+                            for (int i = 0; i < 10; ++i) {
+                                if (i != m_DragSourceSlotIndex && m_App.GetEquippedCats()[i] == m_DraggedCatId) {
+                                    m_App.SetEquippedCat(i, "");
+                                }
+                            }
+                            // 清空原來的 Slot，然後設定新 Slot
+                            m_App.SetEquippedCat(m_DragSourceSlotIndex, "");
+                            m_App.SetEquippedCat(slotIndex, m_DraggedCatId);
+                            LOG_INFO("Moved cat from slot {} to slot {}", m_DragSourceSlotIndex + 1, slotIndex + 1);
                         }
+                    } else {
+                        // 拖到外面（取消這格的編組）
+                        m_App.SetEquippedCat(m_DragSourceSlotIndex, "");
+                        LOG_INFO("Removed cat from slot {} (dragged out)", m_DragSourceSlotIndex + 1);
                     }
-                    m_App.SetEquippedCat(slotIndex, m_DraggedCatId);
-                    LOG_INFO("Equipped {} to slot {}", m_DraggedCatId, slotIndex + 1);
+                } else {
+                    // 來自下方列表
+                    if (slotIndex != -1) {
+                        // 唯一性替換：如果這隻貓咪已被編組在其他位置，則將該位置清空
+                        for (int i = 0; i < 10; ++i) {
+                            if (m_App.GetEquippedCats()[i] == m_DraggedCatId) {
+                                m_App.SetEquippedCat(i, "");
+                            }
+                        }
+                        m_App.SetEquippedCat(slotIndex, m_DraggedCatId);
+                        LOG_INFO("Equipped {} to slot {}", m_DraggedCatId, slotIndex + 1);
+                    }
                 }
                 
                 // 重置拖曳狀態
@@ -242,6 +295,7 @@ void EquipScene::HandleInput() {
                 m_DraggedCatId = "";
                 m_DragImage.reset();
                 m_DragObject->SetVisible(false);
+                m_DragSourceSlotIndex = -1;
             } else if (m_IsDraggingList) {
                 m_IsDraggingList = false;
             } else {
@@ -259,6 +313,7 @@ void EquipScene::HandleInput() {
             
             m_DraggedCatId = "";
             m_DragImage.reset();
+            m_DragSourceSlotIndex = -1;
         }
     }
 }
@@ -270,7 +325,21 @@ void EquipScene::UpdateCarousel(float dt) {
 
     for (size_t i = 0; i < m_CatListItems.size(); ++i) {
         float x = m_CurrentScrollX + i * m_SpacingX;
+        float dist = std::abs(x);
+        float scale = 0.85f;
+
+        if (dist < m_SpacingX) {
+            scale = 0.85f + 0.27f * (1.0f - dist / m_SpacingX);
+        }
+
         m_CatListItems[i].object->m_Transform.translation = {x, m_ListY};
+        m_CatListItems[i].object->m_Transform.scale = {scale, scale};
+
+        if (m_CatListItems[i].costObj) {
+            // 文字位置置於 icon 下方與其重疊邊界處，縮放與 icon 同步
+            m_CatListItems[i].costObj->m_Transform.translation = {x, m_ListY - 52.0f * scale};
+            m_CatListItems[i].costObj->m_Transform.scale = {scale, scale};
+        }
     }
 }
 
@@ -278,6 +347,13 @@ void EquipScene::UpdateEquippedSlots() {
     auto equipped = m_App.GetEquippedCats();
     for (int i = 0; i < 10; ++i) {
         std::string catId = equipped[i];
+
+        // 拔除動畫：如果這個 Slot 正在被拖出，就暫時隱藏它在格子上的顯示
+        if (i == m_DragSourceSlotIndex && m_IsDraggingCat) {
+            m_SlotObjects[i].object->SetVisible(false);
+            continue;
+        }
+
         if (m_SlotObjects[i].catId != catId) {
             m_SlotObjects[i].catId = catId;
             if (catId.empty()) {
@@ -287,6 +363,11 @@ void EquipScene::UpdateEquippedSlots() {
                 auto img = std::make_shared<Util::Image>(RESOURCE_DIR"/Units/Cats/" + catId + "/icon.png");
                 m_SlotObjects[i].image = img;
                 m_SlotObjects[i].object->SetDrawable(img);
+                m_SlotObjects[i].object->SetVisible(true);
+            }
+        } else {
+            // 如果 ID 沒有變，但之前可能在拖曳狀態而被隱藏，則需重新設為可見
+            if (!catId.empty()) {
                 m_SlotObjects[i].object->SetVisible(true);
             }
         }
