@@ -12,6 +12,7 @@ public:
     UnitButton(const UnitData& data, std::function<void()> onClick);
 
     void Update(float currentMoney);
+    void ResetCooldown() { m_CooldownTimer = 0.0f; }
     
     // 提供給 UIManager 以便加入 Renderer
     std::vector<std::shared_ptr<Util::GameObject>> GetParts() const;

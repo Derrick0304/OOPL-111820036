@@ -135,3 +135,9 @@ void UIManager::Update(float currentMoney, int workerLevel, float nextUpgradeCos
     int money = static_cast<int>(currentMoney);
     m_MoneyText->SetText("Money: $" + std::to_string(money));
 }
+
+void UIManager::ResetAllCooldowns() {
+    for (auto& btn : m_Buttons) {
+        btn->ResetCooldown();
+    }
+}

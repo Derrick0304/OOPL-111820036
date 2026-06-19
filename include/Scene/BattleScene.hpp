@@ -89,6 +89,8 @@ private:
     std::shared_ptr<Util::GameObject> m_CatBaseHPObject;
     std::shared_ptr<Util::Text> m_EnemyBaseHPText;
     std::shared_ptr<Util::GameObject> m_EnemyBaseHPObject;
+
+    bool m_DebugMode = false;
 };
 
 #endif

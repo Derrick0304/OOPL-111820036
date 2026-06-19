@@ -21,6 +21,7 @@ public:
               std::function<void()> onFireCannon);
 
     void Update(float currentMoney, int workerLevel, float nextUpgradeCost, float cannonProgress);
+    void ResetAllCooldowns();
 
 private:
     void SetupButtons(const std::vector<std::string>& catNames);

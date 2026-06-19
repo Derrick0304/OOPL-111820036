@@ -32,6 +32,19 @@ void BattleScene::Update() {
         return;
     }
 
+    if (Util::Input::IsKeyUp(Util::Keycode::D)) {
+        m_DebugMode = !m_DebugMode;
+        LOG_INFO("Debug Mode Toggled: {}", m_DebugMode ? "ON" : "OFF");
+    }
+
+    if (m_DebugMode) {
+        m_Money = m_MaxMoney;
+        m_CannonCooldown = CANNON_MAX_COOLDOWN;
+        if (m_UIManager) {
+            m_UIManager->ResetAllCooldowns();
+        }
+    }
+
     if (m_IsPaused) {
         if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
             glm::vec2 cursor = Util::Input::GetCursorPosition();
