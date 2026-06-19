@@ -32,6 +32,10 @@ public:
 
     void SetFlashEnabled(bool enabled) { m_FlashEnabled = enabled; }
     void SetBaseScale(float scale) { m_BaseScale = scale; }
+    void SetVisible(bool visible) {
+        Util::GameObject::SetVisible(visible);
+        if (m_TextObj) m_TextObj->SetVisible(visible);
+    }
 
     void SetZIndex(float zIndex) {
         Util::GameObject::SetZIndex(zIndex);

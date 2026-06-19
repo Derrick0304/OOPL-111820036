@@ -114,9 +114,9 @@ void BattleScene::Update() {
     }
 
     if (m_BattleEnded) {
-        m_RetryButton->Update();
-        m_StageSelectButton->Update();
-        m_MainMenuButton->Update();
+        if (m_OkButton) {
+            m_OkButton->Update();
+        }
         return;
     }
 
@@ -203,6 +203,10 @@ void BattleScene::Exit() {
     m_CatBaseHPObject.reset();
     m_EnemyBaseHPText.reset();
     m_EnemyBaseHPObject.reset();
+    m_BlueBarObject.reset();
+    m_XPRewardText.reset();
+    m_XPRewardObject.reset();
+    m_OkButton.reset();
 }
 
 void BattleScene::SetupBattlefield() {
@@ -362,31 +366,35 @@ void BattleScene::SetupBattlefield() {
 
 void BattleScene::SetupResultOverlay() {
     m_ResultObject = std::make_shared<Util::GameObject>(nullptr, 20.0f);
-    m_ResultObject->m_Transform.translation = {0.0f, 120.0f};
+    m_ResultObject->m_Transform.translation = {0.0f, 150.0f};
     m_ResultObject->m_Transform.scale = {1.2f, 1.2f};
     m_ResultObject->SetVisible(false);
     m_Root->AddChild(m_ResultObject);
 
-    m_RetryButton = std::make_shared<TextButton>("Retry", [this]() {
-        m_App.ChangeScene(std::make_unique<BattleScene>(m_App, m_Stage));
-    });
-    m_RetryButton->m_Transform.translation = {0.0f, 20.0f};
-    m_RetryButton->SetVisible(false);
-    m_Root->AddChild(m_RetryButton);
+    // 建立藍色橫條
+    auto blueBarImg = std::make_shared<Util::Image>(RESOURCE_DIR"/UI/Buttons/BlueBar.png");
+    m_BlueBarObject = std::make_shared<Util::GameObject>(blueBarImg, 20.0f);
+    m_BlueBarObject->m_Transform.scale = {1280.0f, 60.0f};
+    m_BlueBarObject->m_Transform.translation = {0.0f, 0.0f};
+    m_BlueBarObject->SetVisible(false);
+    m_Root->AddChild(m_BlueBarObject);
 
-    m_StageSelectButton = std::make_shared<TextButton>("Back to Stage Select", [this]() {
-        m_App.ChangeScene(std::make_unique<StageSelectScene>(m_App));
-    }, 28);
-    m_StageSelectButton->m_Transform.translation = {0.0f, -50.0f};
-    m_StageSelectButton->SetVisible(false);
-    m_Root->AddChild(m_StageSelectButton);
+    // 獲得的 XP 文字
+    m_XPRewardText = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 24, " ", Util::Color(255, 255, 255));
+    m_XPRewardObject = std::make_shared<Util::GameObject>(m_XPRewardText, 21.0f);
+    m_XPRewardObject->m_Transform.translation = {0.0f, 0.0f};
+    m_XPRewardObject->SetVisible(false);
+    m_Root->AddChild(m_XPRewardObject);
 
-    m_MainMenuButton = std::make_shared<TextButton>("Back to Main Menu", [this]() {
-        m_App.ChangeScene(std::make_unique<MainMenuScene>(m_App));
-    }, 28);
-    m_MainMenuButton->m_Transform.translation = {0.0f, -110.0f};
-    m_MainMenuButton->SetVisible(false);
-    m_Root->AddChild(m_MainMenuButton);
+    // OK 按鈕
+    m_OkButton = std::make_shared<ImageTextButton>("OK", [this]() {
+        m_App.ChangeScene(std::make_unique<StageSelectScene>(m_App, m_Stage.chapterId));
+    }, ImageTextButton::Type::SHORT);
+    m_OkButton->SetVisible(false);
+    m_Root->AddChild(m_OkButton);
+    for (auto& part : m_OkButton->GetParts()) {
+        m_Root->AddChild(part);
+    }
 }
 
 void BattleScene::ShowResult(const std::string& resultText) {
@@ -412,7 +420,26 @@ void BattleScene::ShowResult(const std::string& resultText) {
         m_ResultObject->SetVisible(true);
     }
 
-    m_RetryButton->SetVisible(true);
-    m_StageSelectButton->SetVisible(true);
-    m_MainMenuButton->SetVisible(true);
+    if (resultText == "CATS WIN!") {
+        if (m_BlueBarObject) {
+            m_BlueBarObject->m_Transform.translation = {0.0f, 0.0f};
+            m_BlueBarObject->SetVisible(true);
+        }
+        if (m_XPRewardText) {
+            m_XPRewardText->SetText("+ " + std::to_string(m_Stage.xpReward) + " XP");
+        }
+        if (m_XPRewardObject) {
+            m_XPRewardObject->m_Transform.translation = {0.0f, 0.0f};
+            m_XPRewardObject->SetVisible(true);
+        }
+        if (m_OkButton) {
+            m_OkButton->m_Transform.translation = {0.0f, -100.0f};
+            m_OkButton->SetVisible(true);
+        }
+    } else {
+        if (m_OkButton) {
+            m_OkButton->m_Transform.translation = {0.0f, -50.0f};
+            m_OkButton->SetVisible(true);
+        }
+    }
 }

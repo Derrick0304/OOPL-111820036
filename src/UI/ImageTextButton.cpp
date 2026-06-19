@@ -36,6 +36,7 @@ ImageTextButton::ImageTextButton(const std::string& label, std::function<void()>
     // 文字
     m_Text = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 24, label, Util::Color(0, 0, 0)); // 預設黑色文字
     m_TextObj = std::make_shared<Util::GameObject>(m_Text, 15.0f);
+    m_TextObj->SetVisible(m_Visible);
 }
 
 ImageTextButton::ImageTextButton(const std::string& label, std::function<void()> onClick, 
@@ -71,6 +72,7 @@ ImageTextButton::ImageTextButton(const std::string& label, std::function<void()>
     // 文字
     m_Text = std::make_shared<Util::Text>(RESOURCE_DIR"/fonts/Inter.ttf", 24, label, Util::Color(0, 0, 0));
     m_TextObj = std::make_shared<Util::GameObject>(m_Text, 15.0f);
+    m_TextObj->SetVisible(m_Visible);
 }
 
 void ImageTextButton::Update() {

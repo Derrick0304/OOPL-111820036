@@ -71,9 +71,10 @@ private:
     std::shared_ptr<Util::Text> m_StageTitleText;
     std::shared_ptr<Util::GameObject> m_StageTitleObject;
     std::shared_ptr<Util::GameObject> m_ResultObject; // 不再需要 m_ResultText
-    std::shared_ptr<TextButton> m_RetryButton;
-    std::shared_ptr<TextButton> m_StageSelectButton;
-    std::shared_ptr<TextButton> m_MainMenuButton;
+    std::shared_ptr<Util::GameObject> m_BlueBarObject;
+    std::shared_ptr<Util::Text> m_XPRewardText;
+    std::shared_ptr<Util::GameObject> m_XPRewardObject;
+    std::shared_ptr<ImageTextButton> m_OkButton;
 
     // 暫停與設定介面
     bool m_IsPaused = false;
